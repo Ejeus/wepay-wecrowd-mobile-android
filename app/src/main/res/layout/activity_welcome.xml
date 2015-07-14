@@ -17,7 +17,8 @@
         android:layout_height="fill_parent"
         android:gravity="center"
         android:layout_weight="1"
-        android:text="@string/message_welcome" />
+        android:text="@string/message_welcome"
+        android:textSize="@dimen/activity_title_text_size"/>
 
     <Button
         android:layout_width="fill_parent"
