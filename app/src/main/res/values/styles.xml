@@ -6,12 +6,16 @@
     </style>
 
     <style name="TitleText" parent="android:Widget.TextView">
-        <item name="android:textColor">#D7572E</item>
+        <item name="android:textColor">@color/theme_color_orange</item>
         <item name="android:textSize">@dimen/activity_title_text_size</item>
     </style>
 
     <style name="ButtonAction" parent="android:Widget.Holo.Button">
-        <item name="android:textColor">#D7572E</item>
+        <item name="android:textColor">@color/theme_text_light</item>
     </style>
+
+    <color name="theme_color_blue">#66BCE4</color>
+    <color name="theme_color_orange">#E84E26</color>
+    <color name="theme_text_light">#FFFFFF</color>
 
 </resources>

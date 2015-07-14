@@ -14,7 +14,7 @@
 
     <TextView
         style="@style/TitleText"
-        
+
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
@@ -22,6 +22,8 @@
         android:text="@string/message_welcome" />
 
     <Button
+        style="@style/ButtonAction"
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
