@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/theme_light</item>
+    </style>
+
+    <style name="TitleText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/theme_color_orange</item>
+        <item name="android:textSize">@dimen/activity_title_text_size</item>
+    </style>
+
+    <style name="ButtonAction">
+        <item name="android:textColor">@color/theme_light</item>
+    </style>
+
+    <!-- Application theme colors -->
+    <color name="theme_color_blue">#66BCE4</color>
+    <color name="theme_color_orange">#E84E26</color>
+    <color name="theme_light">#FFFFFF</color>
+
+</resources>

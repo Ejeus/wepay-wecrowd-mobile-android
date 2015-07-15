@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WeCrowd</string>
+
+    <string name="message_welcome">Welcome!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_login">Login as Merchant</string>
+    <string name="title_browse">Browse Campaigns</string>
+    <string name="title_activity_login">Sign In</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>
