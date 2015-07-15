@@ -13,27 +13,30 @@
     tools:context=".WelcomeActivity">
 
     <TextView
-        style="@style/TitleText"
-
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
         android:layout_weight="1"
-        android:text="@string/message_welcome" />
+        android:text="@string/message_welcome"
+        style="@style/TitleText" />
 
     <Button
-        style="@style/ButtonAction"
+        android:id="@+id/button_choose_login"
+        android:onClick="didChooseLogin"
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/title_login" />
-    <Button
-        style="@style/ButtonAction"
+        android:text="@string/title_login"
 
+        style="@style/ButtonAction" />
+
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/title_browse" />
+        android:text="@string/title_browse"
+
+        style="@style/ButtonAction" />
 
 </LinearLayout>
