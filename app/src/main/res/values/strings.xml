@@ -11,5 +11,8 @@
 
     <string name="hint_login">Enter email address</string>
     <string name="hint_password">Enter password</string>
+    <string name="title_activity_campaign_feed">CampaignFeedActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

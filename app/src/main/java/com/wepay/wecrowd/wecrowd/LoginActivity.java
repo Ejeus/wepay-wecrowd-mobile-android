@@ -3,13 +3,14 @@ package com.wepay.wecrowd.wecrowd;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends AppCompatActivity {
     public final static String EXTRA_CREDENTIALS = "com.wepay.wecrowd.CREDENTIALS";
     public final static String EXTRA_PASSWORD = "com.wepay.wecrowd.PASSWORD";
 
@@ -46,14 +47,17 @@ public class LoginActivity extends ActionBarActivity {
         EditText entryCredentials, entryPassword;
         String textCredentials, textPassword;
 
+        intent = new Intent(this, CampaignFeedActivity.class);
+
         entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
         entryPassword = (EditText) findViewById(R.id.edit_text_credentials);
 
         textCredentials = entryCredentials.getText().toString();
         textPassword = entryPassword.getText().toString();
 
-//        intent.putExtra(EXTRA_CREDENTIALS, textCredentials);
-//        intent.putExtra(EXTRA_PASSWORD, textPassword);
-//        startActivity(intent);
+        intent.putExtra(EXTRA_CREDENTIALS, textCredentials);
+        intent.putExtra(EXTRA_PASSWORD, textPassword);
+
+        startActivity(intent);
     }
 }
