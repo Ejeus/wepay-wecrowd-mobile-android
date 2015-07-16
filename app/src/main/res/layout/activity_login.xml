@@ -15,15 +15,19 @@
     <EditText
         style="@style/EditTextSingleLine"
 
+        android:id="@+id/edit_text_credentials"
         android:hint="@string/hint_login" />
     <EditText
         style="@style/EditTextPassword"
 
+        android:id="@+id/edit_text_password"
         android:hint="@string/hint_password" />
 
     <Button
         style="@style/ButtonAction"
 
+        android:id="@+id/button_request_login"
+        android:onClick="didRequestLogin"
         android:text="@string/title_button_login" />
 
 </LinearLayout>

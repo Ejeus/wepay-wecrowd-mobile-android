@@ -1,12 +1,17 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class LoginActivity extends ActionBarActivity {
+    public final static String EXTRA_CREDENTIALS = "com.wepay.wecrowd.CREDENTIALS";
+    public final static String EXTRA_PASSWORD = "com.wepay.wecrowd.PASSWORD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +39,21 @@ public class LoginActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void didRequestLogin(View view) {
+        Intent intent;
+        EditText entryCredentials, entryPassword;
+        String textCredentials, textPassword;
+
+        entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
+        entryPassword = (EditText) findViewById(R.id.edit_text_credentials);
+
+        textCredentials = entryCredentials.getText().toString();
+        textPassword = entryPassword.getText().toString();
+
+//        intent.putExtra(EXTRA_CREDENTIALS, textCredentials);
+//        intent.putExtra(EXTRA_PASSWORD, textPassword);
+//        startActivity(intent);
     }
 }
