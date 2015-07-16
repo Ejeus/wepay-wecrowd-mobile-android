@@ -25,6 +25,10 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".CampaignFeedActivity"
+            android:label="@string/title_activity_campaign_feed" >
+        </activity>
     </application>
 
 </manifest>
