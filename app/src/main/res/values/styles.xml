@@ -11,8 +11,22 @@
         <item name="android:textSize">@dimen/activity_title_text_size</item>
     </style>
 
-    <style name="ButtonAction">
+    <style name="ButtonAction" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/theme_light</item>
+    </style>
+
+    <style name="EditTextSingleLine" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="EditTextPassword" parent="EditTextSingleLine">
+        <item name="android:inputType">textPassword</item>
     </style>
 
     <!-- Application theme colors -->
