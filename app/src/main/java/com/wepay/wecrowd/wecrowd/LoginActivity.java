@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -16,13 +18,20 @@ import org.json.JSONObject;
 import internal.APIClient;
 
 public class LoginActivity extends AppCompatActivity {
-    public final static String EXTRA_CREDENTIALS = "com.wepay.wecrowd.CREDENTIALS";
-    public final static String EXTRA_PASSWORD = "com.wepay.wecrowd.PASSWORD";
+    EditText entryCredentials, entryPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
+
+        entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
+        entryPassword = (EditText) findViewById(R.id.edit_text_password);
+
+        entryCredentials.setText("wp.android.example@wepay.com", TextView.BufferType.EDITABLE);
+        entryPassword.setText("password", TextView.BufferType.EDITABLE);
+
     }
 
     @Override
@@ -48,29 +57,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void didRequestLogin(View view) {
-        APIClient.get("campaigns/28", new JsonHttpResponseHandler() {
+        RequestParams params;
+        String textCredentials, textPassword;
+
+        textCredentials = entryCredentials.getText().toString();
+        textPassword = entryPassword.getText().toString();
+
+        params = new RequestParams();
+        params.put("user_email", textCredentials);
+        params.put("password", textPassword);
+
+        APIClient.post("login", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("Success!");
+                beginNextActivity();
             }
         });
     }
 
     private void beginNextActivity() {
         Intent intent;
-        EditText entryCredentials, entryPassword;
-        String textCredentials, textPassword;
 
         intent = new Intent(this, CampaignFeedActivity.class);
-
-        entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
-        entryPassword = (EditText) findViewById(R.id.edit_text_credentials);
-
-        textCredentials = entryCredentials.getText().toString();
-        textPassword = entryPassword.getText().toString();
-
-        intent.putExtra(EXTRA_CREDENTIALS, textCredentials);
-        intent.putExtra(EXTRA_PASSWORD, textPassword);
 
         startActivity(intent);
     }
