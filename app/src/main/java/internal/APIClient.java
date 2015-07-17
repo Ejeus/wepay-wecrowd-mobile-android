@@ -2,6 +2,7 @@
  * Created by zachv on 7/16/15.
  */
 
+package internal;
 import com.loopj.android.http.*;
 
 public class APIClient {
@@ -9,11 +10,9 @@ public class APIClient {
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public static void get(String url,
-                           RequestParams params,
-                           AsyncHttpResponseHandler responseHandler)
+    public static void get(String url, AsyncHttpResponseHandler responseHandler)
     {
-        client.get(getAbsoluteUrl(url), params, responseHandler);
+        client.get(getAbsoluteUrl(url), null, responseHandler);
     }
 
     public static void post(String url,

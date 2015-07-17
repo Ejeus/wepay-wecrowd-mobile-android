@@ -1,7 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
+import internal.APIClient;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String EXTRA_CREDENTIALS = "com.wepay.wecrowd.CREDENTIALS";
@@ -43,6 +48,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void didRequestLogin(View view) {
+        APIClient.get("campaigns/28", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println("Success!");
+            }
+        });
+    }
+
+    private void beginNextActivity() {
         Intent intent;
         EditText entryCredentials, entryPassword;
         String textCredentials, textPassword;
