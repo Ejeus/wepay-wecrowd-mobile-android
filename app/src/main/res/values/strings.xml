@@ -2,16 +2,39 @@
     <string name="app_name">WeCrowd</string>
 
     <string name="message_welcome">Welcome!</string>
+
     <string name="action_settings">Settings</string>
 
+    <!--Titles-->
+    <string name="title_activity_login">Sign In</string>
+    <string name="title_activity_campaign_feed">CampaignFeedActivity</string>
+
+    <string name="title_button_login">Login</string>
     <string name="title_login">Login as Merchant</string>
     <string name="title_browse">Browse Campaigns</string>
-    <string name="title_activity_login">Sign In</string>
-    <string name="title_button_login">Login</string>
 
+    <!--Errors-->
+    <string name="error_login_title">Unable to login</string>
+    <string name="error_login_message">Login failed</string>
+
+    <!--Dialog-->
+    <string name="dialog_button_close">Close</string>
+
+    <!--Hints-->
     <string name="hint_login">Enter email address</string>
     <string name="hint_password">Enter password</string>
-    <string name="title_activity_campaign_feed">CampaignFeedActivity</string>
+
+    <!--Demo placeholders-->
+    <string name="demo_email">wp.android.example@wepay.com</string>
+    <string name="demo_password">password</string>
+
+    <!--API Parameters-->
+    <string name="api_email_key">user_email</string>
+    <string name="api_password_key">password</string>
+
+    <!--API Endpoints-->
+    <string name="api_login_endpoint">login</string>
+
 
     <string name="hello_world">Hello world!</string>
 

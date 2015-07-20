@@ -10,8 +10,7 @@ public class APIClient {
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public static void get(String url, AsyncHttpResponseHandler responseHandler)
-    {
+    public static void get(String url, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), null, responseHandler);
     }
 

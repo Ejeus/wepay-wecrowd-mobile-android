@@ -1,10 +1,9 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,31 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
         entryPassword = (EditText) findViewById(R.id.edit_text_password);
 
-        entryCredentials.setText("wp.android.example@wepay.com", TextView.BufferType.EDITABLE);
-        entryPassword.setText("password", TextView.BufferType.EDITABLE);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        entryCredentials.setText(R.string.demo_email, TextView.BufferType.EDITABLE);
+        entryPassword.setText(R.string.demo_password, TextView.BufferType.EDITABLE);
     }
 
     public void didRequestLogin(View view) {
@@ -64,22 +40,41 @@ public class LoginActivity extends AppCompatActivity {
         textPassword = entryPassword.getText().toString();
 
         params = new RequestParams();
-        params.put("user_email", textCredentials);
-        params.put("password", textPassword);
+        params.put(getString(R.string.api_email_key), textCredentials);
+        params.put(getString(R.string.api_password_key), textPassword);
 
-        APIClient.post("login", params, new JsonHttpResponseHandler() {
+        APIClient.post(getString(R.string.api_login_endpoint), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 beginNextActivity();
+            }
+
+            @Override
+            public void onFailure(int statusCode,
+                                  Header[] headers,
+                                  String responseString,
+                                  Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+
+                showLoginErrorWithMessage(responseString);
             }
         });
     }
 
     private void beginNextActivity() {
-        Intent intent;
+        startActivity(new Intent(this, CampaignFeedActivity.class));
+    }
 
-        intent = new Intent(this, CampaignFeedActivity.class);
+    private void showLoginErrorWithMessage(String message) {
+        AlertDialog.Builder errorBuilder;
+        AlertDialog dialog;
 
-        startActivity(intent);
+        errorBuilder = new AlertDialog.Builder(LoginActivity.this);
+        errorBuilder.setTitle(R.string.error_login_title)
+                .setMessage(getString(R.string.error_login_message) + ". Error: " + message)
+                .setNegativeButton(R.string.dialog_button_close, null);
+
+        dialog = errorBuilder.create();
+        dialog.show();
     }
 }
