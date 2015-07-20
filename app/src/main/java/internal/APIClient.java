@@ -1,8 +1,9 @@
+package internal;
+
 /**
  * Created by zachv on 7/16/15.
  */
 
-package internal;
 import com.loopj.android.http.*;
 
 public class APIClient {

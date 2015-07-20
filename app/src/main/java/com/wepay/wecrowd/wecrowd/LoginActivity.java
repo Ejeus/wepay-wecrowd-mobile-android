@@ -9,12 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import internal.APIClient;
+import internal.LoginManager;
 
 public class LoginActivity extends AppCompatActivity {
     EditText entryCredentials, entryPassword;
@@ -33,32 +32,34 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void didRequestLogin(View view) {
-        RequestParams params;
         String textCredentials, textPassword;
 
         textCredentials = entryCredentials.getText().toString();
         textPassword = entryPassword.getText().toString();
 
-        params = new RequestParams();
-        params.put(getString(R.string.api_email_key), textCredentials);
-        params.put(getString(R.string.api_password_key), textPassword);
+        LoginManager.loginFromContext(this,
+                textCredentials,
+                textPassword,
+                new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
 
-        APIClient.post(getString(R.string.api_login_endpoint), params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                beginNextActivity();
-            }
+                        beginNextActivity();
+                    }
 
-            @Override
-            public void onFailure(int statusCode,
-                                  Header[] headers,
-                                  String responseString,
-                                  Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+                    @Override
+                    public void onFailure(int statusCode,
+                                          Header[] headers,
+                                          String responseString,
+                                          Throwable throwable)
+                    {
+                        super.onFailure(statusCode, headers, responseString, throwable);
 
-                showLoginErrorWithMessage(responseString);
-            }
-        });
+                        showLoginErrorWithMessage(responseString);
+                    }
+                });
     }
 
     private void beginNextActivity() {
