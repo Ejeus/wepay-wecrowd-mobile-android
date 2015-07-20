@@ -62,11 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void beginNextActivity() {
-        Intent intent;
-
-        intent = new Intent(this, CampaignFeedActivity.class);
-
-        startActivity(intent);
+        startActivity(new Intent(this, CampaignFeedActivity.class));
     }
 
     private void showLoginErrorWithMessage(String message) {
