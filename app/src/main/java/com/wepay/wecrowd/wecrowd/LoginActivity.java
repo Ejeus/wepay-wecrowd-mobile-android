@@ -1,5 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
         entryCredentials.setText("wp.android.example@wepay.com", TextView.BufferType.EDITABLE);
         entryPassword.setText("password", TextView.BufferType.EDITABLE);
-
     }
 
     @Override
@@ -71,6 +71,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 beginNextActivity();
+            }
+
+            @Override
+            public void onFailure(int statusCode,
+                                  Header[] headers,
+                                  String responseString,
+                                  Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+
+                AlertDialog.Builder errorBuilder;
+                AlertDialog dialog;
+
+                errorBuilder = new AlertDialog.Builder(LoginActivity.this);
+                errorBuilder.setTitle("Unable to login.")
+                            .setMessage("Login failed with error: ")
+                            .setNegativeButton("Close", null);
+
+                dialog = errorBuilder.create();
+                dialog.show();
             }
         });
     }
