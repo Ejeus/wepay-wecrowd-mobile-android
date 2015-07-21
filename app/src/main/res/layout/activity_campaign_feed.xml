@@ -11,7 +11,9 @@
 
     tools:context="com.wepay.wecrowd.wecrowd.CampaignFeedActivity">
 
-
-
+    <ListView
+        android:id="@+id/listview_campaigns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
