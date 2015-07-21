@@ -15,6 +15,10 @@ public class APIClient {
         client.get(getAbsoluteUrl(url), null, responseHandler);
     }
 
+    public static void getFromRaw(String url, AsyncHttpResponseHandler responseHandler) {
+        client.get(url, null, responseHandler);
+    }
+
     public static void post(String url,
                             RequestParams params,
                             AsyncHttpResponseHandler responseHandler) {

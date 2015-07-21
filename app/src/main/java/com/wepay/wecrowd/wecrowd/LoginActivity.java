@@ -13,7 +13,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import internal.APIResponseHandler;
 import internal.LoginManager;
+import models.User;
 
 public class LoginActivity extends AppCompatActivity {
     EditText entryCredentials, entryPassword;
@@ -40,24 +42,17 @@ public class LoginActivity extends AppCompatActivity {
         LoginManager.loginFromContext(this,
                 textCredentials,
                 textPassword,
-                new JsonHttpResponseHandler()
+                new APIResponseHandler()
                 {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
+                    public void onCompletion(User user, Throwable throwable) {
+                        super.onCompletion(user, throwable);
 
-                        beginNextActivity();
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode,
-                                          Header[] headers,
-                                          String responseString,
-                                          Throwable throwable)
-                    {
-                        super.onFailure(statusCode, headers, responseString, throwable);
-
-                        showLoginErrorWithMessage(responseString);
+                        if (throwable == null) {
+                            beginNextActivity();
+                        } else {
+                            showLoginErrorWithMessage(throwable.getLocalizedMessage());
+                        }
                     }
                 });
     }
