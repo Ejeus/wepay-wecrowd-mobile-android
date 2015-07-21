@@ -29,6 +29,12 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
+    <style name="TextViewCentered" parent="android:Widget.TextView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <!-- Application theme colors -->
     <color name="theme_color_blue">#66BCE4</color>
     <color name="theme_color_orange">#E84E26</color>
