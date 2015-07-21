@@ -17,7 +17,9 @@ public class Campaign {
     private String campaignID;
     private String title;
     private String imageURL;
+    private String endDate;
     private Bitmap imageBMP;
+    private Integer goal;
 
     // Constructors
     public Campaign(String ID, String title) {
@@ -25,13 +27,17 @@ public class Campaign {
         this.title = title;
     }
 
-    public Campaign(String ID, String title, String imageURL) {
+    public Campaign(String ID, String title, Integer goal) {
         this(ID, title);
+        this.goal = goal;
+    }
+
+    public Campaign(String ID, String title, Integer goal, String imageURL) {
+        this(ID, title, goal);
         this.imageURL = imageURL;
     }
 
     // Utilities
-    // TODO: Make custom response handler
     public void fetchImage(final APIResponseHandler responseHandler) {
         final Campaign campaign = this;
 
@@ -55,5 +61,7 @@ public class Campaign {
     // Accessors
     public String getCampaignID() { return campaignID; }
     public String getTitle() { return title; }
+    public String getEndDate() { return endDate; }
     public Bitmap getImageBMP() { return imageBMP; }
+    public Integer getGoal() { return goal; }
 }

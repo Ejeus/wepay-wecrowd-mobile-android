@@ -14,10 +14,10 @@
         style="@style/TextViewCentered"
 
         android:id="@+id/campaign_feed_cell_title"
-        android:text="YEEEAAHH BOIIII!!" />
+        android:text="TITLE" />
     <TextView
         style="@style/TextViewCentered"
 
-        android:id="@+id/campaign_feed_cell_donation_progress"
-        android:text="DUE DATE" />
+        android:id="@+id/campaign_feed_cell_end_date"
+        android:text="END DATE" />
 </LinearLayout>

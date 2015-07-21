@@ -20,8 +20,8 @@ public class CampaignFeedActivity extends ListActivity {
         campaigns = new ArrayList<Campaign>(2);
         campaignArrayAdapter = new CampaignArrayAdapter(this, campaigns);
 
-        campaigns.add(new Campaign("0", "Test_0"));
-        campaigns.add(new Campaign("1", "Test_1"));
+        campaigns.add(new Campaign("0", "Test_0", 100));
+        campaigns.add(new Campaign("1", "Test_1", 100));
 
         setListAdapter(campaignArrayAdapter);
     }
