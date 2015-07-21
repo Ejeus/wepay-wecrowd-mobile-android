@@ -6,6 +6,10 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import internal.APIClient;
 import internal.APIResponseHandler;
 
@@ -14,17 +18,21 @@ import internal.APIResponseHandler;
  */
 
 public class Campaign {
-    private String campaignID;
-    private String title;
-    private String imageURL;
-    private String endDate;
-    private Bitmap imageBMP;
-    private Integer goal;
+    // Protected members
+    protected String campaignID;
+    protected String title;
+    protected String endDate;
+    protected Bitmap imageBMP;
+    protected Integer goal;
+
+    // Unexposed members
+    protected String imageURL;
 
     // Constructors
     public Campaign(String ID, String title) {
         this.campaignID = ID;
         this.title = title;
+        this.endDate = readableDateString();
     }
 
     public Campaign(String ID, String title, Integer goal) {
@@ -56,6 +64,13 @@ public class Campaign {
                 responseHandler.onCompletion(campaign, throwable);
             }
         });
+    }
+
+    // Utilities
+    private String readableDateString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+
+        return dateFormat.format(Calendar.getInstance().getTime());
     }
 
     // Accessors
