@@ -7,6 +7,7 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
 import internal.APIClient;
+import internal.APIResponseHandler;
 
 /**
  * Created by zachv on 7/20/15.
@@ -31,20 +32,22 @@ public class Campaign {
 
     // Utilities
     // TODO: Make custom response handler
-    public void fetchImage(final AsyncHttpResponseHandler responseHandler) {
+    public void fetchImage(final APIResponseHandler responseHandler) {
+        final Campaign campaign = this;
+
         APIClient.getFromRaw(this.imageURL, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                responseHandler.onSuccess(i, headers, bytes);
+                responseHandler.onCompletion(campaign, null);
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 Log.e(getClass().getName(), "Unable to fetch the image. " + throwable.getLocalizedMessage(), throwable);
 
-                responseHandler.onFailure(i, headers, bytes, throwable);
+                responseHandler.onCompletion(campaign, throwable);
             }
         });
     }
