@@ -18,49 +18,33 @@ public class Campaign {
     private String imageURL;
     private Bitmap imageBMP;
 
-    // Factory methods
-    public static Campaign create(String ID, String title) {
-        return new Campaign(ID, title);
-    }
-
-    public static Campaign create(String ID, String title, String imageURL) {
-        Campaign campaign = new Campaign(ID, title, imageURL);
-        campaign.fetchImage();
-
-        return campaign;
-    }
-
     // Constructors
-    private Campaign(String ID, String title) {
-        init(ID, title);
-    }
-
-    private Campaign(String ID, String title, String imageURL) {
-        init(ID, title, imageURL);
-    }
-
-    // Initialization helpers
-    private void init(String ID, String title) {
+    public Campaign(String ID, String title) {
         this.campaignID = ID;
         this.title = title;
     }
 
-    private void init(String ID, String title, String imageURL) {
-        init(ID, title);
+    public Campaign(String ID, String title, String imageURL) {
+        this(ID, title);
         this.imageURL = imageURL;
     }
 
     // Utilities
-    private void fetchImage() {
-        APIClient.get(this.imageURL, new AsyncHttpResponseHandler() {
+    // TODO: Make custom response handler
+    public void fetchImage(final AsyncHttpResponseHandler responseHandler) {
+        APIClient.getFromRaw(this.imageURL, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                responseHandler.onSuccess(i, headers, bytes);
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                Log.e(getClass().getName(), "Unable to load the image", throwable);
+                Log.e(getClass().getName(), "Unable to fetch the image. " + throwable.getLocalizedMessage(), throwable);
+
+                responseHandler.onFailure(i, headers, bytes, throwable);
             }
         });
     }
@@ -68,5 +52,5 @@ public class Campaign {
     // Accessors
     public String getCampaignID() { return campaignID; }
     public String getTitle() { return title; }
-    public String getImageURL() { return imageURL; }
+    public Bitmap getImageBMP() { return imageBMP; }
 }
