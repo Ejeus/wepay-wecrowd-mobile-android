@@ -12,11 +12,8 @@
     tools:context="com.wepay.wecrowd.wecrowd.CampaignFeedActivity">
 
     <ListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-
         android:id="@+id/listview_campaigns"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-    </ListView>
 </RelativeLayout>

@@ -28,14 +28,6 @@
     <string name="demo_email">wp.android.example@wepay.com</string>
     <string name="demo_password">password</string>
 
-    <!--API Parameters-->
-    <string name="api_email_key">user_email</string>
-    <string name="api_password_key">password</string>
-
-    <!--API Endpoints-->
-    <string name="api_login_endpoint">login</string>
-
-
     <string name="hello_world">Hello world!</string>
 
 </resources>
