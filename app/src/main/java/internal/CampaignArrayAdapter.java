@@ -46,9 +46,10 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         goalTextView = (TextView) rowView.findViewById(R.id.campaign_feed_cell_end_date);
         goalTextView.setText(campaign.getEndDate());
 
-        // TODO: Use real image
-        imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
-        imageView.setImageBitmap(campaign.getImageBMP());
+        if (campaign.getImageBMP() != null) {
+            imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
+            imageView.setImageBitmap(campaign.getImageBMP());
+        }
 
         return rowView;
     }

@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/campaign_feed_image"
-        android:background="@drawable/wecrowdlogo"
+        android:src="@drawable/wecrowdlogo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
     <TextView

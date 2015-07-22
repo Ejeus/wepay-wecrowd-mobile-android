@@ -1,13 +1,11 @@
 package models;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.wepay.wecrowd.wecrowd.R;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -41,6 +39,7 @@ public class Campaign {
     public Campaign(String ID, String title) {
         this.campaignID = ID;
         this.title = title;
+
         this.endDate = readableDateString();
     }
 
@@ -63,7 +62,6 @@ public class Campaign {
                 final Campaign[] campaigns = new Campaign[responseArray.length()];
 
                 for (int i = 0; i < responseArray.length(); ++i) {
-                    final int index = i;
                     JSONObject responseObject = null;
                     Campaign campaign;
 
@@ -74,14 +72,9 @@ public class Campaign {
                     }
 
                     campaign = campaignFromJSONObject(responseObject);
-                    campaign.fetchImage(new APIResponseHandler() {
-                        @Override
-                        public void onCompletion(Campaign campaign, Throwable throwable) {
-                            super.onCompletion(campaign, throwable);
+                    campaigns[i] = campaign;
 
-                            campaigns[index] = campaign;
-                        }
-                    });
+                    campaign.fetchImage(null);
                 }
 
                 responseHandler.onCompletion(campaigns, null);
@@ -100,7 +93,7 @@ public class Campaign {
         });
     }
 
-    public static Campaign campaignFromJSONObject(JSONObject object) {
+    private static Campaign campaignFromJSONObject(JSONObject object) {
         String ID, title, imageURL;
         Integer goal;
 
@@ -121,7 +114,9 @@ public class Campaign {
             public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
                 imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                responseHandler.onCompletion(campaign, null);
+                if (responseHandler != null) {
+                    responseHandler.onCompletion(campaign, null);
+                }
             }
 
             @Override
