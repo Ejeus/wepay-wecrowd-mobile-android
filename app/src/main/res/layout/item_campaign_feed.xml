@@ -6,10 +6,9 @@
     android:orientation="vertical" >
 
     <ImageView
+        style="@style/HeaderImageFull"
+
         android:id="@+id/campaign_feed_image"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:src="@drawable/wecrowdlogo" />
     <TextView
         style="@style/TextViewCentered"

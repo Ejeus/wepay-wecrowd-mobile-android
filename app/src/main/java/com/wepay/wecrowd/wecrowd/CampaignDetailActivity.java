@@ -50,7 +50,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
         final CampaignDetail campaignDetail;
 
         intent = getIntent();
-        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
+//        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
+        campaignID = "28";
 
         CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
             @Override

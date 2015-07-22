@@ -7,11 +7,15 @@
 
     <!--Titles-->
     <string name="title_activity_login">Sign In</string>
-    <string name="title_activity_campaign_feed">CampaignFeedActivity</string>
+    <string name="title_activity_campaign_feed">Campaigns</string>
+    <string name="title_activity_campaign_detail">Campaign Detail</string>
 
     <string name="title_button_login">Login</string>
     <string name="title_login">Login as Merchant</string>
     <string name="title_browse">Browse Campaigns</string>
+
+    <string name="title_button_donate">Donate</string>
+    <string name="title_button_accept_donation">Accept Donation</string>
 
     <!--Errors-->
     <string name="error_login_title">Unable to login</string>
@@ -27,8 +31,9 @@
     <!--Demo placeholders-->
     <string name="demo_email">wp.android.example@wepay.com</string>
     <string name="demo_password">password</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_campaign_detail">CampaignDetailActivity</string>
+    <string name="demo_campaign_description">Bacon ipsum dolor amet alcatra brisket swine filet
+        mignon pork corned beef meatball. Short ribs rump prosciutto ribeye drumstick, filet mignon
+        sausage ham kielbasa capicola beef ribs bacon alcatra fatback. Kielbasa alcatra andouille
+        t-bone. Pancetta shankle beef chuck picanha. </string>
 
 </resources>
