@@ -29,5 +29,6 @@
     <string name="demo_password">password</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_campaign_detail">CampaignDetailActivity</string>
 
 </resources>
