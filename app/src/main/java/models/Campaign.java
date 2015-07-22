@@ -17,6 +17,7 @@ import java.util.Calendar;
 
 import internal.APIClient;
 import internal.APIResponseHandler;
+import internal.Callback;
 import internal.Constants;
 import internal.JSONProcessor;
 
@@ -25,6 +26,9 @@ import internal.JSONProcessor;
  */
 
 public class Campaign {
+    // Public members
+    public static Callback callback;
+
     // Protected members
     protected String campaignID;
     protected String title;
@@ -74,7 +78,14 @@ public class Campaign {
                     campaign = campaignFromJSONObject(responseObject);
                     campaigns[i] = campaign;
 
-                    campaign.fetchImage(null);
+                    campaign.fetchImage(new APIResponseHandler() {
+                        @Override
+                        public void onCompletion(Campaign campaign, Throwable throwable) {
+                            super.onCompletion(campaign, throwable);
+
+                            callback.onCompletion(campaign);
+                        }
+                    });
                 }
 
                 responseHandler.onCompletion(campaigns, null);
