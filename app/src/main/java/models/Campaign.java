@@ -60,10 +60,12 @@ public class Campaign {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray responseArray) {
                 super.onSuccess(statusCode, headers, responseArray);
-                Campaign[] campaigns = new Campaign[responseArray.length()];
+                final Campaign[] campaigns = new Campaign[responseArray.length()];
 
                 for (int i = 0; i < responseArray.length(); ++i) {
+                    final int index = i;
                     JSONObject responseObject = null;
+                    Campaign campaign;
 
                     try {
                         responseObject = responseArray.getJSONObject(i);
@@ -71,7 +73,15 @@ public class Campaign {
                         Log.e(getClass().getName(), e.getLocalizedMessage());
                     }
 
-                    campaigns[i] = campaignFromJSONObject(responseObject);
+                    campaign = campaignFromJSONObject(responseObject);
+                    campaign.fetchImage(new APIResponseHandler() {
+                        @Override
+                        public void onCompletion(Campaign campaign, Throwable throwable) {
+                            super.onCompletion(campaign, throwable);
+
+                            campaigns[index] = campaign;
+                        }
+                    });
                 }
 
                 responseHandler.onCompletion(campaigns, null);
@@ -91,14 +101,15 @@ public class Campaign {
     }
 
     public static Campaign campaignFromJSONObject(JSONObject object) {
-        String ID, title;
+        String ID, title, imageURL;
         Integer goal;
 
         ID = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_ID);
         title = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_NAME);
+        imageURL = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_IMAGE_URL);
         goal = JSONProcessor.integerFromJSON(object, Constants.CAMPAIGN_GOAL);
 
-        return new Campaign(ID, title, goal);
+        return new Campaign(ID, title, goal, imageURL);
     }
 
     // External methods
