@@ -1,17 +1,26 @@
 package models;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.wepay.wecrowd.wecrowd.R;
+
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import internal.APIClient;
 import internal.APIResponseHandler;
+import internal.Constants;
+import internal.JSONProcessor;
 
 /**
  * Created by zachv on 7/20/15.
@@ -45,21 +54,74 @@ public class Campaign {
         this.imageURL = imageURL;
     }
 
-    // Utilities
+    // Static methods
+    public static void fetchAllCampaigns(final APIResponseHandler responseHandler) {
+        APIClient.get(Constants.ENDPOINT_FEATURED_CAMPAIGNS, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray responseArray) {
+                super.onSuccess(statusCode, headers, responseArray);
+                Campaign[] campaigns = new Campaign[responseArray.length()];
+
+                for (int i = 0; i < responseArray.length(); ++i) {
+                    JSONObject responseObject = null;
+
+                    try {
+                        responseObject = responseArray.getJSONObject(i);
+                    } catch (JSONException e) {
+                        Log.e(getClass().getName(), e.getLocalizedMessage());
+                    }
+
+                    campaigns[i] = campaignFromJSONObject(responseObject);
+                }
+
+                responseHandler.onCompletion(campaigns, null);
+            }
+
+            @Override
+            public void onFailure(int statusCode,
+                                  Header[] headers,
+                                  String responseString,
+                                  Throwable throwable)
+            {
+                super.onFailure(statusCode, headers, responseString, throwable);
+
+                responseHandler.onCompletion((Campaign) null, throwable);
+            }
+        });
+    }
+
+    public static Campaign campaignFromJSONObject(JSONObject object) {
+        String ID, title;
+        Integer goal;
+
+        ID = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_ID);
+        title = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_NAME);
+        goal = JSONProcessor.integerFromJSON(object, Constants.CAMPAIGN_GOAL);
+
+        return new Campaign(ID, title, goal);
+    }
+
+    // External methods
     public void fetchImage(final APIResponseHandler responseHandler) {
         final Campaign campaign = this;
 
         APIClient.getFromRaw(this.imageURL, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+            public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
                 imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
                 responseHandler.onCompletion(campaign, null);
             }
 
             @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                Log.e(getClass().getName(), "Unable to fetch the image. " + throwable.getLocalizedMessage(), throwable);
+            public void onFailure(int statusCode,
+                                  Header[] headers,
+                                  byte[] bytes,
+                                  Throwable throwable)
+            {
+                Log.e(getClass().getName(),
+                        "Unable to fetch the image. " + throwable.getLocalizedMessage(),
+                        throwable);
 
                 responseHandler.onCompletion(campaign, throwable);
             }

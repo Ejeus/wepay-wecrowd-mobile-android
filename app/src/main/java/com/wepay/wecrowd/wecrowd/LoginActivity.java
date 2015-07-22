@@ -39,22 +39,18 @@ public class LoginActivity extends AppCompatActivity {
         textCredentials = entryCredentials.getText().toString();
         textPassword = entryPassword.getText().toString();
 
-        LoginManager.loginFromContext(this,
-                textCredentials,
-                textPassword,
-                new APIResponseHandler()
-                {
-                    @Override
-                    public void onCompletion(User user, Throwable throwable) {
-                        super.onCompletion(user, throwable);
+        LoginManager.login(textCredentials, textPassword, new APIResponseHandler() {
+            @Override
+            public void onCompletion(User user, Throwable throwable) {
+                super.onCompletion(user, throwable);
 
-                        if (throwable == null) {
-                            beginNextActivity();
-                        } else {
-                            showLoginErrorWithMessage(throwable.getLocalizedMessage());
-                        }
-                    }
-                });
+                if (throwable == null) {
+                    beginNextActivity();
+                } else {
+                    showLoginErrorWithMessage(throwable.getLocalizedMessage());
+                }
+            }
+        });
     }
 
     private void beginNextActivity() {

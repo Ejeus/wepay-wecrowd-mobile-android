@@ -1,10 +1,12 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
 
 import java.util.ArrayList;
 
+import internal.APIResponseHandler;
 import internal.CampaignArrayAdapter;
 import models.Campaign;
 
@@ -14,16 +16,22 @@ public class CampaignFeedActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final ArrayList<Campaign> campaigns;
-        final CampaignArrayAdapter campaignArrayAdapter;
+        final Context context = this;
 
-        campaigns = new ArrayList<Campaign>(2);
-        campaignArrayAdapter = new CampaignArrayAdapter(this, campaigns);
+        Campaign.fetchAllCampaigns(new APIResponseHandler() {
+            @Override
+            public void onCompletion(Campaign[] campaigns, Throwable throwable) {
+                final ArrayList<Campaign> campaignList;
+                final CampaignArrayAdapter campaignArrayAdapter;
 
-        campaigns.add(new Campaign("0", "Test_0", 100));
-        campaigns.add(new Campaign("1", "Test_1", 100));
+                campaignList = new ArrayList<Campaign>(campaigns.length);
 
-        setListAdapter(campaignArrayAdapter);
+                for (int i = 0; i < campaigns.length; ++i) { campaignList.add(campaigns[i]); }
+
+                campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
+                setListAdapter(campaignArrayAdapter);
+            }
+        });
     }
 
 
