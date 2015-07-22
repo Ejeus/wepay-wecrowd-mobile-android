@@ -8,7 +8,7 @@
     <!--Titles-->
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_campaign_feed">Campaigns</string>
-    <string name="title_activity_campaign_detail">Campaign Detail</string>
+    <string name="title_activity_campaign_detail">Details</string>
 
     <string name="title_button_login">Login</string>
     <string name="title_login">Login as Merchant</string>
@@ -35,5 +35,9 @@
         mignon pork corned beef meatball. Short ribs rump prosciutto ribeye drumstick, filet mignon
         sausage ham kielbasa capicola beef ribs bacon alcatra fatback. Kielbasa alcatra andouille
         t-bone. Pancetta shankle beef chuck picanha. </string>
+
+    <!--Loading Placeholders-->
+    <string name="placeholder_donation_progress">PROGRESS</string>
+    <string name="placeholder_campaign_title">TITLE</string>
 
 </resources>

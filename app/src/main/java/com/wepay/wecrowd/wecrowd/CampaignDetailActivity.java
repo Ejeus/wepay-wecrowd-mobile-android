@@ -52,11 +52,9 @@ public class CampaignDetailActivity extends AppCompatActivity {
     private void setUpCampaignDetail() {
         Intent intent;
         String campaignID;
-        final CampaignDetail campaignDetail;
 
         intent = getIntent();
-//        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
-        campaignID = "28";
+        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
 
         CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
             @Override
@@ -72,17 +70,21 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     private void configureViewForCampaignDetail(CampaignDetail campaignDetail) {
         Integer progressPercent;
-        TextView progressTextView;
+        TextView titleTextView, progressTextView;
         ProgressBar progressBar;
         final ImageView imageView;
 
         progressPercent = floatProgress(campaignDetail.getProgress(), campaignDetail.getGoal());
+
         imageView = (ImageView) findViewById(R.id.campaign_detail_image);
+        titleTextView = (TextView) findViewById(R.id.campaign_detail_title);
         progressTextView = (TextView) findViewById(R.id.campaign_detail_progress_text);
         progressBar = (ProgressBar) findViewById(R.id.campaign_detail_progress_bar);
 
         progressTextView.setText(stringFromProgress(progressPercent));
-        progressBar.setProgress(Math.round(progressPercent));
+        progressBar.setProgress(progressPercent);
+
+        titleTextView.setText(campaignDetail.getTitle());
 
         campaignDetail.fetchImage(new APIResponseHandler() {
             @Override

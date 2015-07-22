@@ -11,6 +11,12 @@
 
     tools:context="com.wepay.wecrowd.wecrowd.CampaignDetailActivity">
 
+    <TextView
+        style = "@style/TextViewSingleLine"
+
+        android:id="@+id/campaign_detail_title"
+        android:text="@string/placeholder_campaign_title"
+        />
     <ImageView
         style="@style/HeaderImageFull"
 
@@ -36,7 +42,7 @@
         style="@style/TextViewSingleLine"
 
         android:id="@+id/campaign_detail_progress_text"
-        android:text="TEST TEST TEST TEST TEST TEST TEST TEST TEST "
+        android:text="@string/placeholder_donation_progress"
         android:textColor="@color/theme_green"/>
     <Button
         style="@style/ButtonAction"
