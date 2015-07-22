@@ -104,7 +104,7 @@ public class Campaign {
         });
     }
 
-    private static Campaign campaignFromJSONObject(JSONObject object) {
+    protected static Campaign campaignFromJSONObject(JSONObject object) {
         String ID, title, imageURL;
         Integer goal;
 

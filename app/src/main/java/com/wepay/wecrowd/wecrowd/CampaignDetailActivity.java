@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import internal.APIResponseHandler;
+import models.Campaign;
+import models.CampaignDetail;
+
 
 public class CampaignDetailActivity extends AppCompatActivity {
 
@@ -42,9 +46,25 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     private void setUpCampaignDetail() {
         Intent intent;
-        Integer campaignID;
+        String campaignID;
+        final CampaignDetail campaignDetail;
 
         intent = getIntent();
-        campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
+        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
+
+        CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
+            @Override
+            public void onCompletion(Campaign campaign, Throwable throwable) {
+                if (throwable == null) {
+                    configureViewForCampaignDetail((CampaignDetail) campaign);
+                } else {
+                    // TODO: handle error
+                }
+            }
+        });
+    }
+
+    private void configureViewForCampaignDetail(CampaignDetail campaignDetail) {
+
     }
 }
