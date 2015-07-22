@@ -1,5 +1,7 @@
 package internal;
 
+import android.graphics.Bitmap;
+
 import models.*;
 
 /**
@@ -9,4 +11,5 @@ public class APIResponseHandler {
     public void onCompletion(Campaign campaign, Throwable throwable) {}
     public void onCompletion(User user, Throwable throwable) {}
     public void onCompletion(Campaign[] campaigns, Throwable throwable) {}
+    public void onCompletion(Bitmap bitmap, Throwable throwable) {}
 }

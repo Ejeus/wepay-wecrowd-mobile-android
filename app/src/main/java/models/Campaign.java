@@ -83,7 +83,7 @@ public class Campaign {
                         public void onCompletion(Campaign campaign, Throwable throwable) {
                             super.onCompletion(campaign, throwable);
 
-                            callback.onCompletion(campaign);
+                            if (callback != null) { callback.onCompletion(campaign); }
                         }
                     });
                 }
@@ -127,6 +127,7 @@ public class Campaign {
 
                 if (responseHandler != null) {
                     responseHandler.onCompletion(campaign, null);
+                    responseHandler.onCompletion(imageBMP, null);
                 }
             }
 
@@ -140,7 +141,10 @@ public class Campaign {
                         "Unable to fetch the image. " + throwable.getLocalizedMessage(),
                         throwable);
 
-                responseHandler.onCompletion(campaign, throwable);
+                if (responseHandler != null) {
+                    responseHandler.onCompletion(campaign, throwable);
+                    responseHandler.onCompletion((Bitmap) null, throwable);
+                }
             }
         });
     }

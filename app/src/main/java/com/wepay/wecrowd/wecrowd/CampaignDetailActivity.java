@@ -1,10 +1,15 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import internal.APIResponseHandler;
 import models.Campaign;
@@ -66,6 +71,38 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
     private void configureViewForCampaignDetail(CampaignDetail campaignDetail) {
+        Integer progressPercent;
+        TextView progressTextView;
+        ProgressBar progressBar;
+        final ImageView imageView;
 
+        progressPercent = floatProgress(campaignDetail.getProgress(), campaignDetail.getGoal());
+        imageView = (ImageView) findViewById(R.id.campaign_detail_image);
+        progressTextView = (TextView) findViewById(R.id.campaign_detail_progress_text);
+        progressBar = (ProgressBar) findViewById(R.id.campaign_detail_progress_bar);
+
+        progressTextView.setText(stringFromProgress(progressPercent));
+        progressBar.setProgress(Math.round(progressPercent));
+
+        campaignDetail.fetchImage(new APIResponseHandler() {
+            @Override
+            public void onCompletion(Bitmap bitmap, Throwable throwable) {
+                if (throwable == null) {
+                    imageView.setImageBitmap(bitmap);
+                } else {
+                    // TODO: handle error
+                }
+            }
+        });
+    }
+
+    private String stringFromProgress(Integer progress) {
+        return progress.toString() + "%" + " funded";
+    }
+
+    private Integer floatProgress(Integer current, Integer goal) {
+        Float progress = current.floatValue() / goal.floatValue();
+
+        return Math.round(progress * 100);
     }
 }

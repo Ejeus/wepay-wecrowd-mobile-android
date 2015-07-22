@@ -19,10 +19,12 @@
     <TextView
         style="@style/TextViewLeft"
 
+        android:id="@+id/campaign_detail_description"
         android:text="@string/demo_campaign_description" />
     <ProgressBar
         style="@android:style/Widget.Holo.ProgressBar.Horizontal"
 
+        android:id="@+id/campaign_detail_progress_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:progressBackgroundTint="@color/theme_neutral"
@@ -33,11 +35,13 @@
     <TextView
         style="@style/TextViewSingleLine"
 
+        android:id="@+id/campaign_detail_progress_text"
         android:text="TEST TEST TEST TEST TEST TEST TEST TEST TEST "
         android:textColor="@color/theme_green"/>
     <Button
         style="@style/ButtonAction"
 
+        android:id="@+id/campaign_detail_button_donate"
         android:text="DONATE_PLACEHOLDER"/>
 
 </LinearLayout>
