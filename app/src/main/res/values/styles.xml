@@ -6,17 +6,14 @@
         <item name="android:colorBackground">@color/theme_light</item>
     </style>
 
-    <style name="TitleText" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/theme_color_orange</item>
-        <item name="android:textSize">@dimen/activity_title_text_size</item>
-    </style>
-
+    <!--Buttons-->
     <style name="ButtonAction" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/theme_light</item>
     </style>
 
+    <!--EditText-->
     <style name="EditTextSingleLine" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -29,15 +26,41 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
-    <style name="TextViewCentered" parent="android:Widget.TextView">
+    <!-- TextView-->
+    <style name="TitleText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/theme_color_orange</item>
+        <item name="android:textSize">@dimen/activity_title_text_size</item>
+    </style>
+
+    <style name="TextView" parent="android:Widget.TextView">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextViewCentered" parent="TextView">
         <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="TextViewLeft" parent="TextView">
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextViewSingleLine" parent="TextViewCentered">
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!--ImageView-->
+    <style name="HeaderImageFull">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
     <!-- Application theme colors -->
     <color name="theme_color_blue">#66BCE4</color>
     <color name="theme_color_orange">#E84E26</color>
     <color name="theme_light">#FFFFFF</color>
+    <color name="theme_neutral">#ffb9b9b9</color>
+    <color name="theme_green">#ff55cc61</color>
 
 </resources>
