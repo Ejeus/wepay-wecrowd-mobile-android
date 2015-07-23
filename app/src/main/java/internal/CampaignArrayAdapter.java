@@ -53,6 +53,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
             @Override
             public void onCompletion(Bitmap bitmap, Throwable throwable) {
                 imageView.setImageBitmap(bitmap);
+                imageView.invalidate();
             }
         });
 
