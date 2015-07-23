@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import internal.LoginManager;
+
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -15,6 +17,8 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        LoginManager.logout();
     }
 
     @Override
