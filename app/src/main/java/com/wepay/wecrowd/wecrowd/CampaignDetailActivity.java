@@ -91,6 +91,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
             public void onCompletion(Bitmap bitmap, Throwable throwable) {
                 if (throwable == null) {
                     imageView.setImageBitmap(bitmap);
+                    imageView.invalidate();
                 } else {
                     // TODO: handle error
                 }
