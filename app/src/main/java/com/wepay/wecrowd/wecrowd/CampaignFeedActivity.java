@@ -18,6 +18,7 @@ import java.util.Objects;
 import internal.APIResponseHandler;
 import internal.Callback;
 import internal.CampaignArrayAdapter;
+import internal.LoginManager;
 import models.Campaign;
 
 public class CampaignFeedActivity extends ListActivity {
@@ -61,15 +62,24 @@ public class CampaignFeedActivity extends ListActivity {
         Campaign.fetchAllCampaigns(new APIResponseHandler() {
             @Override
             public void onCompletion(Campaign[] campaigns, Throwable throwable) {
-                final ArrayList<Campaign> campaignList;
-                final CampaignArrayAdapter campaignArrayAdapter;
+                if (throwable == null) {
+                    final ArrayList<Campaign> campaignList;
+                    final CampaignArrayAdapter campaignArrayAdapter;
+                    final Integer campaignCount;
 
-                campaignList = new ArrayList<Campaign>(campaigns.length);
+                    // Hardcode the merchant campaigns
+                    campaignCount = LoginManager.userType == LoginManager.UserType.PAYER ? campaigns.length : 2;
+                    campaignList = new ArrayList<Campaign>(campaignCount);
 
-                for (int i = 0; i < campaigns.length; ++i) { campaignList.add(campaigns[i]); }
+                    for (int i = 0; i < campaignCount; ++i) {
+                        campaignList.add(campaigns[i]);
+                    }
 
-                campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
-                setListAdapter(campaignArrayAdapter);
+                    campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
+                    setListAdapter(campaignArrayAdapter);
+                } else {
+                    // TODO: Display error
+                }
             }
         });
     }
