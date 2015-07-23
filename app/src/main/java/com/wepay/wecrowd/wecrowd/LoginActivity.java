@@ -14,6 +14,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import internal.APIResponseHandler;
+import internal.ErrorNotifier;
 import internal.LoginManager;
 import models.User;
 
@@ -47,7 +48,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (throwable == null) {
                     beginNextActivity();
                 } else {
-                    showLoginErrorWithMessage(throwable.getLocalizedMessage());
+                    ErrorNotifier.showLoginErrorWithMessage(LoginActivity.this,
+                            getString(R.string.error_login_message),
+                            throwable.getLocalizedMessage());
                 }
             }
         });
@@ -55,18 +58,5 @@ public class LoginActivity extends AppCompatActivity {
 
     private void beginNextActivity() {
         startActivity(new Intent(this, CampaignFeedActivity.class));
-    }
-
-    private void showLoginErrorWithMessage(String message) {
-        AlertDialog.Builder errorBuilder;
-        AlertDialog dialog;
-
-        errorBuilder = new AlertDialog.Builder(LoginActivity.this);
-        errorBuilder.setTitle(R.string.error_login_title)
-                .setMessage(getString(R.string.error_login_message) + ". Error: " + message)
-                .setNegativeButton(R.string.dialog_button_close, null);
-
-        dialog = errorBuilder.create();
-        dialog.show();
     }
 }
