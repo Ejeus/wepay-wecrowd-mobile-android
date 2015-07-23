@@ -86,7 +86,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         titleTextView.setText(campaignDetail.getTitle());
 
-        campaignDetail.fetchImage(new APIResponseHandler() {
+        campaignDetail.fetchImage(campaignDetail, new APIResponseHandler() {
             @Override
             public void onCompletion(Bitmap bitmap, Throwable throwable) {
                 if (throwable == null) {

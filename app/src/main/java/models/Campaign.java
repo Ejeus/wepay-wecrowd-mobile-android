@@ -77,15 +77,6 @@ public class Campaign {
 
                     campaign = campaignFromJSONObject(responseObject);
                     campaigns[i] = campaign;
-
-                    campaign.fetchImage(new APIResponseHandler() {
-                        @Override
-                        public void onCompletion(Campaign campaign, Throwable throwable) {
-                            super.onCompletion(campaign, throwable);
-
-                            if (callback != null) { callback.onCompletion(campaign); }
-                        }
-                    });
                 }
 
                 responseHandler.onCompletion(campaigns, null);
@@ -117,36 +108,35 @@ public class Campaign {
     }
 
     // External methods
-    public void fetchImage(final APIResponseHandler responseHandler) {
-        final Campaign campaign = this;
+    public static void fetchImage(final Campaign campaign, final APIResponseHandler responseHandler) {
+        if (campaign.imageBMP == null) {
+            APIClient.getFromRaw(campaign.imageURL, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
+                    campaign.imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-        APIClient.getFromRaw(this.imageURL, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
-                imageBMP = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-                if (responseHandler != null) {
-                    responseHandler.onCompletion(campaign, null);
-                    responseHandler.onCompletion(imageBMP, null);
+                    if (responseHandler != null) {
+                        responseHandler.onCompletion(campaign.imageBMP, null);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode,
-                                  Header[] headers,
-                                  byte[] bytes,
-                                  Throwable throwable)
-            {
-                Log.e(getClass().getName(),
-                        "Unable to fetch the image. " + throwable.getLocalizedMessage(),
-                        throwable);
+                @Override
+                public void onFailure(int statusCode,
+                                      Header[] headers,
+                                      byte[] bytes,
+                                      Throwable throwable) {
+                    Log.e(getClass().getName(),
+                            "Unable to fetch the image. " + throwable.getLocalizedMessage(),
+                            throwable);
 
-                if (responseHandler != null) {
-                    responseHandler.onCompletion(campaign, throwable);
-                    responseHandler.onCompletion((Bitmap) null, throwable);
+                    if (responseHandler != null) {
+                        responseHandler.onCompletion((Bitmap) null, throwable);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            responseHandler.onCompletion(campaign.imageBMP, null);
+        }
     }
 
     // Utilities

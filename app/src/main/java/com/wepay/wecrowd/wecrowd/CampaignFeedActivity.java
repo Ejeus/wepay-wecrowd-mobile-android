@@ -4,6 +4,8 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -18,7 +20,7 @@ import internal.Callback;
 import internal.CampaignArrayAdapter;
 import models.Campaign;
 
-public class CampaignFeedActivity extends ListActivity implements Callback {
+public class CampaignFeedActivity extends ListActivity {
     public static final String EXTRA_CAMPAIGN_ID = "com.wepay.wecrowd.CAMPAIGN_ID";
 
     @Override
@@ -30,25 +32,31 @@ public class CampaignFeedActivity extends ListActivity implements Callback {
     }
 
     @Override
-    public void onCompletion(Object object) {
-        ListView list = getListView();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_campaign_feed, menu);
 
-        int start = list.getFirstVisiblePosition();
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        for (int i = start, j = list.getLastVisiblePosition(); i <= j; ++i) {
-            if (object == list.getItemAtPosition(i)) {
-                View view = list.getChildAt(i-start);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-                list.getAdapter().getView(i, view, list);
-                break;
-            }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     // Utility methods
     private void setUpList() {
         final Context context = this;
-        Campaign.callback = this;
 
         Campaign.fetchAllCampaigns(new APIResponseHandler() {
             @Override
