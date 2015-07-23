@@ -42,4 +42,5 @@ public class WelcomeActivity extends AppCompatActivity {
     public void didChooseLogin(View view) {
         startActivity(new Intent(this, LoginActivity.class));
     }
+    public void didChooseBrowse(View view) { startActivity(new Intent(this, CampaignFeedActivity.class)); }
 }
