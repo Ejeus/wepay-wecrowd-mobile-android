@@ -18,7 +18,7 @@ import internal.Callback;
 import internal.CampaignArrayAdapter;
 import models.Campaign;
 
-public class CampaignFeedActivity extends ListActivity implements Callback {
+public class CampaignFeedActivity extends ListActivity {
     public static final String EXTRA_CAMPAIGN_ID = "com.wepay.wecrowd.CAMPAIGN_ID";
 
     @Override
@@ -29,26 +29,9 @@ public class CampaignFeedActivity extends ListActivity implements Callback {
         setUpListener();
     }
 
-    @Override
-    public void onCompletion(Object object) {
-        ListView list = getListView();
-
-        int start = list.getFirstVisiblePosition();
-
-        for (int i = start, j = list.getLastVisiblePosition(); i <= j; ++i) {
-            if (object == list.getItemAtPosition(i)) {
-                View view = list.getChildAt(i-start);
-
-                list.getAdapter().getView(i, view, list);
-                break;
-            }
-        }
-    }
-
     // Utility methods
     private void setUpList() {
         final Context context = this;
-        Campaign.callback = this;
 
         Campaign.fetchAllCampaigns(new APIResponseHandler() {
             @Override

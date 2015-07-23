@@ -1,6 +1,7 @@
 package internal;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         LayoutInflater inflater;
         View rowView;
         TextView titleTextView, goalTextView;
-        ImageView imageView;
+        final ImageView imageView;
         Campaign campaign;
 
         inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,10 +47,14 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         goalTextView = (TextView) rowView.findViewById(R.id.campaign_feed_cell_end_date);
         goalTextView.setText(campaign.getEndDate());
 
-        if (campaign.getImageBMP() != null) {
-            imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
-            imageView.setImageBitmap(campaign.getImageBMP());
-        }
+        imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
+
+        Campaign.fetchImage(campaign, new APIResponseHandler() {
+            @Override
+            public void onCompletion(Bitmap bitmap, Throwable throwable) {
+                imageView.setImageBitmap(bitmap);
+            }
+        });
 
         return rowView;
     }
