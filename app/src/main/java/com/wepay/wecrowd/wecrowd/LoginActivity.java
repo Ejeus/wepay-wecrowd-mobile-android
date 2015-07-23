@@ -1,6 +1,5 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
-
 import internal.APIResponseHandler;
+import internal.ErrorNotifier;
 import internal.LoginManager;
 import models.User;
 
@@ -47,7 +42,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (throwable == null) {
                     beginNextActivity();
                 } else {
-                    showLoginErrorWithMessage(throwable.getLocalizedMessage());
+                    ErrorNotifier.showSimpleError(LoginActivity.this,
+                            getString(R.string.error_login_title),
+                            getString(R.string.error_login_preface),
+                            throwable.getLocalizedMessage());
                 }
             }
         });
@@ -55,18 +53,5 @@ public class LoginActivity extends AppCompatActivity {
 
     private void beginNextActivity() {
         startActivity(new Intent(this, CampaignFeedActivity.class));
-    }
-
-    private void showLoginErrorWithMessage(String message) {
-        AlertDialog.Builder errorBuilder;
-        AlertDialog dialog;
-
-        errorBuilder = new AlertDialog.Builder(LoginActivity.this);
-        errorBuilder.setTitle(R.string.error_login_title)
-                .setMessage(getString(R.string.error_login_message) + ". Error: " + message)
-                .setNegativeButton(R.string.dialog_button_close, null);
-
-        dialog = errorBuilder.create();
-        dialog.show();
     }
 }
