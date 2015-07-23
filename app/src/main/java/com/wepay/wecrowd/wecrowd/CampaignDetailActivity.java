@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -12,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
+import internal.ErrorNotifier;
 import models.Campaign;
 import models.CampaignDetail;
 
@@ -62,7 +62,10 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 if (throwable == null) {
                     configureViewForCampaignDetail((CampaignDetail) campaign);
                 } else {
-                    // TODO: handle error
+                    ErrorNotifier.showSimpleError(CampaignDetailActivity.this,
+                            getString(R.string.error_fetch_title),
+                            getString(R.string.error_campaign_detail_fetch_preface),
+                            throwable.getLocalizedMessage());
                 }
             }
         });
@@ -93,7 +96,10 @@ public class CampaignDetailActivity extends AppCompatActivity {
                     imageView.setImageBitmap(bitmap);
                     imageView.invalidate();
                 } else {
-                    // TODO: handle error
+                    ErrorNotifier.showSimpleError(CampaignDetailActivity.this,
+                            getString(R.string.error_fetch_title),
+                            getString(R.string.error_campaign_image_fetch_preface),
+                            throwable.getLocalizedMessage());
                 }
             }
         });

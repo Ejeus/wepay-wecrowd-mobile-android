@@ -9,15 +9,16 @@ import com.wepay.wecrowd.wecrowd.R;
  * Created by zachv on 7/23/15.
  */
 public class ErrorNotifier {
-    public static void showLoginErrorWithMessage(Context context,
-                                                 String errorPreface,
-                                                 String errorMessage)
+    public static void showSimpleError(Context context,
+                                       String errorTitle,
+                                       String errorPreface,
+                                       String errorMessage)
     {
         AlertDialog.Builder errorBuilder;
         AlertDialog dialog;
 
         errorBuilder = new AlertDialog.Builder(context);
-        errorBuilder.setTitle(R.string.error_login_title)
+        errorBuilder.setTitle(errorTitle)
                 .setMessage(errorPreface + ". Error: " + errorMessage)
                 .setNegativeButton(R.string.dialog_button_close, null);
 

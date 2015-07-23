@@ -19,7 +19,10 @@
 
     <!--Errors-->
     <string name="error_login_title">Unable to login</string>
-    <string name="error_login_message">Login failed</string>
+    <string name="error_login_preface">Login failed</string>
+    <string name="error_fetch_title">Unable to fetch</string>
+    <string name="error_campaign_detail_fetch_preface">Fetching campaign details failed</string>
+    <string name="error_campaign_image_fetch_preface">Fetching the campaign image failed</string>
 
     <!--Dialog-->
     <string name="dialog_button_close">Close</string>
