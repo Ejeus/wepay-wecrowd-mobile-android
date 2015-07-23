@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
 import internal.ErrorNotifier;
+import internal.LoginManager;
 import models.Campaign;
 import models.CampaignDetail;
 
@@ -22,9 +24,10 @@ public class CampaignDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setUpCampaignDetail();
-
         setContentView(R.layout.activity_campaign_detail);
+
+        setUpCampaignDetail();
+        configureViewForUserType(LoginManager.userType);
     }
 
     @Override
@@ -103,6 +106,16 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void configureViewForUserType(LoginManager.UserType userType) {
+        Button donateButton = (Button) findViewById(R.id.campaign_detail_button_donate);
+
+        if (userType == LoginManager.UserType.PAYER) {
+            donateButton.setText(getText(R.string.title_button_donate));
+        } else if (userType == LoginManager.UserType.MERCHANT) {
+            donateButton.setText(getText(R.string.title_button_accept_donation));
+        }
     }
 
     private String stringFromProgress(Integer progress) {
