@@ -38,6 +38,16 @@
         mignon pork corned beef meatball. Short ribs rump prosciutto ribeye drumstick, filet mignon
         sausage ham kielbasa capicola beef ribs bacon alcatra fatback. Kielbasa alcatra andouille
         t-bone. Pancetta shankle beef chuck picanha. </string>
+    
+    <string name="demo_payer_donation_amount">50</string>
+    <string name="demo_payer_first_name">WeCrowd-Android</string>
+    <string name="demo_payer_last_name">Demo</string>
+    <string name="demo_payer_email">wp.android.example@wepay.com</string>
+    <string name="demo_payer_card_number">5496198584584769</string>
+    <string name="demo_payer_expiration_month">04</string>
+    <string name="demo_payer_expiration_year">2020</string>
+    <string name="demo_payer_cvv">123</string>
+    <string name="demo_payer_expiration_zip_code">94306</string>
 
     <!--Loading Placeholders-->
     <string name="placeholder_donation_progress">PROGRESS</string>
