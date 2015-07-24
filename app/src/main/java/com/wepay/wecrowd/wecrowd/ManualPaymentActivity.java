@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 
 public class ManualPaymentActivity extends AppCompatActivity {
 
@@ -44,12 +49,14 @@ public class ManualPaymentActivity extends AppCompatActivity {
     }
 
     private void setUpInformationFields() {
-        // Grab the 'root' group containing all the fields
         final ViewGroup rootView;
         TextView tagTextView;
         EditText entryEditText;
+        final List<Map.Entry<String, String>> fields;
 
+        // Grab the 'root' group containing all the fields
         rootView = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        fields = fieldConfigurationList();
 
         for (int i = 0; i < rootView.getChildCount(); ++i) {
             // Grab the row containing the tag and entry views
@@ -60,10 +67,21 @@ public class ManualPaymentActivity extends AppCompatActivity {
             entryEditText = (EditText) field.findViewById(R.id.linear_tagged_entry);
 
             // Set the text for the field child views
-            tagTextView.setText("Donation");
-            entryEditText.setHint("Amount");
+            tagTextView.setText(fields.get(i).getKey());
+            entryEditText.setHint(fields.get(i).getValue());
         }
     }
 
-//    private void
+    private List<Map.Entry<String, String>> fieldConfigurationList() {
+        List<Map.Entry<String, String>> configList = new ArrayList<>();
+
+        configList.add(fieldConfiguration("Donation", "Amount"));
+        configList.add(fieldConfiguration("First Name", "Zachary"));
+
+        return configList;
+    }
+
+    private Map.Entry<String, String> fieldConfiguration(String tag, String value) {
+        return new AbstractMap.SimpleImmutableEntry<>(tag, value);
+    }
 }
