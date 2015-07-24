@@ -42,5 +42,8 @@
     <!--Loading Placeholders-->
     <string name="placeholder_donation_progress">PROGRESS</string>
     <string name="placeholder_campaign_title">TITLE</string>
+    <string name="title_activity_manual_payment">ManualPaymentActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
