@@ -56,6 +56,12 @@
         <item name="android:adjustViewBounds">true</item>
     </style>
 
+    <!--Linear Layout-->
+    <style name="LinearTaggedTextEntry">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <!-- Application theme colors -->
     <color name="theme_color_blue">#66BCE4</color>
     <color name="theme_color_orange">#E84E26</color>
