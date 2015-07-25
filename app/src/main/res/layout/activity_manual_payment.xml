@@ -17,4 +17,16 @@
         layout="@layout/linear_tagged_text_entry" />
     <include
         layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
+    <include
+        layout="@layout/linear_tagged_text_entry" />
 </LinearLayout>

@@ -1,11 +1,9 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -68,15 +66,21 @@ public class ManualPaymentActivity extends AppCompatActivity {
 
             // Set the text for the field child views
             tagTextView.setText(fields.get(i).getKey());
-            entryEditText.setHint(fields.get(i).getValue());
+            entryEditText.setText(fields.get(i).getValue(), TextView.BufferType.EDITABLE);
         }
     }
 
     private List<Map.Entry<String, String>> fieldConfigurationList() {
         List<Map.Entry<String, String>> configList = new ArrayList<>();
 
-        configList.add(fieldConfiguration("Donation", "Amount"));
-        configList.add(fieldConfiguration("First Name", "Zachary"));
+        configList.add(fieldConfiguration(getString(R.string.title_donation), getString(R.string.demo_payer_donation_amount)));
+        configList.add(fieldConfiguration(getString(R.string.title_first_name), getString(R.string.demo_payer_first_name)));
+        configList.add(fieldConfiguration(getString(R.string.title_last_name), getString(R.string.demo_payer_last_name)));
+        configList.add(fieldConfiguration(getString(R.string.title_email), getString(R.string.demo_payer_email)));
+        configList.add(fieldConfiguration(getString(R.string.title_card_number), getString(R.string.demo_payer_card_number)));
+        configList.add(fieldConfiguration(getString(R.string.title_expiration), getString(R.string.demo_payer_expiration_month)));
+        configList.add(fieldConfiguration(getString(R.string.title_cvv), getString(R.string.demo_payer_cvv)));
+        configList.add(fieldConfiguration(getString(R.string.title_zip_code), getString(R.string.demo_payer_expiration_zip_code)));
 
         return configList;
     }
