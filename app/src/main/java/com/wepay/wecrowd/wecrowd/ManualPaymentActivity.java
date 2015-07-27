@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import internal.DonationManager;
 import internal.ErrorNotifier;
 import internal.LoginManager;
 import internal.PaymentManager;
@@ -171,6 +172,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
+        DonationManager.setCampaignID("28");
+
         Log.i(getClass().getName(), "Tokenization successful!");
     }
 
