@@ -21,6 +21,7 @@ public class Constants {
     public static final String PARAM_USER_NAME = "user_name";
     public static final String PARAM_CREDIT_CARD_ID = "credit_card_id";
     public static final String PARAM_DONATION_AMOUNT = "amount";
+    public static final String PARAM_CHECKOUT_ID = "checkout_id";
 
     public static final String LOGIN_PASSWORD = "password";
     public static final String LOGIN_EMAIL = "user_email";
