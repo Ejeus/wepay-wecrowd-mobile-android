@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.wepay.android.TokenizationHandler;
+import com.wepay.android.models.*;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ManualPaymentActivity extends AppCompatActivity {
+public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +89,15 @@ public class ManualPaymentActivity extends AppCompatActivity {
 
     private Map.Entry<String, String> fieldConfiguration(String tag, String value) {
         return new AbstractMap.SimpleImmutableEntry<>(tag, value);
+    }
+
+    @Override
+    public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
+
+    }
+
+    @Override
+    public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
+
     }
 }
