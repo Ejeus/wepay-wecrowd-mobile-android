@@ -1,7 +1,10 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.app.Application;
+import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,13 +13,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wepay.android.TokenizationHandler;
+import com.wepay.android.WePay;
+import com.wepay.android.enums.PaymentMethod;
 import com.wepay.android.models.*;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import internal.LoginManager;
 import internal.PaymentManager;
 
 public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
@@ -51,19 +58,48 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         return super.onOptionsItemSelected(item);
     }
 
+    public void didChooseDonate(View view) {
+        // String firstName, String lastName, String email, String paymentDescription,
+        // Address billingAddress, Address shippingAddress, PaymentMethod paymentMethod,
+        // String ccNumber, String cvv, String expMonth, String expYear, boolean virtualTerminal
+
+        Address address;
+        Boolean virtualTerminal;
+
+        address = new Address(Locale.getDefault());
+        address.setAddressLine(0, "350 Convention Way");
+        address.setLocality("Redwood City");
+        address.setPostalCode("94063");
+        address.setCountryCode("US");
+
+
+        virtualTerminal = LoginManager.userType == LoginManager.UserType.MERCHANT;
+
+        PaymentInfo paymentInfo = new PaymentInfo(getValueForId(R.id.manual_payment_first_name),
+                getValueForId(R.id.manual_payment_last_name),
+                getValueForId(R.id.manual_payment_email),
+                "WeCrowd Android Demo Donation",
+                address, address, PaymentMethod.MANUAL,
+                getValueForId(R.id.manual_payment_card_number),
+                getValueForId(R.id.manual_payment_cvv),
+                getValueForId(R.id.manual_payment_expiration), "2020", virtualTerminal);
+
+        PaymentManager.tokenizeInfo(this, paymentInfo, this);
+    }
+
     private void setUpInformationFields() {
-        final ViewGroup rootView;
+        final ViewGroup fieldViewGroup;
         TextView tagTextView;
         EditText entryEditText;
         final List<Map.Entry<String, String>> fields;
 
         // Grab the 'root' group containing all the fields
-        rootView = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        fieldViewGroup = (ViewGroup) findViewById(R.id.manual_payment_fields); //getFieldRootView();
         fields = fieldConfigurationList();
 
-        for (int i = 0; i < rootView.getChildCount(); ++i) {
+        for (int i = 0; i < fieldViewGroup.getChildCount(); ++i) {
             // Grab the row containing the tag and entry views
-            ViewGroup field = (ViewGroup) rootView.getChildAt(i);
+            ViewGroup field = (ViewGroup) fieldViewGroup.getChildAt(i);
 
             // Grab the views in the field
             tagTextView = (TextView) field.findViewById(R.id.linear_tagged_title);
@@ -93,10 +129,20 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     private Map.Entry<String, String> fieldConfiguration(String tag, String value) {
         return new AbstractMap.SimpleImmutableEntry<>(tag, value);
     }
-    
+
+    private String getValueForId(int ID) {
+        TextView textView = (TextView) getFieldForID(ID).findViewById(R.id.linear_tagged_entry);
+
+        return textView.getText().toString();
+    }
+
+    private ViewGroup getFieldForID(int ID) {
+        return (ViewGroup) getFieldRootView().findViewById(ID);
+    }
+
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
-
+        Log.i(getClass().getName(), "Tokenization successful!");
     }
 
     @Override

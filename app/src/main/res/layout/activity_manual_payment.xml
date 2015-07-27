@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/manual_payment_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,20 +12,41 @@
 
     tools:context="com.wepay.wecrowd.wecrowd.ManualPaymentActivity">
 
+    <LinearLayout
+        android:id="@+id/manual_payment_fields"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_donation" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_first_name"/>
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_last_name" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_email" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_card_number" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_expiration" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_cvv" />
     <include
-        layout="@layout/linear_tagged_text_entry" />
+        layout="@layout/linear_tagged_text_entry"
+        android:id="@+id/manual_payment_zip_code" />
+    </LinearLayout>
+
+    <Button
+        style="@style/ButtonAction"
+
+        android:text="@string/title_button_donate"
+        android:onClick="didChooseDonate"/>
+
 </LinearLayout>
