@@ -60,6 +60,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     public void didChooseDonate(View view) {
         Address address;
         Boolean virtualTerminal;
+        EditText expirationMonthEditText, expirationYearEditText;
+        String expirationMonth, expirationYear;
 
         address = new Address(Locale.getDefault());
         address.setAddressLine(0, "350 Convention Way");
@@ -69,6 +71,12 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
         virtualTerminal = LoginManager.userType == LoginManager.UserType.MERCHANT;
 
+        expirationMonthEditText = (EditText) findViewById(R.id.manual_payment_month_entry);
+        expirationYearEditText = (EditText) findViewById(R.id.manual_payment_year_entry);
+
+        expirationMonth = expirationMonthEditText.getText().toString();
+        expirationYear = expirationYearEditText.getText().toString();
+
         PaymentInfo paymentInfo = new PaymentInfo(getValueForId(R.id.manual_payment_first_name),
                 getValueForId(R.id.manual_payment_last_name),
                 getValueForId(R.id.manual_payment_email),
@@ -76,7 +84,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 address, address, PaymentMethod.MANUAL,
                 getValueForId(R.id.manual_payment_card_number),
                 getValueForId(R.id.manual_payment_cvv),
-                "01", "2020", virtualTerminal);
+                expirationMonth, expirationYear, virtualTerminal);
 
         PaymentManager.tokenizeInfo(this, paymentInfo, this);
     }
