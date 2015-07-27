@@ -1,6 +1,5 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.app.Application;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wepay.android.TokenizationHandler;
-import com.wepay.android.WePay;
 import com.wepay.android.enums.PaymentMethod;
 import com.wepay.android.models.*;
 
@@ -59,10 +57,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     }
 
     public void didChooseDonate(View view) {
-        // String firstName, String lastName, String email, String paymentDescription,
-        // Address billingAddress, Address shippingAddress, PaymentMethod paymentMethod,
-        // String ccNumber, String cvv, String expMonth, String expYear, boolean virtualTerminal
-
         Address address;
         Boolean virtualTerminal;
 
@@ -71,7 +65,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         address.setLocality("Redwood City");
         address.setPostalCode("94063");
         address.setCountryCode("US");
-
 
         virtualTerminal = LoginManager.userType == LoginManager.UserType.MERCHANT;
 
@@ -137,7 +130,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     }
 
     private ViewGroup getFieldForID(int ID) {
-        return (ViewGroup) getFieldRootView().findViewById(ID);
+        return (ViewGroup) findViewById(R.id.manual_payment_fields).findViewById(ID);
     }
 
     @Override
@@ -147,6 +140,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
-
+        Log.e(getClass().getName(), "Tokenization failed");
     }
 }
