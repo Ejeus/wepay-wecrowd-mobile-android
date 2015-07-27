@@ -64,10 +64,10 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         String expirationMonth, expirationYear;
 
         address = new Address(Locale.getDefault());
-        address.setAddressLine(0, "350 Convention Way");
-        address.setLocality("Redwood City");
-        address.setPostalCode("94063");
-        address.setCountryCode("US");
+        address.setAddressLine(0, getString(R.string.demo_address_line));
+        address.setLocality(getString(R.string.demo_address_locality));
+        address.setPostalCode(getString(R.string.demo_address_postal_code));
+        address.setCountryCode(getString(R.string.demo_address_country_code));
 
         virtualTerminal = LoginManager.userType == LoginManager.UserType.MERCHANT;
 
@@ -151,7 +151,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
         ErrorNotifier.showSimpleError(this, "Tokenization failed",
-                "Unable to tokenize with given information",
+                "Unable to tokenize with given information.",
                 error.getLocalizedMessage());
 
         Log.e(getClass().getName(), "Tokenization failed");

@@ -41,6 +41,10 @@
         sausage ham kielbasa capicola beef ribs bacon alcatra fatback. Kielbasa alcatra andouille
         t-bone. Pancetta shankle beef chuck picanha. </string>
     <string name="demo_donation_description">"WeCrowd Android Demo Donation"</string>
+    <string name="demo_address_line">350 Convention Way</string>
+    <string name="demo_address_locality">Redwood City</string>
+    <string name="demo_address_postal_code">94063</string>
+    <string name="demo_address_country_code">US</string>
 
     <string name="title_donation">Donation</string>
     <string name="title_first_name">First Name</string>
