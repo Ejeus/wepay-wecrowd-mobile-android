@@ -30,6 +30,8 @@
     <!--Hints-->
     <string name="hint_login">Enter email address</string>
     <string name="hint_password">Enter password</string>
+    <string name="hint_month">MM</string>
+    <string name="hint_year">YYYY</string>
 
     <!--Demo placeholders-->
     <string name="demo_email">wp.android.example@wepay.com</string>
@@ -38,6 +40,7 @@
         mignon pork corned beef meatball. Short ribs rump prosciutto ribeye drumstick, filet mignon
         sausage ham kielbasa capicola beef ribs bacon alcatra fatback. Kielbasa alcatra andouille
         t-bone. Pancetta shankle beef chuck picanha. </string>
+    <string name="demo_donation_description">"WeCrowd Android Demo Donation"</string>
 
     <string name="title_donation">Donation</string>
     <string name="title_first_name">First Name</string>

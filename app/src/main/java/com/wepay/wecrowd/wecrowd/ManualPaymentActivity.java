@@ -72,11 +72,11 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         PaymentInfo paymentInfo = new PaymentInfo(getValueForId(R.id.manual_payment_first_name),
                 getValueForId(R.id.manual_payment_last_name),
                 getValueForId(R.id.manual_payment_email),
-                "WeCrowd Android Demo Donation",
+                getString(R.string.demo_donation_description),
                 address, address, PaymentMethod.MANUAL,
                 getValueForId(R.id.manual_payment_card_number),
                 getValueForId(R.id.manual_payment_cvv),
-                getValueForId(R.id.manual_payment_expiration), "2020", virtualTerminal);
+                "01", "2020", virtualTerminal);
 
         PaymentManager.tokenizeInfo(this, paymentInfo, this);
     }
@@ -105,6 +105,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         }
     }
 
+    // Couldn't figure out how to just add the strings directly to XML while reusing the ViewGroup
+    // with the <include> tag, so using a programmatic structure.
     private List<Map.Entry<String, String>> fieldConfigurationList() {
         List<Map.Entry<String, String>> configList = new ArrayList<>();
 
@@ -113,7 +115,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         configList.add(fieldConfiguration(getString(R.string.title_last_name), getString(R.string.demo_payer_last_name)));
         configList.add(fieldConfiguration(getString(R.string.title_email), getString(R.string.demo_payer_email)));
         configList.add(fieldConfiguration(getString(R.string.title_card_number), getString(R.string.demo_payer_card_number)));
-        configList.add(fieldConfiguration(getString(R.string.title_expiration), getString(R.string.demo_payer_expiration_month)));
         configList.add(fieldConfiguration(getString(R.string.title_cvv), getString(R.string.demo_payer_cvv)));
         configList.add(fieldConfiguration(getString(R.string.title_zip_code), getString(R.string.demo_payer_expiration_zip_code)));
 
