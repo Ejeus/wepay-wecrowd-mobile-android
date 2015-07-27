@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import internal.ErrorNotifier;
 import internal.LoginManager;
 import internal.PaymentManager;
 
@@ -86,8 +87,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         EditText entryEditText;
         final List<Map.Entry<String, String>> fields;
 
-        // Grab the 'root' group containing all the fields
-        fieldViewGroup = (ViewGroup) findViewById(R.id.manual_payment_fields); //getFieldRootView();
+        // Grab the group containing all the fields
+        fieldViewGroup = (ViewGroup) findViewById(R.id.manual_payment_fields);
         fields = fieldConfigurationList();
 
         for (int i = 0; i < fieldViewGroup.getChildCount(); ++i) {
@@ -140,6 +141,10 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
+        ErrorNotifier.showSimpleError(this, "Tokenization failed",
+                "Unable to tokenize with given information",
+                error.getLocalizedMessage());
+
         Log.e(getClass().getName(), "Tokenization failed");
     }
 }
