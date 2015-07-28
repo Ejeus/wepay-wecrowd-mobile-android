@@ -1,6 +1,7 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.app.Activity;
+import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import internal.APIResponseHandler;
+import internal.DonationManager;
 import internal.ErrorNotifier;
 import internal.LoginManager;
 import internal.PaymentManager;
@@ -133,13 +136,13 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     private List<Map.Entry<String, String>> fieldConfigurationList() {
         List<Map.Entry<String, String>> configList = new ArrayList<>();
 
-        configList.add(fieldConfiguration(getString(R.string.title_donation), getString(R.string.demo_payer_donation_amount)));
-        configList.add(fieldConfiguration(getString(R.string.title_first_name), getString(R.string.demo_payer_first_name)));
-        configList.add(fieldConfiguration(getString(R.string.title_last_name), getString(R.string.demo_payer_last_name)));
-        configList.add(fieldConfiguration(getString(R.string.title_email), getString(R.string.demo_payer_email)));
-        configList.add(fieldConfiguration(getString(R.string.title_card_number), getString(R.string.demo_payer_card_number)));
-        configList.add(fieldConfiguration(getString(R.string.title_cvv), getString(R.string.demo_payer_cvv)));
-        configList.add(fieldConfiguration(getString(R.string.title_zip_code), getString(R.string.demo_payer_expiration_zip_code)));
+        configList.add(fieldConfiguration(getString(R.string.title_donation), getAmount()));
+        configList.add(fieldConfiguration(getString(R.string.title_first_name), getFirstName()));
+        configList.add(fieldConfiguration(getString(R.string.title_last_name), getLastName()));
+        configList.add(fieldConfiguration(getString(R.string.title_email), getEmail()));
+        configList.add(fieldConfiguration(getString(R.string.title_card_number), getCardNumber()));
+        configList.add(fieldConfiguration(getString(R.string.title_cvv), getCVV()));
+        configList.add(fieldConfiguration(getString(R.string.title_zip_code), getZipCode()));
 
         return configList;
     }
@@ -171,15 +174,42 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
+        final Context context = this;
+        final Integer amount = Integer.parseInt(getValueForId(R.id.manual_payment_donation));
+
+        DonationManager.configureDonationForName(paymentToken.getTokenId(), amount);
+
+        DonationManager.makeDonation(this, new APIResponseHandler() {
+            @Override
+            public void onCompletion(String value, Throwable throwable) {
+                if (throwable == null) {
+                    Log.i(getClass().getName(), "Donation successful!");
+                } else {
+                    ErrorNotifier.showSimpleError(context, "Donation failed",
+                            "Unable to complete the donation",
+                            throwable.getLocalizedMessage());
+                }
+            }
+        });
+
         Log.i(getClass().getName(), "Tokenization successful!");
     }
 
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
         ErrorNotifier.showSimpleError(this, "Tokenization failed",
-                "Unable to tokenize with given information.",
+                "Unable to tokenize with given information",
                 error.getLocalizedMessage());
 
         Log.e(getClass().getName(), "Tokenization failed");
     }
+
+    // Default field value getters
+    private String getAmount() { return getString(R.string.demo_payer_donation_amount); }
+    private String getFirstName() { return getString(R.string.demo_payer_first_name); }
+    private String getLastName() { return getString(R.string.demo_payer_last_name); }
+    private String getEmail() { return getString(R.string.demo_payer_email); }
+    private String getCardNumber() { return getString(R.string.demo_payer_card_number); }
+    private String getCVV() { return getString(R.string.demo_payer_cvv); }
+    private String getZipCode() { return getString(R.string.demo_payer_expiration_zip_code); }
 }

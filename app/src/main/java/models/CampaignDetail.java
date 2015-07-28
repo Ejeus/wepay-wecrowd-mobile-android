@@ -17,7 +17,7 @@ public class CampaignDetail extends Campaign {
     private String description;
     private Integer progress;
 
-    public CampaignDetail(String ID,
+    public CampaignDetail(Integer ID,
                           String title,
                           Integer goal,
                           String description,
@@ -29,7 +29,7 @@ public class CampaignDetail extends Campaign {
         this.progress = progress;
     }
 
-    public CampaignDetail(String ID,
+    public CampaignDetail(Integer ID,
                           String title,
                           Integer goal,
                           String imageURL,
@@ -51,8 +51,8 @@ public class CampaignDetail extends Campaign {
                 progress);
     }
 
-    public static void fetchCampaignDetail(String ID, final APIResponseHandler handler) {
-        String suffix = Constants.ENDPOINT_CAMPAIGNS + "/" + ID;
+    public static void fetchCampaignDetail(Integer ID, final APIResponseHandler handler) {
+        String suffix = Constants.ENDPOINT_CAMPAIGNS + "/" + ID.toString();
 
         APIClient.get(suffix, new JsonHttpResponseHandler() {
             @Override

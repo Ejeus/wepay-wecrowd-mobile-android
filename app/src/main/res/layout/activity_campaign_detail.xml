@@ -49,6 +49,7 @@
         style="@style/ButtonAction"
 
         android:id="@+id/campaign_detail_button_donate"
+        android:onClick="didSelectDonate"
         android:text="DONATE_PLACEHOLDER"/>
 
 </LinearLayout>

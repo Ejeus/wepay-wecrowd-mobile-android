@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
+import internal.DonationManager;
 import internal.ErrorNotifier;
 import internal.LoginManager;
 import models.Campaign;
@@ -52,12 +54,23 @@ public class CampaignDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void didSelectDonate(View view) {
+        if (LoginManager.userType == LoginManager.UserType.PAYER) {
+            startActivity(new Intent(this, ManualPaymentActivity.class));
+        } else if (LoginManager.userType == LoginManager.UserType.MERCHANT) {
+            // TODO: Show payment options for merchant
+        }
+    }
+
     private void setUpCampaignDetail() {
         Intent intent;
-        String campaignID;
+        Integer campaignID;
 
         intent = getIntent();
-        campaignID = intent.getStringExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID);
+        campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
+
+        // Set the donation campaign
+        DonationManager.configureDonationWithID(campaignID);
 
         CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
             @Override
