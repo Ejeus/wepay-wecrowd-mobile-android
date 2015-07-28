@@ -30,7 +30,7 @@ public class Campaign {
     public static Callback callback;
 
     // Protected members
-    protected String campaignID;
+    protected Integer campaignID;
     protected String title;
     protected String endDate;
     protected Bitmap imageBMP;
@@ -40,19 +40,19 @@ public class Campaign {
     protected String imageURL;
 
     // Constructors
-    public Campaign(String ID, String title) {
+    public Campaign(Integer ID, String title) {
         this.campaignID = ID;
         this.title = title;
 
         this.endDate = readableDateString();
     }
 
-    public Campaign(String ID, String title, Integer goal) {
+    public Campaign(Integer ID, String title, Integer goal) {
         this(ID, title);
         this.goal = goal;
     }
 
-    public Campaign(String ID, String title, Integer goal, String imageURL) {
+    public Campaign(Integer ID, String title, Integer goal, String imageURL) {
         this(ID, title, goal);
         this.imageURL = imageURL;
     }
@@ -96,10 +96,10 @@ public class Campaign {
     }
 
     protected static Campaign campaignFromJSONObject(JSONObject object) {
-        String ID, title, imageURL;
-        Integer goal;
+        String title, imageURL;
+        Integer ID, goal;
 
-        ID = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_ID);
+        ID = JSONProcessor.integerFromJSON(object, Constants.CAMPAIGN_ID);
         title = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_NAME);
         imageURL = JSONProcessor.stringFromJSON(object, Constants.CAMPAIGN_IMAGE_URL);
         goal = JSONProcessor.integerFromJSON(object, Constants.CAMPAIGN_GOAL);
@@ -147,7 +147,7 @@ public class Campaign {
     }
 
     // Accessors
-    public String getCampaignID() { return campaignID; }
+    public Integer getCampaignID() { return campaignID; }
     public String getTitle() { return title; }
     public String getEndDate() { return endDate; }
     public Bitmap getImageBMP() { return imageBMP; }

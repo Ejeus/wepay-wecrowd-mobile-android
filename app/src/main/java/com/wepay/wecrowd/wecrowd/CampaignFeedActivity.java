@@ -95,7 +95,7 @@ public class CampaignFeedActivity extends ListActivity {
         });
     }
 
-    private void beginDetailActivity(String campaignID) {
+    private void beginDetailActivity(Integer campaignID) {
         Intent intent;
 
         intent = new Intent(this, CampaignDetailActivity.class);
