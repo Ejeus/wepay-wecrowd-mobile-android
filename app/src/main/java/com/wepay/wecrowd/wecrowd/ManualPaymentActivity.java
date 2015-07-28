@@ -180,7 +180,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         DonationManager.configureDonationWithID(28);
         DonationManager.configureDonationForName(paymentToken.getTokenId(), amount);
 
-        DonationManager.makeDonation(new APIResponseHandler() {
+        DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
             public void onCompletion(String value, Throwable throwable) {
                 if (throwable == null) {

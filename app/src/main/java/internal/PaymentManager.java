@@ -24,7 +24,7 @@ public class PaymentManager {
 
     private static void initializeMembersFromContext(Context context) {
         if (config == null) {
-            config = new Config(context, "116876", Config.ENVIRONMENT_STAGING);
+            config = new Config(context, "58670", Config.ENVIRONMENT_STAGING); //  116876 // My app: 58670
         }
 
         if (wepay == null) {
