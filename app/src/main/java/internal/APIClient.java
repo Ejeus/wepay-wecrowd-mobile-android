@@ -60,7 +60,7 @@ public class APIClient {
 
         client.setUserAgent(USER_AGENT);
 
-        client.post(context, url, entity, contentType, responseHandler);
+        client.post(context, getAbsoluteUrl(url), entity, contentType, responseHandler);
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {

@@ -1,10 +1,8 @@
 package internal;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -33,21 +31,15 @@ public class DonationManager {
     }
 
     public static void makeDonation(Context context, final APIResponseHandler responseHandler) {
-        RequestParams params;
-        Map<String, Object> paramMap = new HashMap<String, Object>();
+        Map<String, Object> paramMap;
 
         // TODO: Add assert for donation allocation
-        params = new RequestParams();
-//        params.put(Constants.CAMPAIGN_ID, donation.getCampaignID());
-//        params.put(Constants.PARAM_DONATION_AMOUNT, donation.getAmount());
-//        params.put(Constants.PARAM_CREDIT_CARD_ID, donation.getCreditCardID());
-        paramMap.put("campaign_id", 9);
-        paramMap.put("credit_card_id", donation.getCreditCardID());
-        paramMap.put("amount",  10);
+        paramMap = new HashMap<>();
+        paramMap.put(Constants.CAMPAIGN_ID, donation.getCampaignID());
+        paramMap.put(Constants.PARAM_CREDIT_CARD_ID, donation.getCreditCardID());
+        paramMap.put(Constants.PARAM_DONATION_AMOUNT, donation.getAmount());
 
-        APIClient.post(context, "http://e11a0c1f.ngrok.io/api/donate", paramMap, new JsonHttpResponseHandler() {
-//        APIClient.postRaw("http://e11a0c1f.ngrok.io/api/donate", params, new JsonHttpResponseHandler() {
-//        APIClient.postRaw("http://wecrowd.wepay.com/api/donate", params, new JsonHttpResponseHandler() {
+        APIClient.post(context, Constants.ENDPOINT_DONATE, paramMap, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     String value;
@@ -64,11 +56,6 @@ public class DonationManager {
                                       Throwable throwable)
                 {
                     responseHandler.onCompletion((String) null, throwable);
-                }
-
-                @Override
-                public void onFinish() {
-                    Log.i("TEST", "FINISHED");
                 }
             }
         );
