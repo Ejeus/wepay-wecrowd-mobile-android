@@ -14,15 +14,20 @@ import com.wepay.android.models.Error;
 
 
 public class SwipePaymentActivity extends AppCompatActivity implements SwiperHandler, TokenizationHandler {
+    TextView statusTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_payment);
 
+        storeLayoutViews();
         setUpViewInformation();
     }
 
+    private void storeLayoutViews() {
+        statusTextView = (TextView) findViewById(R.id.swipe_payment_status);
+    }
 
     private void setUpViewInformation() {
         ViewGroup donationField;
@@ -48,8 +53,22 @@ public class SwipePaymentActivity extends AppCompatActivity implements SwiperHan
     }
 
     @Override
-    public void onStatusChange(SwiperStatus swiperStatus) {
+    public void onStatusChange(SwiperStatus status) {
+        String statusMessage = getString(R.string.title_status_swipe);
 
+        if (status.equals(SwiperStatus.NOT_CONNECTED)) {
+            statusMessage = getString(R.string.message_swiper_not_connected);
+        } else if (status.equals(SwiperStatus.WAITING_FOR_SWIPE)) {
+            statusMessage = getString(R.string.message_swiper_waiting);
+        } else if (status.equals(SwiperStatus.SWIPE_DETECTED)) {
+            statusMessage = getString(R.string.message_swiper_detected);
+        } else if (status.equals(SwiperStatus.TOKENIZING)) {
+            statusMessage = getString(R.string.message_swiper_tokenizing);
+        } else if (status.equals(SwiperStatus.STOPPED)) {
+            statusMessage = getString(R.string.message_swiper_stopped);
+        }
+
+        statusTextView.setText(statusMessage);
     }
 
     @Override
