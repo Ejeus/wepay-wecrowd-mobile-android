@@ -11,13 +11,10 @@ public class Donation {
 
     public Donation() {}
 
-    public void setDonationInfo(Integer campaignID) { this.campaignID = campaignID; }
-    public void setDonationCheckoutInfo(Integer checkoutID) { this.checkoutID = checkoutID; }
-    public void setDonationInfo(String creditCardID, Integer amount)
-    {
-        this.creditCardID = creditCardID;
-        this.amount = amount;
-    }
+    public void setCampaignID(Integer campaignID) { this.campaignID = campaignID; }
+    public void setCreditCardID(String creditCardID) { this.creditCardID = creditCardID; }
+    public void setAmount(Integer amount) { this.amount = amount; }
+    public void setCheckoutID(Integer checkoutID) { this.checkoutID = checkoutID; }
 
     public Integer getCampaignID() { return campaignID; }
     public String getCreditCardID() { return creditCardID; }

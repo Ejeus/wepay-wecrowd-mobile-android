@@ -1,0 +1,40 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:orientation="vertical"
+
+    tools:context="com.wepay.wecrowd.wecrowd.SwipePaymentActivity">
+
+    <TextView
+        style="@style/TextViewCentered"
+
+        android:id="@+id/swipe_payment_status"
+        android:text="@string/title_status_swipe"
+        android:paddingBottom="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        style="@style/TextViewLeft"
+
+        android:textAllCaps="true"
+        android:text="@string/title_instruction_donation" />
+    <include
+        layout="@layout/linear_tagged_text_entry"
+
+        android:id="@+id/swiper_payment_donation_field" />
+
+    <Button
+        style="@style/ButtonAction"
+
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:onClick="didChooseDonate"
+        android:text="@string/title_button_accept_donation" />
+
+</LinearLayout>
