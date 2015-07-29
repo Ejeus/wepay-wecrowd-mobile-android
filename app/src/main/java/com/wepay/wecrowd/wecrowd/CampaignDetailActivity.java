@@ -3,6 +3,7 @@ package com.wepay.wecrowd.wecrowd;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import models.CampaignDetail;
 
 
 public class CampaignDetailActivity extends AppCompatActivity {
+    private CampaignDetail campaignDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    
     public void didSelectDonate(View view) {
         if (LoginManager.userType == LoginManager.UserType.PAYER) {
             startActivity(new Intent(this, ManualPaymentActivity.class));
@@ -76,6 +78,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
             @Override
             public void onCompletion(Campaign campaign, Throwable throwable) {
                 if (throwable == null) {
+                    campaignDetail = (CampaignDetail) campaign;
                     configureViewForCampaignDetail((CampaignDetail) campaign);
                 } else {
                     AppNotifier.showSimpleError(CampaignDetailActivity.this,

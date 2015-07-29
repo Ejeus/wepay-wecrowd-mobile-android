@@ -189,6 +189,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
                 if (throwable == null) {
                     AppNotifier.showSimpleSuccess(context, "Donation successful!");
+
+                    finish();
                 } else {
                     AppNotifier.showSimpleError(context, "Donation failed",
                             "Unable to complete the donation",
