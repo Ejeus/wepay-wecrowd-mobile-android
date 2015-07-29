@@ -28,7 +28,7 @@
     <include
         layout="@layout/linear_tagged_text_entry"
 
-        android:id="@+id/swiper_payment_donation" />
+        android:id="@+id/swiper_payment_donation_field" />
 
     <Button
         style="@style/ButtonAction"
