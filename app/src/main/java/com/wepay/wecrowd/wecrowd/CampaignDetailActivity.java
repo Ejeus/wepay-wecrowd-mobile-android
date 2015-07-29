@@ -40,31 +40,33 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
     public void didSelectDonate(View view) {
-        if (LoginManager.userType == LoginManager.UserType.PAYER) {
-//            startActivity(new Intent(this, ManualPaymentActivity.class));
-        } else if (LoginManager.userType == LoginManager.UserType.MERCHANT) {
-            // TODO: Show payment options for merchant
-        }
-
         final Context context = this;
-        PopupMenu menu = new PopupMenu(this, findViewById(R.id.campaign_detail_button_donate));
-        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_donation_manual_payment: {
-                        startActivity(new Intent(context, ManualPaymentActivity.class));
-                    }
-                    case R.id.menu_donation_swipe_payment: {
 
+        if (LoginManager.userType == LoginManager.UserType.PAYER) {
+            startActivity(new Intent(this, ManualPaymentActivity.class));
+        } else if (LoginManager.userType == LoginManager.UserType.MERCHANT) {
+            PopupMenu menu = new PopupMenu(this, findViewById(R.id.campaign_detail_button_donate));
+
+            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.menu_donation_manual_payment: {
+                            startActivity(new Intent(context, ManualPaymentActivity.class));
+                            return true;
+                        }
+                        case R.id.menu_donation_swipe_payment: {
+                            startActivity(new Intent(context, SwipePaymentActivity.class));
+                            return true;
+                        }
+                        default: { return false; }
                     }
-                    default: { return false; }
                 }
-            }
-        });
+            });
 
-        menu.inflate(R.menu.menu_donation);
-        menu.show();
+            menu.inflate(R.menu.menu_donation);
+            menu.show();
+        }
     }
 
     private void setUpCampaignDetail() {

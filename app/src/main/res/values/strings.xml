@@ -81,5 +81,6 @@
     <string name="message_failure_tokenization">Tokenization failed</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_swipe_payment">SwipePaymentActivity</string>
 
 </resources>
