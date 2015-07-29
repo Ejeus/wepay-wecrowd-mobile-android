@@ -6,6 +6,7 @@ import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wepay.android.TokenizationHandler;
 import com.wepay.android.enums.PaymentMethod;
@@ -26,7 +28,7 @@ import java.util.Map;
 
 import internal.APIResponseHandler;
 import internal.DonationManager;
-import internal.ErrorNotifier;
+import internal.AppNotifier;
 import internal.LoginManager;
 import internal.PaymentManager;
 
@@ -183,9 +185,12 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
             @Override
             public void onCompletion(String value, Throwable throwable) {
                 if (throwable == null) {
+                    AppNotifier.showSimpleSuccess(context, "Donation successful!");
+
+
                     Log.i(getClass().getName(), "Donation successful!");
                 } else {
-                    ErrorNotifier.showSimpleError(context, "Donation failed",
+                    AppNotifier.showSimpleError(context, "Donation failed",
                             "Unable to complete the donation",
                             throwable.getLocalizedMessage());
                 }
@@ -197,7 +202,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
-        ErrorNotifier.showSimpleError(this, "Tokenization failed",
+        AppNotifier.showSimpleError(this, "Tokenization failed",
                 "Unable to tokenize with given information",
                 error.getLocalizedMessage());
 
