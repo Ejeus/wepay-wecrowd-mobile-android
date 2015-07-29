@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
-import internal.ErrorNotifier;
+import internal.AppNotifier;
 import internal.LoginManager;
 import models.User;
 
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (throwable == null) {
                     beginNextActivity();
                 } else {
-                    ErrorNotifier.showSimpleError(LoginActivity.this,
+                    AppNotifier.showSimpleError(LoginActivity.this,
                             getString(R.string.error_login_title),
                             getString(R.string.error_login_preface),
                             throwable.getLocalizedMessage());

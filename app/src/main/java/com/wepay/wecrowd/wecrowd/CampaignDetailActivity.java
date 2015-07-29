@@ -3,6 +3,7 @@ package com.wepay.wecrowd.wecrowd;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +15,14 @@ import android.widget.TextView;
 
 import internal.APIResponseHandler;
 import internal.DonationManager;
-import internal.ErrorNotifier;
+import internal.AppNotifier;
 import internal.LoginManager;
 import models.Campaign;
 import models.CampaignDetail;
 
 
 public class CampaignDetailActivity extends AppCompatActivity {
+    private CampaignDetail campaignDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    
     public void didSelectDonate(View view) {
         if (LoginManager.userType == LoginManager.UserType.PAYER) {
             startActivity(new Intent(this, ManualPaymentActivity.class));
@@ -76,9 +78,10 @@ public class CampaignDetailActivity extends AppCompatActivity {
             @Override
             public void onCompletion(Campaign campaign, Throwable throwable) {
                 if (throwable == null) {
+                    campaignDetail = (CampaignDetail) campaign;
                     configureViewForCampaignDetail((CampaignDetail) campaign);
                 } else {
-                    ErrorNotifier.showSimpleError(CampaignDetailActivity.this,
+                    AppNotifier.showSimpleError(CampaignDetailActivity.this,
                             getString(R.string.error_fetch_title),
                             getString(R.string.error_campaign_detail_fetch_preface),
                             throwable.getLocalizedMessage());
@@ -112,7 +115,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
                     imageView.setImageBitmap(bitmap);
                     imageView.invalidate();
                 } else {
-                    ErrorNotifier.showSimpleError(CampaignDetailActivity.this,
+                    AppNotifier.showSimpleError(CampaignDetailActivity.this,
                             getString(R.string.error_fetch_title),
                             getString(R.string.error_campaign_image_fetch_preface),
                             throwable.getLocalizedMessage());

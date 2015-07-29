@@ -26,7 +26,7 @@ import java.util.Map;
 
 import internal.APIResponseHandler;
 import internal.DonationManager;
-import internal.ErrorNotifier;
+import internal.AppNotifier;
 import internal.LoginManager;
 import internal.PaymentManager;
 
@@ -93,6 +93,9 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 expirationMonth, expirationYear, virtualTerminal);
 
         PaymentManager.tokenizeInfo(this, paymentInfo, this);
+
+        // Show the loading view
+        AppNotifier.showIndeterminateProgress(this, getString(R.string.message_processing));
     }
 
     public void hideKeyboard(View view) {
@@ -182,11 +185,17 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
             public void onCompletion(String value, Throwable throwable) {
+                AppNotifier.dismissIndeterminateProgress();
+
                 if (throwable == null) {
-                    Log.i(getClass().getName(), "Donation successful!");
+                    AppNotifier.showSimpleSuccess(context,
+                            getString(R.string.message_success_donation));
+
+                    finish();
                 } else {
-                    ErrorNotifier.showSimpleError(context, "Donation failed",
-                            "Unable to complete the donation",
+                    AppNotifier.showSimpleError(context,
+                            getString(R.string.message_failure_donation),
+                            getString(R.string.error_donation_preface),
                             throwable.getLocalizedMessage());
                 }
             }
@@ -197,8 +206,10 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     @Override
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
-        ErrorNotifier.showSimpleError(this, "Tokenization failed",
-                "Unable to tokenize with given information",
+        AppNotifier.dismissIndeterminateProgress();
+
+        AppNotifier.showSimpleError(this, getString(R.string.message_failure_tokenization),
+                getString(R.string.error_tokenization_preface),
                 error.getLocalizedMessage());
 
         Log.e(getClass().getName(), "Tokenization failed");

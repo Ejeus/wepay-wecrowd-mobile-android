@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">WeCrowd</string>
 
-    <string name="message_welcome">Welcome!</string>
-
     <string name="action_settings">Settings</string>
 
     <!--Titles-->
@@ -23,6 +21,8 @@
     <string name="error_fetch_title">Unable to fetch</string>
     <string name="error_campaign_detail_fetch_preface">Fetching campaign details failed</string>
     <string name="error_campaign_image_fetch_preface">Fetching the campaign image failed</string>
+    <string name="error_donation_preface">Unable to complete the donation</string>
+    <string name="error_tokenization_preface">Unable to tokenize with given information</string>
 
     <!--Dialog-->
     <string name="dialog_button_close">Close</string>
@@ -69,6 +69,13 @@
     <string name="placeholder_donation_progress">PROGRESS</string>
     <string name="placeholder_campaign_title">TITLE</string>
     <string name="title_activity_manual_payment">ManualPaymentActivity</string>
+
+    <!--Messages-->
+    <string name="message_welcome">Welcome!</string>
+    <string name="message_processing">Processing...</string>
+    <string name="message_success_donation">Donation successful!</string>
+    <string name="message_failure_donation">Donation failed</string>
+    <string name="message_failure_tokenization">Tokenization failed</string>
 
     <string name="hello_world">Hello world!</string>
 
