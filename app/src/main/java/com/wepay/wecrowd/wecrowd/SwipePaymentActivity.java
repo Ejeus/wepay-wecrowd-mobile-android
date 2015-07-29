@@ -24,6 +24,7 @@ public class SwipePaymentActivity extends AppCompatActivity
         implements SwiperHandler, TokenizationHandler
 {
     TextView statusTextView;
+    EditText donateEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class SwipePaymentActivity extends AppCompatActivity
     private void setUpViewInformation() {
         ViewGroup donationField;
         TextView donateTag;
-        EditText donateEditText;
 
         donationField = (ViewGroup) findViewById(R.id.swiper_payment_donation_field);
         donateTag = (TextView) donationField.getChildAt(0);
@@ -85,8 +85,9 @@ public class SwipePaymentActivity extends AppCompatActivity
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
         final Context context = this;
 
-        DonationManager.configureDonationWithID(28);
-        DonationManager.configureDonationWithID(paymentToken.getTokenId(), 10);
+        DonationManager.configureDonationWithToken(paymentToken.getTokenId());
+//        DonationManager.configureDonationWithID(28);
+//        DonationManager.configureDonationWithID(paymentToken.getTokenId(), 10);
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
@@ -120,7 +121,9 @@ public class SwipePaymentActivity extends AppCompatActivity
     }
 
     public void didChooseDonate(View view) {
+        DonationManager.configureDonationWithAmount(Integer.parseInt(donateEditText.getText().toString()));
+
+        statusTextView.setText("Starting card reader...");
         PaymentManager.startCardSwipeTokenization(this, this, this);
-//        PaymentManager.startCardSwipeReading(this, this);
     }
 }

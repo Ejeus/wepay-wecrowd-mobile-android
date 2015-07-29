@@ -21,13 +21,19 @@ public class DonationManager {
     public static void configureDonationWithID(Integer ID) {
         if (donation == null) { donation = new Donation(); }
 
-        donation.setDonationInfo(ID);
+        donation.setCampaignID(ID);
     }
 
-    public static void configureDonationWithID(String creditCardID, Integer amount) {
+    public static void configureDonationWithToken(String creditCardID) {
         if (donation == null) { donation = new Donation(); }
 
-        donation.setDonationInfo(creditCardID, amount);
+        donation.setCreditCardID(creditCardID);
+    }
+
+    public static void configureDonationWithAmount(Integer amount) {
+        if (donation == null) { donation = new Donation(); }
+
+        donation.setAmount(amount);
     }
 
     public static void makeDonation(Context context, final APIResponseHandler responseHandler) {
