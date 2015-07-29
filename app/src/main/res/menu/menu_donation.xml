@@ -1,0 +1,14 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/menu_donation"
+    >
+
+    <item
+        android:id="@+id/menu_donation_item_0"
+        android:title="MENU_ITEM_0"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+</menu>
+
