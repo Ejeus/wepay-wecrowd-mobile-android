@@ -15,6 +15,9 @@
     <string name="title_button_donate">Donate</string>
     <string name="title_button_accept_donation">Accept Donation</string>
 
+    <string name="title_donation_manual">Manual entry</string>
+    <string name="title_donation_swipe">Swipe card</string>
+
     <!--Errors-->
     <string name="error_login_title">Unable to login</string>
     <string name="error_login_preface">Login failed</string>

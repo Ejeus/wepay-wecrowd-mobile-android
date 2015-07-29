@@ -1,5 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         setUpCampaignDetail();
         configureViewForUserType(LoginManager.userType);
     }
-    
+
     public void didSelectDonate(View view) {
         if (LoginManager.userType == LoginManager.UserType.PAYER) {
 //            startActivity(new Intent(this, ManualPaymentActivity.class));
@@ -45,7 +46,23 @@ public class CampaignDetailActivity extends AppCompatActivity {
             // TODO: Show payment options for merchant
         }
 
+        final Context context = this;
         PopupMenu menu = new PopupMenu(this, findViewById(R.id.campaign_detail_button_donate));
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_donation_manual_payment: {
+                        startActivity(new Intent(context, ManualPaymentActivity.class));
+                    }
+                    case R.id.menu_donation_swipe_payment: {
+
+                    }
+                    default: { return false; }
+                }
+            }
+        });
+
         menu.inflate(R.menu.menu_donation);
         menu.show();
     }
