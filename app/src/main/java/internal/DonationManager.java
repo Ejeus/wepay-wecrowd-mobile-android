@@ -24,7 +24,7 @@ public class DonationManager {
         donation.setDonationInfo(ID);
     }
 
-    public static void configureDonationForName(String creditCardID, Integer amount) {
+    public static void configureDonationWithID(String creditCardID, Integer amount) {
         if (donation == null) { donation = new Donation(); }
 
         donation.setDonationInfo(creditCardID, amount);

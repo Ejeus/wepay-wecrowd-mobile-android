@@ -180,7 +180,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         final Context context = this;
         final Integer amount = Integer.parseInt(getValueForId(R.id.manual_payment_donation));
 
-        DonationManager.configureDonationForName(paymentToken.getTokenId(), amount);
+        DonationManager.configureDonationWithID(paymentToken.getTokenId(), amount);
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override

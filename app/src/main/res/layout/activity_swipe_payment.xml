@@ -34,6 +34,7 @@
         style="@style/ButtonAction"
 
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:onClick="didChooseDonate"
         android:text="@string/title_button_accept_donation" />
 
 </LinearLayout>

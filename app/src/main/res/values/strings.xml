@@ -79,14 +79,12 @@
     <string name="message_success_donation">Donation successful!</string>
     <string name="message_failure_donation">Donation failed</string>
     <string name="message_failure_tokenization">Tokenization failed</string>
-    <string name="message_swiper_not_connected">Swiper not connected.
-        Connect swiper and wait</string>
+    <string name="message_swiper_not_connected">Please connect the swiper and wait</string>
     <string name="message_swiper_waiting">Waiting...</string>
     <string name="message_swiper_detected">Swipe detected!</string>
     <string name="message_swiper_tokenizing">Tokenizing</string>
     <string name="message_swiper_stopped">Swiper stopped</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_swipe_payment">SwipePaymentActivity</string>
 
 </resources>
