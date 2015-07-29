@@ -11,12 +11,12 @@
     <string name="title_button_login">Login</string>
     <string name="title_login">Login as Merchant</string>
     <string name="title_browse">Browse Campaigns</string>
-
     <string name="title_button_donate">Donate</string>
     <string name="title_button_accept_donation">Accept Donation</string>
-
     <string name="title_donation_manual">Manual entry</string>
     <string name="title_donation_swipe">Swipe card</string>
+    <string name="title_status_swipe">Swiper Status</string>
+    <string name="title_instruction_donation">Enter donation amount</string>
 
     <!--Errors-->
     <string name="error_login_title">Unable to login</string>
