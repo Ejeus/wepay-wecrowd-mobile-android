@@ -95,7 +95,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         PaymentManager.tokenizeInfo(this, paymentInfo, this);
 
         // Show the loading view
-        AppNotifier.showIndeterminateProgress(this, "Processing...");
+        AppNotifier.showIndeterminateProgress(this, getString(R.string.message_processing));
     }
 
     public void hideKeyboard(View view) {
@@ -188,12 +188,14 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {
-                    AppNotifier.showSimpleSuccess(context, "Donation successful!");
+                    AppNotifier.showSimpleSuccess(context,
+                            getString(R.string.message_success_donation));
 
                     finish();
                 } else {
-                    AppNotifier.showSimpleError(context, "Donation failed",
-                            "Unable to complete the donation",
+                    AppNotifier.showSimpleError(context,
+                            getString(R.string.message_failure_donation),
+                            getString(R.string.error_donation_preface),
                             throwable.getLocalizedMessage());
                 }
             }
@@ -206,8 +208,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     public void onError(PaymentInfo paymentInfo, com.wepay.android.models.Error error) {
         AppNotifier.dismissIndeterminateProgress();
 
-        AppNotifier.showSimpleError(this, "Tokenization failed",
-                "Unable to tokenize with given information",
+        AppNotifier.showSimpleError(this, getString(R.string.message_failure_tokenization),
+                getString(R.string.error_tokenization_preface),
                 error.getLocalizedMessage());
 
         Log.e(getClass().getName(), "Tokenization failed");
