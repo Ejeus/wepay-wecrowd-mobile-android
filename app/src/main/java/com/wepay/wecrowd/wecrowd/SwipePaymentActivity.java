@@ -1,6 +1,7 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,7 +54,7 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo) {
-//        PaymentManager.tokenizeInfo(this, paymentInfo, this);
+
     }
 
     @Override
@@ -86,8 +87,6 @@ public class SwipePaymentActivity extends AppCompatActivity
         final Context context = this;
 
         DonationManager.configureDonationWithToken(paymentToken.getTokenId());
-//        DonationManager.configureDonationWithID(28);
-//        DonationManager.configureDonationWithID(paymentToken.getTokenId(), 10);
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
@@ -97,6 +96,8 @@ public class SwipePaymentActivity extends AppCompatActivity
                 if (throwable == null) {
                     AppNotifier.showSimpleSuccess(context,
                             getString(R.string.message_success_donation));
+
+                    startActivity(new Intent(context, SignatureActivity.class));
                 } else {
                     AppNotifier.showSimpleError(context,
                             getString(R.string.message_failure_donation),
