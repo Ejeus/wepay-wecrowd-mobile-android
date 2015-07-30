@@ -1,5 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,12 +18,13 @@ import com.wepay.android.models.Error;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
+import internal.Callback;
 import internal.DonationManager;
 import internal.PaymentManager;
 
 
 public class SwipePaymentActivity extends AppCompatActivity
-        implements SwiperHandler, TokenizationHandler
+        implements SwiperHandler, TokenizationHandler, Callback
 {
     TextView statusTextView;
     EditText donateEditText;
@@ -84,7 +86,7 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
-        final Context context = this;
+        final Activity self = this;
 
         DonationManager.configureDonationWithToken(paymentToken.getTokenId());
 
@@ -94,12 +96,13 @@ public class SwipePaymentActivity extends AppCompatActivity
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {
-                    AppNotifier.showSimpleSuccess(context,
+                    AppNotifier.showSimpleSuccess(self,
                             getString(R.string.message_success_donation));
 
-                    startActivity(new Intent(context, SignatureActivity.class));
+                    SignatureActivity.callback = (Callback) self;
+                    startActivity(new Intent(self, SignatureActivity.class));
                 } else {
-                    AppNotifier.showSimpleError(context,
+                    AppNotifier.showSimpleError(self,
                             getString(R.string.message_failure_donation),
                             getString(R.string.error_donation_preface),
                             throwable.getLocalizedMessage());
@@ -107,7 +110,7 @@ public class SwipePaymentActivity extends AppCompatActivity
             }
         });
 
-        AppNotifier.showIndeterminateProgress(context, getString(R.string.message_processing));
+        AppNotifier.showIndeterminateProgress(self, getString(R.string.message_processing));
     }
 
     @Override
@@ -119,6 +122,11 @@ public class SwipePaymentActivity extends AppCompatActivity
                 error.getLocalizedMessage());
 
         statusTextView.setText(getString(R.string.title_status_swipe));
+    }
+
+    @Override
+    public void onCompletion(Object object) {
+        finish();
     }
 
     public void didChooseDonate(View view) {

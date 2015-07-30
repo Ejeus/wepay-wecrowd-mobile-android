@@ -87,6 +87,7 @@
     <string name="message_swiper_detected">Swipe detected!</string>
     <string name="message_swiper_tokenizing">Tokenizing</string>
     <string name="message_swiper_stopped">Swiper stopped</string>
+    <string name="message_signature_stored">Signature stored!</string>
 
     <string name="title_activity_swipe_payment">SwipePaymentActivity</string>
     <string name="title_activity_signature">SignatureActivity</string>
