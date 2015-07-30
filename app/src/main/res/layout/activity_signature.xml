@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -13,13 +13,18 @@
     tools:context="com.wepay.wecrowd.wecrowd.SignatureActivity">
 
     <com.github.gcacace.signaturepad.views.SignaturePad
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:id="@+id/signature_pad"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         app:penColor="@android:color/black"
-        />
+        android:layout_marginBottom="56dp" />
 
-</LinearLayout>
+    <Button
+        style="@style/ButtonAction"
+        android:onClick="didSubmitSignature"
+        android:text="@string/title_submit"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

@@ -18,6 +18,7 @@
     <string name="title_status_swipe">Swiper Status</string>
     <string name="title_instruction_donation">Enter donation amount</string>
     <string name="title_action_clear">Clear</string>
+    <string name="title_submit">Submit</string>
 
     <!--Errors-->
     <string name="error_login_title">Unable to login</string>
