@@ -1,32 +1,33 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import internal.APIResponseHandler;
-import internal.Callback;
 import internal.CampaignArrayAdapter;
 import internal.LoginManager;
 import models.Campaign;
 
-public class CampaignFeedActivity extends ListActivity {
+public class CampaignFeedActivity extends AppCompatActivity {
     public static final String EXTRA_CAMPAIGN_ID = "com.wepay.wecrowd.CAMPAIGN_ID";
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_campaign_feed);
+
+        listView = (ListView) findViewById(R.id.listview_campaigns);
 
         setUpList();
         setUpListener();
@@ -76,7 +77,8 @@ public class CampaignFeedActivity extends ListActivity {
                     }
 
                     campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
-                    setListAdapter(campaignArrayAdapter);
+                    listView.setAdapter(campaignArrayAdapter);
+//                    setListAdapter(campaignArrayAdapter);
                 } else {
                     // TODO: Display error
                 }
@@ -85,10 +87,10 @@ public class CampaignFeedActivity extends ListActivity {
     }
 
     private void setUpListener() {
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Campaign campaign = (Campaign) getListAdapter().getItem(position);
+                Campaign campaign = (Campaign) listView.getAdapter().getItem(position);
 
                 beginDetailActivity(campaign.getCampaignID());
             }
