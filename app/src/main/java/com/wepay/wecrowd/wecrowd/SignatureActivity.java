@@ -1,15 +1,23 @@
 package com.wepay.wecrowd.wecrowd;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.wepay.android.SignatureHandler;
+import com.wepay.android.models.*;
+
+import internal.AppNotifier;
+import internal.DonationManager;
+import internal.PaymentManager;
 
 
-public class SignatureActivity extends AppCompatActivity {
+public class SignatureActivity extends AppCompatActivity implements SignatureHandler {
     SignaturePad signaturePad;
 
 
@@ -45,7 +53,22 @@ public class SignatureActivity extends AppCompatActivity {
     }
 
     public void didSubmitSignature(View view) {
-
+        PaymentManager.storeSignatureImage(this,
+                signaturePad.getSignatureBitmap(),
+                DonationManager.getCheckoutID(),
+                this);
     }
 
+    @Override
+    public void onSuccess(String signatureURL, String checkoutID) {
+        Log.i(getClass().getName(), "Signature URL:" + signatureURL);
+    }
+
+    @Override
+    public void onError(Bitmap bitmap, String checkoutID, com.wepay.android.models.Error error) {
+        AppNotifier.showSimpleError(this,
+                "Unable to store signature",
+                "Failed to store signature image",
+                error.getLocalizedMessage());
+    }
 }
