@@ -70,7 +70,7 @@ public class CampaignFeedActivity extends AppCompatActivity {
 
                     // Hardcode the merchant campaigns
                     campaignCount = LoginManager.userType == LoginManager.UserType.PAYER ? campaigns.length : 2;
-                    campaignList = new ArrayList<Campaign>(campaignCount);
+                    campaignList = new ArrayList<>(campaignCount);
 
                     for (int i = 0; i < campaignCount; ++i) {
                         campaignList.add(campaigns[i]);
@@ -78,7 +78,6 @@ public class CampaignFeedActivity extends AppCompatActivity {
 
                     campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
                     listView.setAdapter(campaignArrayAdapter);
-//                    setListAdapter(campaignArrayAdapter);
                 } else {
                     // TODO: Display error
                 }
