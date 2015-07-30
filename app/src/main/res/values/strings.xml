@@ -37,6 +37,7 @@
     <string name="hint_password">Enter password</string>
     <string name="hint_month">MM</string>
     <string name="hint_year">YYYY</string>
+    <string name="hint_signature">Please sign</string>
 
     <!--Demo placeholders-->
     <string name="demo_email">wp.android.example@wepay.com</string>
