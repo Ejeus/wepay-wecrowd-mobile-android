@@ -51,6 +51,7 @@ public class DonationManager {
                     String value;
 
                     value = JSONProcessor.stringFromJSON(response, Constants.PARAM_CHECKOUT_ID);
+                    donation.setCheckoutID(value);
 
                     responseHandler.onCompletion(value, null);
                 }
@@ -66,4 +67,6 @@ public class DonationManager {
             }
         );
     }
+
+    public static String getCheckoutID() { return donation == null ? null : donation.getCheckoutID(); }
 }

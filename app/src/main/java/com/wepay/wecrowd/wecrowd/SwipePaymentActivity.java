@@ -1,6 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +17,13 @@ import com.wepay.android.models.Error;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
+import internal.Callback;
 import internal.DonationManager;
 import internal.PaymentManager;
 
 
 public class SwipePaymentActivity extends AppCompatActivity
-        implements SwiperHandler, TokenizationHandler
+        implements SwiperHandler, TokenizationHandler, Callback
 {
     TextView statusTextView;
     EditText donateEditText;
@@ -54,13 +55,13 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo) {
-
+        // No need to do anything
     }
 
     @Override
     public void onError(com.wepay.android.models.Error error) {
-        AppNotifier.showSimpleError(this, "Unable to complete card swipe",
-                "The card swipe failed", error.getLocalizedMessage());
+        AppNotifier.showSimpleError(this, getString(R.string.error_swiper_title),
+                getString(R.string.error_swiper_preface), error.getLocalizedMessage());
     }
 
     @Override
@@ -84,7 +85,7 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
-        final Context context = this;
+        final Activity self = this;
 
         DonationManager.configureDonationWithToken(paymentToken.getTokenId());
 
@@ -94,12 +95,13 @@ public class SwipePaymentActivity extends AppCompatActivity
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {
-                    AppNotifier.showSimpleSuccess(context,
+                    AppNotifier.showSimpleSuccess(self,
                             getString(R.string.message_success_donation));
 
-                    startActivity(new Intent(context, SignatureActivity.class));
+                    SignatureActivity.callback = (Callback) self;
+                    startActivity(new Intent(self, SignatureActivity.class));
                 } else {
-                    AppNotifier.showSimpleError(context,
+                    AppNotifier.showSimpleError(self,
                             getString(R.string.message_failure_donation),
                             getString(R.string.error_donation_preface),
                             throwable.getLocalizedMessage());
@@ -107,7 +109,7 @@ public class SwipePaymentActivity extends AppCompatActivity
             }
         });
 
-        AppNotifier.showIndeterminateProgress(context, getString(R.string.message_processing));
+        AppNotifier.showIndeterminateProgress(self, getString(R.string.message_processing));
     }
 
     @Override
@@ -121,10 +123,15 @@ public class SwipePaymentActivity extends AppCompatActivity
         statusTextView.setText(getString(R.string.title_status_swipe));
     }
 
+    @Override
+    public void onCompletion(Object object) {
+        finish();
+    }
+
     public void didChooseDonate(View view) {
         DonationManager.configureDonationWithAmount(Integer.parseInt(donateEditText.getText().toString()));
 
-        statusTextView.setText("Starting card reader...");
+        statusTextView.setText(getString(R.string.message_swiper_start));
         PaymentManager.startCardSwipeTokenization(this, this, this);
     }
 }
