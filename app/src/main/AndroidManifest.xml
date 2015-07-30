@@ -14,10 +14,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".WelcomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +30,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".WelcomeActivity" >
+            android:parentActivityName=".WelcomeActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.WelcomeActivity" />
@@ -37,7 +40,8 @@
             android:name=".CampaignFeedActivity"
             android:label="@string/title_activity_campaign_feed"
             android:parentActivityName=".LoginActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.LoginActivity" />
@@ -45,7 +49,8 @@
         <activity
             android:name=".CampaignDetailActivity"
             android:label="@string/title_activity_campaign_detail"
-            android:parentActivityName=".CampaignFeedActivity" >
+            android:parentActivityName=".CampaignFeedActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.CampaignFeedActivity" />
@@ -53,7 +58,8 @@
         <activity
             android:name=".ManualPaymentActivity"
             android:label="@string/title_activity_manual_payment"
-            android:parentActivityName=".CampaignDetailActivity" >
+            android:parentActivityName=".CampaignDetailActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.CampaignDetailActivity" />
@@ -61,7 +67,8 @@
         <activity
             android:name=".SwipePaymentActivity"
             android:label="@string/title_activity_swipe_payment"
-            android:parentActivityName=".CampaignDetailActivity" >
+            android:parentActivityName=".CampaignDetailActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.CampaignDetailActivity" />
@@ -69,7 +76,8 @@
         <activity
             android:name=".SignatureActivity"
             android:label="@string/title_activity_signature"
-            android:parentActivityName=".SwipePaymentActivity" >
+            android:parentActivityName=".SwipePaymentActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wepay.wecrowd.wecrowd.SwipePaymentActivity" />
