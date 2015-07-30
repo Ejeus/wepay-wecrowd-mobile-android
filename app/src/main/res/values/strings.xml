@@ -28,6 +28,8 @@
     <string name="error_campaign_image_fetch_preface">Fetching the campaign image failed</string>
     <string name="error_donation_preface">Unable to complete the donation</string>
     <string name="error_tokenization_preface">Unable to tokenize with given information</string>
+    <string name="error_swiper_title">Unable to complete card swipe</string>
+    <string name="error_swiper_preface">The card swipe failed</string>
 
     <!--Dialog-->
     <string name="dialog_button_close">Close</string>
@@ -83,6 +85,7 @@
     <string name="message_failure_donation">Donation failed</string>
     <string name="message_failure_tokenization">Tokenization failed</string>
     <string name="message_swiper_not_connected">Please connect the swiper and wait</string>
+    <string name="message_swiper_start">Starting card reader...</string>
     <string name="message_swiper_waiting">Waiting...</string>
     <string name="message_swiper_detected">Swipe detected!</string>
     <string name="message_swiper_tokenizing">Tokenizing</string>

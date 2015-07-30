@@ -1,7 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,13 +55,13 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo) {
-
+        // No need to do anything
     }
 
     @Override
     public void onError(com.wepay.android.models.Error error) {
-        AppNotifier.showSimpleError(this, "Unable to complete card swipe",
-                "The card swipe failed", error.getLocalizedMessage());
+        AppNotifier.showSimpleError(this, getString(R.string.error_swiper_title),
+                getString(R.string.error_swiper_preface), error.getLocalizedMessage());
     }
 
     @Override
@@ -132,7 +131,7 @@ public class SwipePaymentActivity extends AppCompatActivity
     public void didChooseDonate(View view) {
         DonationManager.configureDonationWithAmount(Integer.parseInt(donateEditText.getText().toString()));
 
-        statusTextView.setText("Starting card reader...");
+        statusTextView.setText(getString(R.string.message_swiper_start));
         PaymentManager.startCardSwipeTokenization(this, this, this);
     }
 }
