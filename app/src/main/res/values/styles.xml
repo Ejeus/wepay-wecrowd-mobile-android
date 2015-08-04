@@ -77,7 +77,7 @@
 
     <!-- Application theme colors -->
     <color name="theme_blue">#66BCE4</color>
-    <color name="theme_dark_blue">#ff3c6f86</color>
+    <color name="theme_dark_blue">#ff4f92b0</color>
     <color name="theme_orange">#E84E26</color>
     <color name="theme_dark_orange">#ffc44220</color>
     <color name="theme_light">#FFFFFF</color>
