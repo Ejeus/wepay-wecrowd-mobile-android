@@ -14,7 +14,7 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:gravity="center"
         android:layout_weight="1"
         android:text="@string/message_welcome"
@@ -24,9 +24,8 @@
         android:id="@+id/button_choose_login"
         android:onClick="didChooseLogin"
 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:text="@string/title_login"
 
         style="@style/ButtonAction" />
@@ -35,8 +34,6 @@
         android:id="@+id/button_choose_browse"
         android:onClick="didChooseBrowse"
 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/title_browse"
 
