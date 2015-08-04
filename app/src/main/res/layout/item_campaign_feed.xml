@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <ImageView
         style="@style/HeaderImageFull"
 
         android:id="@+id/campaign_feed_image"
-        android:src="@drawable/wecrowdlogo" />
+        android:src="@drawable/wecrowdlogo"
+        android:contentDescription="campaign_image" />
     <TextView
         style="@style/TextViewCentered"
 

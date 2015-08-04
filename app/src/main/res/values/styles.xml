@@ -80,8 +80,9 @@
     <color name="theme_dark_blue">#ff4f92b0</color>
     <color name="theme_orange">#E84E26</color>
     <color name="theme_dark_orange">#ffc44220</color>
-    <color name="theme_light">#FFFFFF</color>
+    <color name="theme_light">#ffffffff</color>
     <color name="theme_neutral">#ffb9b9b9</color>
+    <color name="theme_neutral_light">#fff5f5f5</color>
     <color name="theme_green">#ff55cc61</color>
 
 </resources>
