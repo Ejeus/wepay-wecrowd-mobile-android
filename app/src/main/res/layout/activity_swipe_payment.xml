@@ -3,12 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-
+    android:layout_height="wrap_content"
     android:orientation="vertical"
 
     tools:context="com.wepay.wecrowd.wecrowd.SwipePaymentActivity">
@@ -17,24 +12,38 @@
         style="@style/TextViewCentered"
 
         android:id="@+id/swipe_payment_status"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/title_status_swipe"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:textSize="@dimen/text_size_status"
+        android:background="@color/theme_neutral_light"/>
 
-    <TextView
-        style="@style/TextViewLeft"
-
-        android:textAllCaps="true"
-        android:text="@string/title_instruction_donation" />
-    <include
-        layout="@layout/linear_tagged_text_entry"
-
-        android:id="@+id/swiper_payment_donation_field" />
-
-    <Button
-        style="@style/ButtonAction"
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:onClick="didChooseDonate"
-        android:text="@string/title_button_accept_donation" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextViewLeft"
+
+            android:textAllCaps="true"
+            android:text="@string/title_instruction_donation" />
+        <include
+            layout="@layout/linear_tagged_text_entry"
+
+            android:id="@+id/swiper_payment_donation_field" />
+
+        <Button
+            style="@style/ButtonAction"
+
+            android:id="@+id/button_donate"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:onClick="didChooseDonate"
+            android:text="@string/title_button_accept_donation"
+            android:layout_marginTop="@dimen/activity_vertical_margin" />
+    </LinearLayout>
 
 </LinearLayout>
