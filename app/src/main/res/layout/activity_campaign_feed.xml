@@ -4,10 +4,6 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/theme_neutral_light"
 
     tools:context="com.wepay.wecrowd.wecrowd.CampaignFeedActivity">
@@ -16,7 +12,6 @@
         android:id="@+id/listview_campaigns"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/activity_vertical_margin"/>
+        android:divider="@android:color/transparent" />
 
 </RelativeLayout>
