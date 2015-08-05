@@ -18,7 +18,7 @@
     <string name="title_button_accept_donation">Accept Donation</string>
     <string name="title_donation_manual">Manual entry</string>
     <string name="title_donation_swipe">Swipe card</string>
-    <string name="title_status_swipe">Swiper Status</string>
+    <string name="title_status_swipe">. . .</string>
     <string name="title_instruction_donation">Enter donation amount</string>
     <string name="title_action_clear">Clear</string>
     <string name="title_submit">Submit</string>

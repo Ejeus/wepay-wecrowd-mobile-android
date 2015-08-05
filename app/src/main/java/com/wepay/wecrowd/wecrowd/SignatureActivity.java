@@ -32,33 +32,6 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         signaturePad = (SignaturePad) findViewById(R.id.signature_pad);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_signature, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        //noinspection SimplifiableIfStatement
-        switch (item.getItemId()) {
-            case R.id.action_clear: {
-                signaturePad.clear();
-                return true;
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
     public void didSubmitSignature(View view) {
         AppNotifier.showIndeterminateProgress(this, getString(R.string.message_processing));
 
