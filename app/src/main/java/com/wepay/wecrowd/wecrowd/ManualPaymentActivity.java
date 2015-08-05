@@ -31,12 +31,24 @@ import internal.LoginManager;
 import internal.PaymentManager;
 
 public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
+    List<Map.Entry<String, String>> fields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_payment);
 
+        setUpInformationFields();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
         setUpInformationFields();
     }
 
@@ -64,6 +76,15 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     // Button message
     public void didChooseDonate(View view) {
+        performDonation();
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    private void performDonation() {
         Address address;
         Boolean virtualTerminal;
         EditText expirationMonthEditText, expirationYearEditText;
@@ -98,20 +119,14 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         AppNotifier.showIndeterminateProgress(this, getString(R.string.message_processing));
     }
 
-    public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
     private void setUpInformationFields() {
         final ViewGroup fieldViewGroup;
         TextView tagTextView;
         EditText entryEditText, expirationMonthEditText, expirationYearEditText;
-        final List<Map.Entry<String, String>> fields;
 
         // Grab the group containing all the fields
         fieldViewGroup = (ViewGroup) findViewById(R.id.manual_payment_fields);
-        fields = fieldConfigurationList();
+        if (fields == null) { fields = fieldConfigurationList(); }
 
         for (int i = 0; i < fieldViewGroup.getChildCount(); ++i) {
             // Grab the row containing the tag and entry views
