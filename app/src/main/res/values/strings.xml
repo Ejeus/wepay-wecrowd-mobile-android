@@ -7,6 +7,9 @@
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_campaign_feed">Campaigns</string>
     <string name="title_activity_campaign_detail">Details</string>
+    <string name="title_activity_manual_payment">Manual Entry</string>
+    <string name="title_activity_swipe_payment">Swipe Card</string>
+    <string name="title_activity_signature">Signature</string>
 
     <string name="title_button_login">Login</string>
     <string name="title_login">Login as Merchant</string>
@@ -76,7 +79,6 @@
     <!--Loading Placeholders-->
     <string name="placeholder_donation_progress">PROGRESS</string>
     <string name="placeholder_campaign_title">TITLE</string>
-    <string name="title_activity_manual_payment">ManualPaymentActivity</string>
 
     <!--Messages-->
     <string name="message_welcome">Welcome!</string>
@@ -91,7 +93,4 @@
     <string name="message_swiper_tokenizing">Tokenizing</string>
     <string name="message_swiper_stopped">Swiper stopped</string>
     <string name="message_signature_stored">Signature stored!</string>
-
-    <string name="title_activity_swipe_payment">SwipePaymentActivity</string>
-    <string name="title_activity_signature">SignatureActivity</string>
 </resources>
