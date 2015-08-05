@@ -60,6 +60,7 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onError(com.wepay.android.models.Error error) {
+        statusTextView.setText(getString(R.string.title_status_swipe));
         AppNotifier.showSimpleError(this, getString(R.string.error_swiper_title),
                 getString(R.string.error_swiper_preface), error.getLocalizedMessage());
     }
