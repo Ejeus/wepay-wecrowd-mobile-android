@@ -74,7 +74,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
         Integer campaignID;
 
         intent = getIntent();
-        campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
+//        campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
+        campaignID = 28;
 
         // Set the donation campaign
         DonationManager.configureDonationWithID(campaignID);
@@ -97,21 +98,20 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     private void configureViewForCampaignDetail(CampaignDetail campaignDetail) {
         Integer progressPercent;
-        TextView titleTextView, progressTextView;
+        TextView progressTextView;
         ProgressBar progressBar;
         final ImageView imageView;
+
+        setTitle(campaignDetail.getTitle());
 
         progressPercent = floatProgress(campaignDetail.getProgress(), campaignDetail.getGoal());
 
         imageView = (ImageView) findViewById(R.id.campaign_detail_image);
-        titleTextView = (TextView) findViewById(R.id.campaign_detail_title);
         progressTextView = (TextView) findViewById(R.id.campaign_detail_progress_text);
         progressBar = (ProgressBar) findViewById(R.id.campaign_detail_progress_bar);
 
         progressTextView.setText(stringFromProgress(progressPercent));
         progressBar.setProgress(progressPercent);
-
-        titleTextView.setText(campaignDetail.getTitle());
 
         campaignDetail.fetchImage(campaignDetail, new APIResponseHandler() {
             @Override
