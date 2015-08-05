@@ -41,20 +41,20 @@
                 android:progressBackgroundTint="@color/theme_neutral"
                 android:progressTint="@color/theme_green"
                 android:max="100"
-                android:progress="50"
-                />
+                android:progress="50" />
             <TextView
                 style="@style/TextViewSingleLine"
 
                 android:id="@+id/campaign_detail_progress_text"
                 android:text="@string/placeholder_donation_progress"
-                android:textColor="@color/theme_green"/>
+                android:textColor="@color/theme_green" />
             <Button
                 style="@style/ButtonAction"
 
                 android:id="@+id/campaign_detail_button_donate"
                 android:onClick="didSelectDonate"
-                android:text="DONATE_PLACEHOLDER"/>
+                android:text="DONATE_PLACEHOLDER"
+                android:layout_marginTop="@dimen/activity_vertical_margin" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
