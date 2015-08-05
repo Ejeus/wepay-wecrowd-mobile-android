@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_title_text_size">48sp</dimen>
     <dimen name="campaign_detail_title_text_size">10sp</dimen>
+    <dimen name="spacing_standard">8dp</dimen>
 </resources>
