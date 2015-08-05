@@ -27,6 +27,7 @@
         style="@style/ButtonAction"
 
         android:id="@+id/button_request_login"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:onClick="didRequestLogin"
         android:text="@string/title_button_login" />
 
