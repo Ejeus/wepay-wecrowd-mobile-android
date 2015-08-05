@@ -21,7 +21,8 @@
 
             android:id="@+id/campaign_feed_image"
             android:src="@drawable/wecrowdlogo"
-            android:contentDescription="campaign_image" />
+            android:contentDescription="campaign_image"
+            android:layout_marginBottom="@dimen/spacing_standard" />
         <TextView
             style="@style/TextViewCentered"
 
@@ -31,6 +32,7 @@
             style="@style/TextViewCentered"
 
             android:id="@+id/campaign_feed_cell_end_date"
-            android:text="END DATE" />
+            android:text="END DATE"
+            android:layout_marginBottom="@dimen/spacing_standard" />
     </LinearLayout>
 </LinearLayout>
