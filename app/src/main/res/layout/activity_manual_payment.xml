@@ -86,7 +86,8 @@
             style="@style/ButtonAction"
 
             android:text="@string/title_button_donate"
-            android:onClick="didChooseDonate"/>
+            android:onClick="didChooseDonate"
+            android:layout_marginTop="@dimen/activity_vertical_margin" />
 
     </LinearLayout>
 </ScrollView>
