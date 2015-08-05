@@ -26,6 +26,18 @@
         </shape>
     </item>
 
+    <item android:state_enabled="false">
+        <shape>
+            <solid
+                android:color="@color/theme_neutral" />
+            <padding
+                android:right="10dp"
+                android:left="10dp"
+                android:top="10dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>
+
     <item>
         <shape>
             <solid

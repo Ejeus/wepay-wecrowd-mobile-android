@@ -39,6 +39,7 @@
         <Button
             style="@style/ButtonAction"
 
+            android:id="@+id/button_donate"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:onClick="didChooseDonate"
             android:text="@string/title_button_accept_donation"
