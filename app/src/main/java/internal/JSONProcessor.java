@@ -2,6 +2,7 @@ package internal;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,20 +13,29 @@ public class JSONProcessor {
     private static final String TAG = "JSON_PROCESSOR";
 
     public static String stringFromJSON(JSONObject object, String key) {
-        String value = null;
+        String value;
 
         try { value = object.getString(key); }
-        catch (JSONException e) { Log.e(TAG, e.getLocalizedMessage()); }
+        catch (JSONException e) { throw new RuntimeException(e); }
 
         return value;
     }
 
     public static Integer integerFromJSON(JSONObject object, String key) {
-        Integer value = null;
+        Integer value;
 
         try { value = object.getInt(key); }
-        catch (JSONException e) { Log.e(TAG, e.getLocalizedMessage()); }
+        catch (JSONException e) { throw new RuntimeException(e); }
 
         return value;
+    }
+
+    public static JSONObject jsonObjectFromArray(JSONArray array, int index) {
+        JSONObject object;
+
+        try { object = array.getJSONObject(index); }
+        catch (JSONException e) {throw new RuntimeException(e); }
+
+        return object;
     }
 }

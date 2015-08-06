@@ -77,7 +77,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
 
         // Set the donation campaign
-//        DonationManager.configureDonationWithID(campaignID);
+        DonationManager.configureDonationWithID(campaignID);
 
         CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
             @Override

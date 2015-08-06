@@ -17,7 +17,6 @@ import models.Donation;
  */
 public class DonationManager {
     private static Donation donation;
-    private static final String ASSERT_DONATION_MESSAGE = "Assertion failure: Donation must be configured before performing a donation";
 
     public static void configureDonationWithID(Integer ID) {
         if (donation == null) { donation = new Donation(); }
