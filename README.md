@@ -24,7 +24,7 @@ Huge shout out to these libraries!
 4. Ensure [Android Studio](https://developer.android.com/sdk/index.html) is installed
 5. Open the project in Android Studio
 6. Ensure Android studio device settings are configured to your liking -- **Run->Edit Configurations**
-7. Run the app on your favorite Android device!
+7. Build and run the app on your favorite Android device (it may take a few minutes the first time)!
 
 ## License
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
