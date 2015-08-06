@@ -41,8 +41,8 @@
     <string name="dialog_button_close">Close</string>
 
     <!--Hints-->
-    <string name="hint_login">Enter email address</string>
-    <string name="hint_password">Enter password</string>
+    <string name="hint_login">Email address</string>
+    <string name="hint_password">Password</string>
     <string name="hint_month">MM</string>
     <string name="hint_year">YYYY</string>
     <string name="hint_signature">Please sign</string>

@@ -37,14 +37,14 @@ public class LoginManager {
                 super.onSuccess(statusCode, headers, response);
 
                 // Retrieve the data from JSON
-                try { userID = response.getInt("user_id"); }
+                try { userID = response.getInt(Constants.PARAM_USER_ID); }
                 catch (JSONException e) {
                     throwable = new Throwable(e.getLocalizedMessage());
                     handler.onCompletion(user, throwable);
                     return;
                 }
 
-                try { userToken = response.getString("token"); }
+                try { userToken = response.getString(Constants.PARAM_TOKEN); }
                 catch (JSONException e) {
                     throwable = new Throwable(e.getLocalizedMessage());
                     handler.onCompletion(user, throwable);
@@ -52,7 +52,6 @@ public class LoginManager {
                 }
 
                 user = new User(userID, userToken);
-
                 userType = UserType.MERCHANT;
 
                 handler.onCompletion(user, throwable);

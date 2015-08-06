@@ -1,16 +1,11 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +22,7 @@ import java.util.Map;
 import internal.APIResponseHandler;
 import internal.DonationManager;
 import internal.AppNotifier;
+import internal.InputManager;
 import internal.LoginManager;
 import internal.PaymentManager;
 
@@ -55,11 +51,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     // Button message
     public void didChooseDonate(View view) {
         performDonation();
-    }
-
-    public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void performDonation() {
@@ -113,7 +104,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
             // Grab the views in the field
             tagTextView = (TextView) field.findViewById(R.id.linear_tagged_title);
             entryEditText = (EditText) field.findViewById(R.id.linear_tagged_entry);
-            setKeyboardDismissForEditText(entryEditText);
+
+            InputManager.setKeyboardDismissForEditText(this, entryEditText);
 
             // Set the text for the field child views
             tagTextView.setText(fields.get(i).getKey());
@@ -123,8 +115,8 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         expirationMonthEditText = (EditText) findViewById(R.id.manual_payment_month_entry);
         expirationYearEditText = (EditText) findViewById(R.id.manual_payment_year_entry);
 
-        setKeyboardDismissForEditText(expirationMonthEditText);
-        setKeyboardDismissForEditText(expirationYearEditText);
+        InputManager.setKeyboardDismissForEditText(this, expirationMonthEditText);
+        InputManager.setKeyboardDismissForEditText(this, expirationYearEditText);
     }
 
     // Couldn't figure out how to just add the strings directly to XML while reusing the ViewGroup
@@ -157,16 +149,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         return (ViewGroup) findViewById(R.id.manual_payment_fields).findViewById(ID);
     }
 
-    private void setKeyboardDismissForEditText(EditText editText) {
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
-    }
+
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
