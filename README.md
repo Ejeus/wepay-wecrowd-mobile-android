@@ -26,4 +26,4 @@ Huge shout out to these libraries!
 7. Run the app on your favorite Android device!
 
 ## License
-See the [LICENSE] (LICENSE.md) file for license rights and limitations (MIT).
+See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
