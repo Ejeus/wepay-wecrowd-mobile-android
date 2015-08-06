@@ -33,6 +33,7 @@
     <string name="error_tokenization_preface">Unable to tokenize with given information</string>
     <string name="error_swiper_title">Unable to complete card swipe</string>
     <string name="error_swiper_preface">The card swipe failed</string>
+    <string name="error_campaigns_fetch_preface">Fetching the campaigns failed</string>
 
     <!--Dialog-->
     <string name="dialog_button_close">Close</string>

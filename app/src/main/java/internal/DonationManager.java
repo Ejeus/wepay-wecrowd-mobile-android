@@ -17,6 +17,7 @@ import models.Donation;
  */
 public class DonationManager {
     private static Donation donation;
+    private static final String ASSERT_DONATION_MESSAGE = "Assertion failure: Donation must be configured before performing a donation";
 
     public static void configureDonationWithID(Integer ID) {
         if (donation == null) { donation = new Donation(); }
@@ -39,7 +40,6 @@ public class DonationManager {
     public static void makeDonation(Context context, final APIResponseHandler responseHandler) {
         Map<String, Object> paramMap;
 
-        // TODO: Add assert for donation allocation
         paramMap = new HashMap<>();
         paramMap.put(Constants.CAMPAIGN_ID, donation.getCampaignID());
         paramMap.put(Constants.PARAM_CREDIT_CARD_ID, donation.getCreditCardID());
