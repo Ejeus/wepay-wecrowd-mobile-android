@@ -1,16 +1,11 @@
 package com.wepay.wecrowd.wecrowd;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -109,6 +104,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
             // Grab the views in the field
             tagTextView = (TextView) field.findViewById(R.id.linear_tagged_title);
             entryEditText = (EditText) field.findViewById(R.id.linear_tagged_entry);
+
             InputManager.setKeyboardDismissForEditText(this, entryEditText);
 
             // Set the text for the field child views

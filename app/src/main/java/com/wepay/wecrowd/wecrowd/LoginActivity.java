@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
+import internal.InputManager;
 import internal.LoginManager;
 import models.User;
 
@@ -24,8 +25,11 @@ public class LoginActivity extends AppCompatActivity {
         entryCredentials = (EditText) findViewById(R.id.edit_text_credentials);
         entryPassword = (EditText) findViewById(R.id.edit_text_password);
 
-        entryCredentials.setText(R.string.demo_email, TextView.BufferType.EDITABLE);
-        entryPassword.setText(R.string.demo_password, TextView.BufferType.EDITABLE);
+        entryCredentials.setText(R.string.demo_email);
+        entryPassword.setText(R.string.demo_password);
+
+        InputManager.setKeyboardDismissForEditTexts(this,
+                new EditText[] {entryCredentials, entryPassword});
     }
 
     public void didRequestLogin(View view) {

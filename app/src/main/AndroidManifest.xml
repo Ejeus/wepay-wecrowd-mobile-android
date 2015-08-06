@@ -37,6 +37,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName=".WelcomeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -64,6 +65,7 @@
             android:name=".ManualPaymentActivity"
             android:label="@string/title_activity_manual_payment"
             android:parentActivityName=".CampaignDetailActivity"
+            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -73,6 +75,7 @@
             android:name=".SwipePaymentActivity"
             android:label="@string/title_activity_swipe_payment"
             android:parentActivityName=".CampaignDetailActivity"
+            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
