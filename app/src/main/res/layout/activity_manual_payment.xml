@@ -18,6 +18,11 @@
         android:clickable="true"
         android:focusableInTouchMode="true">
 
+        <TextView
+            style="@style/TextView"
+            android:textAllCaps="true"
+            android:text="@string/title_instruction_manual_entry" />
+
         <LinearLayout
             android:id="@+id/manual_payment_fields"
             android:layout_width="fill_parent"

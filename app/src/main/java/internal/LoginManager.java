@@ -39,7 +39,6 @@ public class LoginManager {
                 // Retrieve the data from JSON
                 try { userID = response.getInt("user_id"); }
                 catch (JSONException e) {
-                    Log.e(LoginManager.class.getName(), "JSON: Unable to retrieve user_id.");
                     throwable = new Throwable(e.getLocalizedMessage());
                     handler.onCompletion(user, throwable);
                     return;
@@ -47,7 +46,6 @@ public class LoginManager {
 
                 try { userToken = response.getString("token"); }
                 catch (JSONException e) {
-                    Log.e(LoginManager.class.getName(), "JSON: Unable to retrieve token.");
                     throwable = new Throwable(e.getLocalizedMessage());
                     handler.onCompletion(user, throwable);
                     return;

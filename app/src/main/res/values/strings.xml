@@ -20,6 +20,7 @@
     <string name="title_donation_swipe">Swipe card</string>
     <string name="title_status_swipe">. . .</string>
     <string name="title_instruction_donation">Enter donation amount</string>
+    <string name="title_instruction_manual_entry">Enter your payment information</string>
     <string name="title_action_clear">Clear</string>
     <string name="title_submit">Submit</string>
 
@@ -33,6 +34,8 @@
     <string name="error_tokenization_preface">Unable to tokenize with given information</string>
     <string name="error_swiper_title">Unable to complete card swipe</string>
     <string name="error_swiper_preface">The card swipe failed</string>
+    <string name="error_campaigns_fetch_preface">Fetching the campaigns failed</string>
+    <string name="error_title_retry">Retry</string>
 
     <!--Dialog-->
     <string name="dialog_button_close">Close</string>
@@ -57,7 +60,7 @@
     <string name="demo_address_postal_code">94063</string>
     <string name="demo_address_country_code">US</string>
 
-    <string name="title_donation">Donation</string>
+    <string name="title_donation">Amount</string>
     <string name="title_first_name">First Name</string>
     <string name="title_last_name">Last Name</string>
     <string name="title_email">Email</string>

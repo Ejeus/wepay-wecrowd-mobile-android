@@ -26,9 +26,6 @@ import internal.JSONProcessor;
  */
 
 public class Campaign {
-    // Public members
-    public static Callback callback;
-
     // Protected members
     protected Integer campaignID;
     protected String title;
@@ -66,14 +63,10 @@ public class Campaign {
                 final Campaign[] campaigns = new Campaign[responseArray.length()];
 
                 for (int i = 0; i < responseArray.length(); ++i) {
-                    JSONObject responseObject = null;
+                    JSONObject responseObject;
                     Campaign campaign;
 
-                    try {
-                        responseObject = responseArray.getJSONObject(i);
-                    } catch (JSONException e) {
-                        Log.e(getClass().getName(), e.getLocalizedMessage());
-                    }
+                    responseObject = JSONProcessor.jsonObjectFromArray(responseArray, i);
 
                     campaign = campaignFromJSONObject(responseObject);
                     campaigns[i] = campaign;
@@ -108,7 +101,9 @@ public class Campaign {
     }
 
     // External methods
-    public static void fetchImage(final Campaign campaign, final APIResponseHandler responseHandler) {
+    public static void fetchImage(final Campaign campaign,
+                                  final APIResponseHandler responseHandler)
+    {
         if (campaign.imageBMP == null) {
             APIClient.getFromRaw(campaign.imageURL, new AsyncHttpResponseHandler() {
                 @Override
@@ -125,10 +120,6 @@ public class Campaign {
                                       Header[] headers,
                                       byte[] bytes,
                                       Throwable throwable) {
-                    Log.e(getClass().getName(),
-                            "Unable to fetch the image. " + throwable.getLocalizedMessage(),
-                            throwable);
-
                     if (responseHandler != null) {
                         responseHandler.onCompletion((Bitmap) null, throwable);
                     }

@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import internal.APIResponseHandler;
+import internal.AppNotifier;
 import internal.CampaignArrayAdapter;
 import internal.LoginManager;
 import models.Campaign;
@@ -56,7 +57,10 @@ public class CampaignFeedActivity extends AppCompatActivity {
                     campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
                     listView.setAdapter(campaignArrayAdapter);
                 } else {
-                    // TODO: Display error
+                    AppNotifier.showSimpleError(context,
+                            getString(R.string.error_fetch_title),
+                            getString(R.string.error_campaigns_fetch_preface),
+                            throwable.getLocalizedMessage());
                 }
             }
         });

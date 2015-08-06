@@ -40,6 +40,12 @@ public class PaymentManager {
         wepay.startSwiperForReading(swiperHandler);
     }
 
+    public static void stopCardReader(Context context) {
+        initializeMembersFromContext(context);
+
+        wepay.stopSwiper();
+    }
+
     public static void storeSignatureImage(Context context,
                                            Bitmap image,
                                            String checkoutID,
@@ -51,7 +57,12 @@ public class PaymentManager {
     }
 
     private static void initializeMembersFromContext(Context context) {
-        config = new Config(context, CLIENT_ID, Config.ENVIRONMENT_STAGING);
-        wepay = new WePay(config);
+        if (config == null || wepay == null) {
+            config = new Config(context, CLIENT_ID, Config.ENVIRONMENT_STAGING);
+            wepay = new WePay(config);
+        } else if (config.getContext() != context) {
+            config = new Config(context, CLIENT_ID, Config.ENVIRONMENT_STAGING);
+            wepay = new WePay(config);
+        }
     }
 }

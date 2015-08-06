@@ -11,6 +11,10 @@ public class Donation {
 
     public Donation() {}
 
+    public boolean hasValidMembers() {
+        return campaignID != null && creditCardID != null && amount != null;
+    }
+
     public void setCampaignID(Integer campaignID) { this.campaignID = campaignID; }
     public void setCreditCardID(String creditCardID) { this.creditCardID = creditCardID; }
     public void setAmount(Integer amount) { this.amount = amount; }

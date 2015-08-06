@@ -39,7 +39,6 @@ public class DonationManager {
     public static void makeDonation(Context context, final APIResponseHandler responseHandler) {
         Map<String, Object> paramMap;
 
-        // TODO: Add assert for donation allocation
         paramMap = new HashMap<>();
         paramMap.put(Constants.CAMPAIGN_ID, donation.getCampaignID());
         paramMap.put(Constants.PARAM_CREDIT_CARD_ID, donation.getCreditCardID());

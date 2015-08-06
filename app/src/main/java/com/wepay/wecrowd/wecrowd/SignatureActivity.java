@@ -47,8 +47,6 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         AppNotifier.showSimpleSuccess(this, getString(R.string.message_signature_stored));
         finish();
         callback.onCompletion(checkoutID);
-
-        Log.i(getClass().getName(), "Signature URL:" + signatureURL);
     }
 
     @Override

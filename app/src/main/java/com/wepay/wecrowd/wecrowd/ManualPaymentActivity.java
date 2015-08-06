@@ -194,8 +194,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 }
             }
         });
-
-        Log.i(getClass().getName(), "Tokenization successful!");
     }
 
     @Override
@@ -205,8 +203,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         AppNotifier.showSimpleError(this, getString(R.string.message_failure_tokenization),
                 getString(R.string.error_tokenization_preface),
                 error.getLocalizedMessage());
-
-        Log.e(getClass().getName(), "Tokenization failed");
     }
 
     // Default field value getters
