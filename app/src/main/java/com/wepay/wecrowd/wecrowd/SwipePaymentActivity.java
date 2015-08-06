@@ -46,6 +46,13 @@ public class SwipePaymentActivity extends AppCompatActivity
         PaymentManager.startCardSwipeTokenization(this, this, this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        PaymentManager.stopCardReader(this);
+    }
+
     private void storeLayoutViews() {
         statusTextView = (TextView) findViewById(R.id.swipe_payment_status);
         donateButton = (Button) findViewById(R.id.button_donate);
