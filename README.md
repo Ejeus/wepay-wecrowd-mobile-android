@@ -16,6 +16,7 @@ Native application for [WeCrowd](http://wecrowd.wepay.com/), a sample crowdfundi
 ## External code used
 Huge shout out to these libraries!
 * [Android Signature Pad](https://github.com/gcacace/android-signaturepad) [License](http://www.apache.org/licenses/LICENSE-2.0.txt)
+* WePay Android SDK
 
 ## Usage Instructions
 1. Clone the repo
