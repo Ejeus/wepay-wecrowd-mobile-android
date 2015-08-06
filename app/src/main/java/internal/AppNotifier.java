@@ -3,7 +3,10 @@ package internal;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.Gravity;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.wepay.wecrowd.wecrowd.R;
@@ -26,6 +29,27 @@ public class AppNotifier {
         errorBuilder.setTitle(errorTitle)
                 .setMessage(errorPreface + ". Error: " + errorMessage)
                 .setNegativeButton(R.string.dialog_button_close, null);
+
+        dialog = errorBuilder.create();
+        dialog.show();
+    }
+
+    public static void showErrorWithItem(Context context,
+                                         String errorTitle,
+                                         String errorPreface,
+                                         String errorMessage,
+                                         String itemTitle,
+                                         DialogInterface.OnClickListener onClickListener)
+    {
+        AlertDialog.Builder errorBuilder;
+        AlertDialog dialog;
+
+        errorBuilder = new AlertDialog.Builder(context);
+        errorBuilder
+                .setTitle(errorTitle)
+                .setMessage(errorPreface + ". Error: " + errorMessage)
+                .setNegativeButton(R.string.dialog_button_close, onClickListener)
+                .setPositiveButton(itemTitle, onClickListener);
 
         dialog = errorBuilder.create();
         dialog.show();

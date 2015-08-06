@@ -1,6 +1,8 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.wepay.android.SwiperHandler;
 import com.wepay.android.TokenizationHandler;
+import com.wepay.android.enums.ErrorCode;
 import com.wepay.android.enums.SwiperStatus;
 import com.wepay.android.models.*;
 import com.wepay.android.models.Error;
@@ -77,9 +80,38 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onError(com.wepay.android.models.Error error) {
+        final AppCompatActivity self = this;
+
         statusTextView.setText(getString(R.string.title_status_swipe));
-        AppNotifier.showSimpleError(this, getString(R.string.error_swiper_title),
-                getString(R.string.error_swiper_preface), error.getLocalizedMessage());
+
+        if (error.getErrorCode()== ErrorCode.SWIPER_TIME_OUT_ERROR.getCode()) {
+            AppNotifier.showErrorWithItem(this, getString(R.string.error_swiper_title),
+                    getString(R.string.error_swiper_preface), error.getLocalizedMessage(),
+                    getString(R.string.error_title_retry),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE: {
+                                    // Selected the retry button
+                                    PaymentManager.startCardSwipeTokenization(self,
+                                            (SwiperHandler) self,
+                                            (TokenizationHandler) self);
+                                    break;
+                                }
+                                case DialogInterface.BUTTON_NEGATIVE: {
+                                    // Selected the cancel button
+                                    finish();
+                                    break;
+                                }
+                                default: { break; }
+                            }
+                        }
+                    });
+        } else {
+            AppNotifier.showSimpleError(self, getString(R.string.error_swiper_title),
+                    getString(R.string.error_swiper_preface), error.getLocalizedMessage());
+        }
     }
 
     @Override
