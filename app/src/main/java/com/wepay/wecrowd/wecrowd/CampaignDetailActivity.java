@@ -68,12 +68,12 @@ public class CampaignDetailActivity extends AppCompatActivity {
             menu.show();
         }
     }
-    
+
     private void setUpCampaignDetail() {
         Intent intent;
         Integer campaignID;
 
-        // Grab the selected campign ID
+        // Grab the selected campaign ID
         intent = getIntent();
         campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
 

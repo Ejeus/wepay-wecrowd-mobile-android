@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,21 +19,22 @@ import models.Campaign;
 public class CampaignFeedActivity extends AppCompatActivity {
     public static final String EXTRA_CAMPAIGN_ID = "com.wepay.wecrowd.CAMPAIGN_ID";
 
-    private ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView listView;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_feed);
 
         listView = (ListView) findViewById(R.id.listview_campaigns);
 
-        setUpList();
-        setUpListener();
+        setUpListView(listView);
+        setUpListViewListener(listView);
     }
 
     // Utility methods
-    private void setUpList() {
+    private void setUpListView(final ListView listView) {
+        // Final Context referece for use in anonymous inner class
         final Context context = this;
 
         Campaign.fetchAllCampaigns(new APIResponseHandler() {
@@ -46,11 +45,13 @@ public class CampaignFeedActivity extends AppCompatActivity {
                     final CampaignArrayAdapter campaignArrayAdapter;
                     final Integer campaignCount;
 
-                    // Hardcode the merchant campaigns
+                    // There's no merchant account associated with the featured campaigns,
+                    // so hardcode the merchant's campaigns for the sake of the demo
                     campaignCount = LoginManager.userType == LoginManager.UserType.PAYER ? campaigns.length : 2;
                     campaignList = new ArrayList<>(campaignCount);
 
                     for (int i = 0; i < campaignCount; ++i) {
+                        // Store the models for all campaigns
                         campaignList.add(campaigns[i]);
                     }
 
@@ -66,7 +67,8 @@ public class CampaignFeedActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpListener() {
+    private void setUpListViewListener(final ListView listView) {
+        // Designate an action for when a user selects a list item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
