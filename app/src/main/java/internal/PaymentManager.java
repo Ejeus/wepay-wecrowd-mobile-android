@@ -2,7 +2,6 @@ package internal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.session.MediaSession;
 
 import com.wepay.android.SignatureHandler;
 import com.wepay.android.SwiperHandler;

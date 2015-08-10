@@ -1,7 +1,6 @@
 package com.wepay.wecrowd.wecrowd;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +15,9 @@ import com.wepay.android.SwiperHandler;
 import com.wepay.android.TokenizationHandler;
 import com.wepay.android.enums.ErrorCode;
 import com.wepay.android.enums.SwiperStatus;
-import com.wepay.android.models.*;
 import com.wepay.android.models.Error;
+import com.wepay.android.models.PaymentInfo;
+import com.wepay.android.models.PaymentToken;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;

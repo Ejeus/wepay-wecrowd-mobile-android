@@ -14,8 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
-import internal.DonationManager;
 import internal.AppNotifier;
+import internal.DonationManager;
 import internal.LoginManager;
 import models.Campaign;
 import models.CampaignDetail;

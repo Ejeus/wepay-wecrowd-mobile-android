@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.wepay.android.TokenizationHandler;
 import com.wepay.android.enums.PaymentMethod;
-import com.wepay.android.models.*;
+import com.wepay.android.models.PaymentInfo;
+import com.wepay.android.models.PaymentToken;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import internal.APIResponseHandler;
-import internal.DonationManager;
 import internal.AppNotifier;
+import internal.DonationManager;
 import internal.InputManager;
 import internal.LoginManager;
 import internal.PaymentManager;

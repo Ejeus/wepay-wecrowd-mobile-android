@@ -2,14 +2,12 @@ package models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -17,7 +15,6 @@ import java.util.Calendar;
 
 import internal.APIClient;
 import internal.APIResponseHandler;
-import internal.Callback;
 import internal.Constants;
 import internal.JSONProcessor;
 
