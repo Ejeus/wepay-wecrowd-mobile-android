@@ -29,11 +29,8 @@ import internal.PaymentManager;
 public class SwipePaymentActivity extends AppCompatActivity
         implements SwiperHandler, TokenizationHandler, Callback
 {
-    TextView statusTextView;
-    EditText donateEditText;
-    Button donateButton;
-
-    String tokenID;
+    private TextView statusTextView;
+    private EditText donateEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +40,7 @@ public class SwipePaymentActivity extends AppCompatActivity
         storeLayoutViews();
         setUpViewInformation();
 
-        donateButton.setEnabled(false);
         statusTextView.setText(getString(R.string.message_swiper_start));
-
-        PaymentManager.startCardSwipeTokenization(this, this, this);
     }
 
     @Override
@@ -58,7 +52,6 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     private void storeLayoutViews() {
         statusTextView = (TextView) findViewById(R.id.swipe_payment_status);
-        donateButton = (Button) findViewById(R.id.button_donate);
     }
 
     private void setUpViewInformation() {
@@ -69,7 +62,7 @@ public class SwipePaymentActivity extends AppCompatActivity
         donateTag = (TextView) donationField.getChildAt(0);
         donateEditText = (EditText) donationField.getChildAt(1);
 
-        donateTag.setText(getString(R.string.title_donation_manual));
+        donateTag.setText(getString(R.string.title_donation));
         donateEditText.setText(getString(R.string.demo_payer_donation_amount));
     }
 
@@ -112,6 +105,8 @@ public class SwipePaymentActivity extends AppCompatActivity
             AppNotifier.showSimpleError(self, getString(R.string.error_swiper_title),
                     getString(R.string.error_swiper_preface), error.getLocalizedMessage());
         }
+
+        statusTextView.setText(getString(R.string.message_user_try_again));
     }
 
     @Override
@@ -135,9 +130,9 @@ public class SwipePaymentActivity extends AppCompatActivity
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
-        tokenID = paymentToken.getTokenId();
-        donateButton.setEnabled(true);
         statusTextView.setText("Tokenized!");
+
+        performDonationWithTokenID(paymentToken.getTokenId());
     }
 
     @Override
@@ -148,7 +143,7 @@ public class SwipePaymentActivity extends AppCompatActivity
                 getString(R.string.error_tokenization_preface),
                 error.getLocalizedMessage());
 
-        statusTextView.setText(getString(R.string.title_status_swipe));
+        statusTextView.setText(getString(R.string.message_user_try_again));
     }
 
     @Override
@@ -157,9 +152,8 @@ public class SwipePaymentActivity extends AppCompatActivity
     }
 
     public void didChooseDonate(View view) {
+        PaymentManager.startCardSwipeTokenization(this, this, this);
         DonationManager.configureDonationWithAmount(Integer.parseInt(donateEditText.getText().toString()));
-
-        performDonationWithTokenID(tokenID);
     }
 
     private void performDonationWithTokenID(String tokenID) {

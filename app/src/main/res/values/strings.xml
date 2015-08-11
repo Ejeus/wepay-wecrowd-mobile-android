@@ -90,10 +90,11 @@
     <string name="message_failure_donation">Donation failed</string>
     <string name="message_failure_tokenization">Tokenization failed</string>
     <string name="message_swiper_not_connected">Please connect the swiper and wait</string>
-    <string name="message_swiper_start">Starting card reader...</string>
+    <string name="message_swiper_start">Swiper status</string>
     <string name="message_swiper_waiting">Waiting for swipe...</string>
     <string name="message_swiper_detected">Swipe detected!</string>
     <string name="message_swiper_tokenizing">Tokenizing</string>
     <string name="message_swiper_stopped">Swiper stopped</string>
     <string name="message_signature_stored">Signature stored!</string>
+    <string name="message_user_try_again">Please try again</string>
 </resources>
