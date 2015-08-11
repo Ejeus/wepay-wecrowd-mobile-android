@@ -96,4 +96,5 @@
     <string name="message_swiper_tokenizing">Tokenizing</string>
     <string name="message_swiper_stopped">Swiper stopped</string>
     <string name="message_signature_stored">Signature stored!</string>
+    <string name="message_user_try_again">Please try again</string>
 </resources>

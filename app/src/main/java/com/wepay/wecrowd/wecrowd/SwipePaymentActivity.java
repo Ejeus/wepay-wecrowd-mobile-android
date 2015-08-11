@@ -105,6 +105,8 @@ public class SwipePaymentActivity extends AppCompatActivity
             AppNotifier.showSimpleError(self, getString(R.string.error_swiper_title),
                     getString(R.string.error_swiper_preface), error.getLocalizedMessage());
         }
+
+        statusTextView.setText(getString(R.string.message_user_try_again));
     }
 
     @Override
@@ -141,7 +143,7 @@ public class SwipePaymentActivity extends AppCompatActivity
                 getString(R.string.error_tokenization_preface),
                 error.getLocalizedMessage());
 
-        statusTextView.setText(getString(R.string.title_status_swipe));
+        statusTextView.setText(getString(R.string.message_user_try_again));
     }
 
     @Override

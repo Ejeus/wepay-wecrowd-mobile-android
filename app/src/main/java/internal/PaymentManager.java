@@ -58,9 +58,11 @@ public class PaymentManager {
     private static void initializeMembersFromContext(Context context) {
         if (config == null || wepay == null) {
             config = new Config(context, CLIENT_ID, Config.ENVIRONMENT_STAGING);
+            config.setRestartSwiperAfterSwipeGeneralError(true);
             wepay = new WePay(config);
         } else if (config.getContext() != context) {
             config = new Config(context, CLIENT_ID, Config.ENVIRONMENT_STAGING);
+            config.setRestartSwiperAfterSwipeGeneralError(true);
             wepay = new WePay(config);
         }
     }
