@@ -4,12 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import internal.APIResponseHandler;
-import internal.DonationManager;
 import internal.AppNotifier;
+import internal.DonationManager;
 import internal.LoginManager;
 import models.Campaign;
 import models.CampaignDetail;
@@ -40,13 +35,18 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
     public void didSelectDonate(View view) {
+        // Final context reference for use in anonymous inner class
         final Context context = this;
 
         if (LoginManager.userType == LoginManager.UserType.PAYER) {
+            // No merchant is logged in, so the user is an anonymous donator
+            // Anonymous donator can only manually enter payment information
             startActivity(new Intent(this, ManualPaymentActivity.class));
         } else if (LoginManager.userType == LoginManager.UserType.MERCHANT) {
+            // Merchant is logged in, so present the payment options
             PopupMenu menu = new PopupMenu(this, findViewById(R.id.campaign_detail_button_donate));
 
+            // Configure the menu item cases
             menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -73,12 +73,14 @@ public class CampaignDetailActivity extends AppCompatActivity {
         Intent intent;
         Integer campaignID;
 
+        // Grab the selected campaign ID
         intent = getIntent();
         campaignID = intent.getIntExtra(CampaignFeedActivity.EXTRA_CAMPAIGN_ID, -1);
 
-        // Set the donation campaign
+        // Set the donation's campaign
         DonationManager.configureDonationWithID(campaignID);
 
+        // Fetch the server data for the given campaign
         CampaignDetail.fetchCampaignDetail(campaignID, new APIResponseHandler() {
             @Override
             public void onCompletion(Campaign campaign, Throwable throwable) {

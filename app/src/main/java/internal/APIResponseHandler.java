@@ -2,7 +2,8 @@ package internal;
 
 import android.graphics.Bitmap;
 
-import models.*;
+import models.Campaign;
+import models.User;
 
 /**
  * Created by zachv on 7/21/15.

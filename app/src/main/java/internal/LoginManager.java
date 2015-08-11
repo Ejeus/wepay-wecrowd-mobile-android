@@ -6,8 +6,6 @@ package internal;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.wepay.wecrowd.wecrowd.R;
-import android.util.Log;
 
 import org.apache.http.Header;
 import org.json.JSONException;

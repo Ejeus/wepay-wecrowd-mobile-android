@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.wepay.android.TokenizationHandler;
 import com.wepay.android.enums.PaymentMethod;
-import com.wepay.android.models.*;
+import com.wepay.android.models.PaymentInfo;
+import com.wepay.android.models.PaymentToken;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import internal.APIResponseHandler;
-import internal.DonationManager;
 import internal.AppNotifier;
+import internal.DonationManager;
 import internal.InputManager;
 import internal.LoginManager;
 import internal.PaymentManager;
@@ -59,6 +60,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         EditText expirationMonthEditText, expirationYearEditText;
         String expirationMonth, expirationYear;
 
+        // Set the address to our placeholder information
         address = new Address(Locale.getDefault());
         address.setAddressLine(0, getString(R.string.demo_address_line));
         address.setLocality(getString(R.string.demo_address_locality));
@@ -82,6 +84,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 getValueForId(R.id.manual_payment_cvv),
                 expirationMonth, expirationYear, virtualTerminal);
 
+        // Tokenize
         PaymentManager.tokenizeInfo(this, paymentInfo, this);
 
         // Show the loading view
@@ -135,17 +138,17 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
         return configList;
     }
 
-    private Map.Entry<String, String> fieldConfiguration(String tag, String value) {
+    private Map.Entry<String, String> fieldConfiguration(final String tag, final String value) {
         return new AbstractMap.SimpleImmutableEntry<>(tag, value);
     }
 
-    private String getValueForId(int ID) {
+    private String getValueForId(final int ID) {
         TextView textView = (TextView) getFieldForID(ID).findViewById(R.id.linear_tagged_entry);
 
         return textView.getText().toString();
     }
 
-    private ViewGroup getFieldForID(int ID) {
+    private ViewGroup getFieldForID(final int ID) {
         return (ViewGroup) findViewById(R.id.manual_payment_fields).findViewById(ID);
     }
 
