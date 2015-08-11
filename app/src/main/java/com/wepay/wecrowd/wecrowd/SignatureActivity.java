@@ -43,7 +43,6 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case R.id.action_clear: {
                 signaturePad.clear();
@@ -68,6 +67,8 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         AppNotifier.dismissIndeterminateProgress();
         AppNotifier.showSimpleSuccess(this, getString(R.string.message_signature_stored));
         finish();
+
+        // Let the delegate know that this activity is finished
         callback.onCompletion(checkoutID);
     }
 
