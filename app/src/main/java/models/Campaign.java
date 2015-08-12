@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import internal.APIClient;
 import internal.APIResponseHandler;
@@ -129,7 +130,7 @@ public class Campaign {
 
     // Utilities
     private String readableDateString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy", Locale.US);
 
         return dateFormat.format(Calendar.getInstance().getTime());
     }

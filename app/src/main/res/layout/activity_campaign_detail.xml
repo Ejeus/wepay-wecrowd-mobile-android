@@ -42,7 +42,7 @@
                 style="@style/TextViewSingleLine"
 
                 android:id="@+id/campaign_detail_progress_text"
-                android:text="@string/placeholder_donation_progress"
+                android:text="@string/placeholder_generic_progress"
                 android:textColor="@color/theme_green" />
             <Button
                 style="@style/ButtonAction"
