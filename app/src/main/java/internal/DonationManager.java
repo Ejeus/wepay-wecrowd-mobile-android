@@ -14,6 +14,7 @@ import models.Donation;
 
 /**
  * Created by zachv on 7/27/15.
+ * Wecrowd Android
  */
 public class DonationManager {
     private static Donation donation;
@@ -52,7 +53,7 @@ public class DonationManager {
                     value = JSONProcessor.stringFromJSON(response, Constants.PARAM_CHECKOUT_ID);
                     donation.setCheckoutID(value);
 
-                    responseHandler.onCompletion(value, null);
+                    responseHandler.onCompletion(null);
                 }
 
                 @Override
@@ -61,7 +62,7 @@ public class DonationManager {
                                       String responseString,
                                       Throwable throwable)
                 {
-                    responseHandler.onCompletion((String) null, throwable);
+                    responseHandler.onCompletion(throwable);
                 }
             }
         );

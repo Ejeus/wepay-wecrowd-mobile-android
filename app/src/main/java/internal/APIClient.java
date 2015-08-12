@@ -2,6 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/16/15.
+ * Wecrowd Android
  */
 
 import android.content.Context;
@@ -34,12 +35,6 @@ public class APIClient {
                             RequestParams params,
                             AsyncHttpResponseHandler responseHandler) {
         client.post(getAbsoluteUrl(url), params, responseHandler);
-    }
-
-    public static void postRaw(String url,
-                               RequestParams params,
-                               AsyncHttpResponseHandler responseHandler) {
-        client.post(url, params, responseHandler);
     }
 
     public static void post(Context context,

@@ -21,6 +21,7 @@ import internal.JSONProcessor;
 
 /**
  * Created by zachv on 7/20/15.
+ * Wecrowd Android
  */
 
 public class Campaign {
@@ -42,7 +43,7 @@ public class Campaign {
         this.endDate = readableDateString();
     }
 
-    Campaign(Integer ID, String title, Integer goal) {
+    private Campaign(Integer ID, String title, Integer goal) {
         this(ID, title);
         this.goal = goal;
     }
@@ -139,6 +140,5 @@ public class Campaign {
     public Integer getCampaignID() { return campaignID; }
     public String getTitle() { return title; }
     public String getEndDate() { return endDate; }
-    public Bitmap getImageBMP() { return imageBMP; }
     public Integer getGoal() { return goal; }
 }

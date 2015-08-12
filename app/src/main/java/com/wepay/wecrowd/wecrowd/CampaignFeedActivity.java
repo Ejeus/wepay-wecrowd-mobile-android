@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
@@ -50,10 +51,8 @@ public class CampaignFeedActivity extends AppCompatActivity {
                     campaignCount = LoginManager.userType == LoginManager.UserType.PAYER ? campaigns.length : 2;
                     campaignList = new ArrayList<>(campaignCount);
 
-                    for (int i = 0; i < campaignCount; ++i) {
-                        // Store the models for all campaigns
-                        campaignList.add(campaigns[i]);
-                    }
+                    // Add all retrieved campaigns to the list
+                    campaignList.addAll(Arrays.asList(campaigns).subList(0, campaignCount));
 
                     campaignArrayAdapter = new CampaignArrayAdapter(context, campaignList);
                     listView.setAdapter(campaignArrayAdapter);

@@ -12,42 +12,27 @@ import internal.JSONProcessor;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class CampaignDetail extends Campaign {
-    private final String description;
     private final Integer progress;
-
-    public CampaignDetail(Integer ID,
-                          String title,
-                          Integer goal,
-                          String description,
-                          Integer progress)
-    {
-        super(ID, title, goal);
-
-        this.description = description;
-        this.progress = progress;
-    }
 
     private CampaignDetail(Integer ID,
                            String title,
                            Integer goal,
                            String imageURL,
-                           String description,
                            Integer progress)
     {
         super(ID, title, goal, imageURL);
 
-        this.description = description;
         this.progress = progress;
     }
 
-    private CampaignDetail(Campaign campaign, String description, Integer progress) {
+    private CampaignDetail(Campaign campaign, Integer progress) {
         this(campaign.campaignID,
                 campaign.title,
                 campaign.goal,
                 campaign.imageURL,
-                description,
                 progress);
     }
 
@@ -58,13 +43,11 @@ public class CampaignDetail extends Campaign {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Campaign campaign = campaignFromJSONObject(response);
-                String description;
                 Integer progress;
 
-                description = JSONProcessor.stringFromJSON(response, Constants.CAMPAIGN_DESCRIPTION);
                 progress = JSONProcessor.integerFromJSON(response, Constants.CAMPAIGN_PROGRESS);
 
-                handler.onCompletion(new CampaignDetail(campaign, description, progress), null);
+                handler.onCompletion(new CampaignDetail(campaign, progress), null);
             }
 
             @Override
@@ -78,7 +61,5 @@ public class CampaignDetail extends Campaign {
         });
     }
 
-    // Accessors
-    public String getDescription() { return description; }
     public Integer getProgress() { return progress; }
 }

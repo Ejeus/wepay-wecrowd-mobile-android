@@ -12,6 +12,7 @@ import com.wepay.android.models.PaymentInfo;
 
 /**
  * Created by zachv on 7/27/15.
+ * Wecrowd Android
  */
 public class PaymentManager {
     private static final String CLIENT_ID = "116876";
@@ -31,12 +32,6 @@ public class PaymentManager {
         initializeMembersFromContext(context);
 
         wepay.startSwiperForTokenizing(swiperHandler, tokenizationHandler);
-    }
-
-    public static void startCardSwipeReading(Context context, SwiperHandler swiperHandler) {
-        initializeMembersFromContext(context);
-
-        wepay.startSwiperForReading(swiperHandler);
     }
 
     public static void stopCardReader(Context context) {

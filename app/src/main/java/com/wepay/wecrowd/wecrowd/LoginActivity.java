@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 new EditText[] {entryCredentials, entryPassword});
     }
 
+    @SuppressWarnings("unused")
     public void didRequestLogin(View view) {
         String textCredentials, textPassword;
 

@@ -2,6 +2,7 @@ package models;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class User {
     private final Integer ID;

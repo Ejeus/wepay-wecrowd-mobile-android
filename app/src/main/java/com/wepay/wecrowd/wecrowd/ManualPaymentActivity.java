@@ -15,11 +15,9 @@ import com.wepay.android.enums.PaymentMethod;
 import com.wepay.android.models.PaymentInfo;
 import com.wepay.android.models.PaymentToken;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
@@ -40,17 +38,13 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         setUpInformationFields();
     }
 
     // Button message
+    @SuppressWarnings("unused")
     public void didChooseDonate(View view) {
         performDonation();
     }
@@ -169,7 +163,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
-            public void onCompletion(String value, Throwable throwable) {
+            public void onCompletion(Throwable throwable) {
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {
@@ -210,7 +204,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
         public String getTag() { return tag; }
         public String getEntry() { return entry; }
-        public int getInputType() { return inputType; }
     }
 
     // Default field value getters

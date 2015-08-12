@@ -53,6 +53,7 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("unused")
     public void didSubmitSignature(View view) {
         AppNotifier.showIndeterminateProgress(this, getString(R.string.message_processing));
 
@@ -69,7 +70,7 @@ public class SignatureActivity extends AppCompatActivity implements SignatureHan
         finish();
 
         // Let the delegate know that this activity is finished
-        callback.onCompletion(checkoutID);
+        callback.onCompletion();
     }
 
     @Override

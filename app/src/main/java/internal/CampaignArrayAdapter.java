@@ -18,6 +18,7 @@ import models.Campaign;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
     private final Context context;

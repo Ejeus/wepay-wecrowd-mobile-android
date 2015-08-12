@@ -2,6 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/20/15.
+ * Wecrowd Android
  */
 
 import com.loopj.android.http.JsonHttpResponseHandler;

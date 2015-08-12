@@ -23,8 +23,6 @@ import models.CampaignDetail;
 
 
 public class CampaignDetailActivity extends AppCompatActivity {
-    private CampaignDetail campaignDetail;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +33,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         configureViewForUserType(LoginManager.userType);
     }
 
+    @SuppressWarnings("unused")
     public void didSelectDonate(View view) {
         // Final context reference for use in anonymous inner class
         final Context context = this;
@@ -86,7 +85,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
             @Override
             public void onCompletion(Campaign campaign, Throwable throwable) {
                 if (throwable == null) {
-                    campaignDetail = (CampaignDetail) campaign;
                     configureViewForCampaignDetail((CampaignDetail) campaign);
                 } else {
                     AppNotifier.showSimpleError(CampaignDetailActivity.this,

@@ -5,6 +5,7 @@ import android.util.LruCache;
 
 /**
  * Created by zachv on 8/11/15.
+ * Wecrowd Android
  */
 public class ImageCache {
     private static final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
@@ -26,10 +27,6 @@ public class ImageCache {
 
     public static Bitmap getBitmapFromCache(String key) {
         return memCache.get(key);
-    }
-
-    public static String getKeyForID(String ID) {
-        return IMAGE_CACHE_PREFIX + ID;
     }
 
     public static String getKeyForID(Integer ID) {
