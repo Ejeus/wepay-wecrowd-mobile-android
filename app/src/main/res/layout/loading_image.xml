@@ -9,7 +9,7 @@
 
         android:id="@+id/loadable_image"
         android:src="@drawable/wecrowdlogo"
-        android:contentDescription="campaign_image"
+        android:contentDescription="@string/placeholder_generic_image"
         android:layout_marginBottom="@dimen/spacing_standard" />
     <ProgressBar
         android:id="@+id/image_progress_bar"

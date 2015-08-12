@@ -13,7 +13,8 @@ import internal.LoginManager;
 import models.User;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText entryCredentials, entryPassword;
+    private EditText entryCredentials;
+    private EditText entryPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 new EditText[] {entryCredentials, entryPassword});
     }
 
+    @SuppressWarnings("unused")
     public void didRequestLogin(View view) {
         String textCredentials, textPassword;
 

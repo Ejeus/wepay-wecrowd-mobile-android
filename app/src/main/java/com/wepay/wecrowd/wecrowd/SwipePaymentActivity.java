@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -147,10 +146,11 @@ public class SwipePaymentActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCompletion(Object object) {
+    public void onCompletion() {
         finish();
     }
 
+    @SuppressWarnings("unused")
     public void didChooseDonate(View view) {
         PaymentManager.startCardSwipeTokenization(this, this, this);
         DonationManager.configureDonationWithAmount(Integer.parseInt(donateEditText.getText().toString()));
@@ -163,7 +163,7 @@ public class SwipePaymentActivity extends AppCompatActivity
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
-            public void onCompletion(String value, Throwable throwable) {
+            public void onCompletion(Throwable throwable) {
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {

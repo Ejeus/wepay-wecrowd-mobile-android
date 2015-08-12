@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import internal.APIClient;
 import internal.APIResponseHandler;
@@ -20,33 +21,34 @@ import internal.JSONProcessor;
 
 /**
  * Created by zachv on 7/20/15.
+ * Wecrowd Android
  */
 
 public class Campaign {
     // Protected members
-    protected Integer campaignID;
-    protected String title;
-    protected String endDate;
-    protected Bitmap imageBMP;
-    protected Integer goal;
+    final Integer campaignID;
+    final String title;
+    private final String endDate;
+    private Bitmap imageBMP;
+    Integer goal;
 
     // Unexposed members
-    protected String imageURL;
+    String imageURL;
 
     // Constructors
-    public Campaign(Integer ID, String title) {
+    private Campaign(Integer ID, String title) {
         this.campaignID = ID;
         this.title = title;
 
         this.endDate = readableDateString();
     }
 
-    public Campaign(Integer ID, String title, Integer goal) {
+    private Campaign(Integer ID, String title, Integer goal) {
         this(ID, title);
         this.goal = goal;
     }
 
-    public Campaign(Integer ID, String title, Integer goal, String imageURL) {
+    Campaign(Integer ID, String title, Integer goal, String imageURL) {
         this(ID, title, goal);
         this.imageURL = imageURL;
     }
@@ -80,12 +82,12 @@ public class Campaign {
             {
                 super.onFailure(statusCode, headers, responseString, throwable);
 
-                responseHandler.onCompletion((Campaign) null, throwable);
+                responseHandler.onCompletion((Campaign[]) null, throwable);
             }
         });
     }
 
-    protected static Campaign campaignFromJSONObject(JSONObject object) {
+    static Campaign campaignFromJSONObject(JSONObject object) {
         String title, imageURL;
         Integer ID, goal;
 
@@ -129,7 +131,7 @@ public class Campaign {
 
     // Utilities
     private String readableDateString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy", Locale.US);
 
         return dateFormat.format(Calendar.getInstance().getTime());
     }
@@ -138,6 +140,5 @@ public class Campaign {
     public Integer getCampaignID() { return campaignID; }
     public String getTitle() { return title; }
     public String getEndDate() { return endDate; }
-    public Bitmap getImageBMP() { return imageBMP; }
     public Integer getGoal() { return goal; }
 }

@@ -2,6 +2,7 @@ package models;
 
 /**
  * Created by zachv on 7/27/15.
+ * Wecrowd Android
  */
 public class Donation {
     private Integer campaignID;
@@ -10,10 +11,6 @@ public class Donation {
     private String checkoutID;
 
     public Donation() {}
-
-    public boolean hasValidMembers() {
-        return campaignID != null && creditCardID != null && amount != null;
-    }
 
     public void setCampaignID(Integer campaignID) { this.campaignID = campaignID; }
     public void setCreditCardID(String creditCardID) { this.creditCardID = creditCardID; }

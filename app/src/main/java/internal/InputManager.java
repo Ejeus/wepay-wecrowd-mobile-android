@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 /**
  * Created by zachv on 8/6/15.
+ * Wecrowd Android
  */
 public class InputManager {
     public static void setKeyboardDismissForEditText(final Context context, EditText editText) {
@@ -20,12 +21,12 @@ public class InputManager {
     }
 
     public static void setKeyboardDismissForEditTexts(final Context context, EditText[] editTexts) {
-        for (int i = 0; i < editTexts.length; ++i) {
-            setKeyboardDismissForEditText(context, editTexts[i]);
+        for (EditText editText : editTexts) {
+            setKeyboardDismissForEditText(context, editText);
         }
     }
 
-    public static void hideKeyboard(final Context context, View view) {
+    private static void hideKeyboard(final Context context, View view) {
         InputMethodManager inputMethodManager;
 
         inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);

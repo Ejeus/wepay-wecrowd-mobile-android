@@ -18,6 +18,7 @@ import models.Campaign;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
     private final Context context;
@@ -35,48 +36,64 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater;
         View rowView;
-        TextView titleTextView, goalTextView;
-        final ImageView imageView;
-        final ProgressBar loadView;
+        ViewHolder viewHolder;
+        final ViewHolder finalViewHolder;
         final Campaign campaign;
         final Bitmap campaignImage;
         final String cacheKey;
 
-        inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        rowView = inflater.inflate(R.layout.item_campaign_feed, parent, false);
         campaign = this.values.get(position);
+        rowView = convertView;
 
-        titleTextView = (TextView) rowView.findViewById(R.id.campaign_feed_cell_title);
-        titleTextView.setText(campaign.getTitle(), TextView.BufferType.NORMAL);
+        // Set up our view for recycling to reduce load
+        if (rowView == null) {
+            inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(R.layout.item_campaign_feed, parent, false);
 
-        goalTextView = (TextView) rowView.findViewById(R.id.campaign_feed_cell_end_date);
-        goalTextView.setText(campaign.getEndDate());
+            viewHolder = new ViewHolder();
+            viewHolder.titleText = (TextView) rowView.findViewById(R.id.campaign_feed_cell_title);
+            viewHolder.goalText = (TextView) rowView.findViewById(R.id.campaign_feed_cell_end_date);
+            viewHolder.imageView = (ImageView) rowView.findViewById(R.id.loadable_image);
+            viewHolder.progressView = (ProgressBar) rowView.findViewById(R.id.image_progress_bar);
 
-        imageView = (ImageView) rowView.findViewById(R.id.loadable_image);
-        loadView = (ProgressBar) rowView.findViewById(R.id.image_progress_bar);
+            rowView.setTag(viewHolder);
+        }
+
+        viewHolder = (ViewHolder) rowView.getTag();
+
+        viewHolder.titleText.setText(campaign.getTitle(), TextView.BufferType.NORMAL);
+        viewHolder.goalText.setText(campaign.getEndDate());
 
         // Check if the image already exists in the cache
         cacheKey = ImageCache.getKeyForID(campaign.getCampaignID());
         campaignImage = ImageCache.getBitmapFromCache(cacheKey);
 
+        // Necessary for accessing members from anonymous inner class
+        finalViewHolder = viewHolder;
+
         if (campaignImage == null) {
             Campaign.fetchImage(campaign, new APIResponseHandler() {
                 @Override
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
-                    imageView.setImageBitmap(bitmap);
+                    finalViewHolder.imageView.setImageBitmap(bitmap);
 
                     ImageCache.addBitmapToCache(cacheKey, bitmap);
 
-                    loadView.setVisibility(View.GONE);
+                    finalViewHolder.progressView.setVisibility(View.GONE);
                 }
             });
         } else {
-            imageView.setImageBitmap(campaignImage);
-            loadView.setVisibility(View.GONE);
+            finalViewHolder.imageView.setImageBitmap(campaignImage);
+            finalViewHolder.progressView.setVisibility(View.GONE);
         }
 
         return rowView;
     }
 
-
+    // Used to recycle the main view item
+    static class ViewHolder {
+        TextView titleText, goalText;
+        ImageView imageView;
+        ProgressBar progressView;
+    }
 }

@@ -11,7 +11,7 @@ Native application for [WeCrowd](http://wecrowd.wepay.com/), a sample crowdfundi
 
 ## What the app is NOT for
 * This app does not perform actual transactions or donate to any real causes.
-* This app is not meant to be a full-fledged version of the WeCrowd web app. Some functionality (such as creating a campaign as a merchant) is not implemented since the primary goal of the app is to showcase the payment trasaction flow.
+* This app is not meant to be a full-fledged version of the WeCrowd web app. Some functionality (such as creating a campaign as a merchant) is not implemented since the primary goal of the app is to showcase the payment transaction flow.
 
 ## External code used
 Huge shout out to these libraries!

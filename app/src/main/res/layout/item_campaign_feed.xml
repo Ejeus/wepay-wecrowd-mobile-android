@@ -21,12 +21,12 @@
             style="@style/TextViewCentered"
 
             android:id="@+id/campaign_feed_cell_title"
-            android:text="TITLE" />
+            android:text="@string/placeholder_generic_title" />
         <TextView
             style="@style/TextViewCentered"
 
             android:id="@+id/campaign_feed_cell_end_date"
-            android:text="END DATE"
+            android:text="@string/placeholder_generic_end_date"
             android:layout_marginBottom="@dimen/spacing_standard" />
     </LinearLayout>
 </LinearLayout>

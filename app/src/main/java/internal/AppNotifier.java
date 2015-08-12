@@ -11,6 +11,7 @@ import com.wepay.wecrowd.wecrowd.R;
 
 /**
  * Created by zachv on 7/23/15.
+ * Wecrowd Android
  */
 public class AppNotifier {
     private static ProgressDialog progressDialog;
@@ -67,12 +68,6 @@ public class AppNotifier {
         progressDialog.show();
 
         progressDialog.setCancelable(false);
-    }
-
-    public static void setProgressMessage(CharSequence message) {
-        if (progressDialog != null) {
-            progressDialog.setMessage(message);
-        }
     }
 
     public static void dismissIndeterminateProgress() {

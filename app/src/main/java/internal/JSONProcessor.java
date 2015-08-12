@@ -6,10 +6,9 @@ import org.json.JSONObject;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class JSONProcessor {
-    private static final String TAG = "JSON_PROCESSOR";
-
     public static String stringFromJSON(JSONObject object, String key) {
         String value;
 

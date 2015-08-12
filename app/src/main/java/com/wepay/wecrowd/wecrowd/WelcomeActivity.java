@@ -16,9 +16,12 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
     }
 
+    @SuppressWarnings("unused")
     public void didChooseLogin(View view) {
         startActivity(new Intent(this, LoginActivity.class));
     }
+
+    @SuppressWarnings("unused")
     public void didChooseBrowse(View view) {
         LoginManager.logout();
         startActivity(new Intent(this, CampaignFeedActivity.class));

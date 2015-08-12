@@ -2,6 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/20/15.
+ * Wecrowd Android
  */
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -16,7 +17,7 @@ import models.User;
 public class LoginManager {
     public enum UserType { MERCHANT, PAYER }
     public static UserType userType = UserType.PAYER;
-    public static User user = null;
+    private static User user = null;
 
     public static void login(String email, String password, final APIResponseHandler handler) {
         RequestParams params;
@@ -52,6 +53,7 @@ public class LoginManager {
                 user = new User(userID, userToken);
                 userType = UserType.MERCHANT;
 
+                //noinspection ConstantConditions
                 handler.onCompletion(user, throwable);
             }
 

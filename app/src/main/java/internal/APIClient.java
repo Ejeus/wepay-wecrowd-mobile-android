@@ -2,6 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/16/15.
+ * WeCrowd Android
  */
 
 import android.content.Context;
@@ -20,7 +21,7 @@ public class APIClient {
     private static final String URL_BASE = "http://wecrowd.wepay.com/api/";
     private static final String USER_AGENT = "WeCrowd-android";
 
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), null, responseHandler);
@@ -34,12 +35,6 @@ public class APIClient {
                             RequestParams params,
                             AsyncHttpResponseHandler responseHandler) {
         client.post(getAbsoluteUrl(url), params, responseHandler);
-    }
-
-    public static void postRaw(String url,
-                               RequestParams params,
-                               AsyncHttpResponseHandler responseHandler) {
-        client.post(url, params, responseHandler);
     }
 
     public static void post(Context context,

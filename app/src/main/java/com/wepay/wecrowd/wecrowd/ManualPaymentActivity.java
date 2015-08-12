@@ -3,6 +3,7 @@ package com.wepay.wecrowd.wecrowd;
 import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -15,11 +16,9 @@ import com.wepay.android.enums.PaymentMethod;
 import com.wepay.android.models.PaymentInfo;
 import com.wepay.android.models.PaymentToken;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import internal.APIResponseHandler;
 import internal.AppNotifier;
@@ -29,7 +28,7 @@ import internal.LoginManager;
 import internal.PaymentManager;
 
 public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
-    List<InfoField> fields;
+    private List<InfoField> fields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +39,13 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         setUpInformationFields();
     }
 
     // Button message
+    @SuppressWarnings("unused")
     public void didChooseDonate(View view) {
         performDonation();
     }
@@ -169,7 +164,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
         DonationManager.makeDonation(this, new APIResponseHandler() {
             @Override
-            public void onCompletion(String value, Throwable throwable) {
+            public void onCompletion(Throwable throwable) {
                 AppNotifier.dismissIndeterminateProgress();
 
                 if (throwable == null) {
@@ -198,9 +193,9 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     // Data for a field of information
     class InfoField {
-        private String tag;
-        private String entry;
-        private int inputType;
+        private final String tag;
+        private final String entry;
+        private final int inputType;
 
         public InfoField(String tag, String entry, int inputType) {
             this.tag = tag;
@@ -210,7 +205,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
         public String getTag() { return tag; }
         public String getEntry() { return entry; }
-        public int getInputType() { return inputType; }
     }
 
     // Default field value getters

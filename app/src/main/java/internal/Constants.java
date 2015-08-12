@@ -2,6 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/21/15.
+ * Wecrowd Android
  */
 public class Constants {
     // Endpoints
@@ -15,11 +16,9 @@ public class Constants {
     public static final String CAMPAIGN_NAME = "campaign_name";
     public static final String CAMPAIGN_GOAL = "campaign_goal";
     public static final String CAMPAIGN_IMAGE_URL = "campaign_image_url";
-    public static final String CAMPAIGN_DESCRIPTION = "campaign_description";
     public static final String CAMPAIGN_PROGRESS = "campaign_progress";
 
     public static final String PARAM_USER_ID = "user_id";
-    public static final String PARAM_USER_NAME = "user_name";
     public static final String PARAM_CREDIT_CARD_ID = "credit_card_id";
     public static final String PARAM_DONATION_AMOUNT = "amount";
     public static final String PARAM_CHECKOUT_ID = "checkout_id";

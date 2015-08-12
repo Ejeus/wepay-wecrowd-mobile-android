@@ -42,14 +42,14 @@
                 style="@style/TextViewSingleLine"
 
                 android:id="@+id/campaign_detail_progress_text"
-                android:text="@string/placeholder_donation_progress"
+                android:text="@string/placeholder_generic_progress"
                 android:textColor="@color/theme_green" />
             <Button
                 style="@style/ButtonAction"
 
                 android:id="@+id/campaign_detail_button_donate"
                 android:onClick="didSelectDonate"
-                android:text="DONATE_PLACEHOLDER"
+                android:text="@string/title_button_donate"
                 android:layout_marginTop="@dimen/activity_vertical_margin" />
         </LinearLayout>
     </LinearLayout>

@@ -8,6 +8,5 @@
 
     <!--Text Sizes-->
     <dimen name="activity_title_text_size">48sp</dimen>
-    <dimen name="text_size_body">10sp</dimen>
     <dimen name="text_size_status">21sp</dimen>
 </resources>
