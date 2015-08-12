@@ -53,6 +53,7 @@ public class LoginManager {
                 user = new User(userID, userToken);
                 userType = UserType.MERCHANT;
 
+                //noinspection ConstantConditions
                 handler.onCompletion(user, throwable);
             }
 

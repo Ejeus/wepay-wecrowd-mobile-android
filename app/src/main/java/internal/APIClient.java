@@ -2,7 +2,7 @@ package internal;
 
 /**
  * Created by zachv on 7/16/15.
- * Wecrowd Android
+ * WeCrowd Android
  */
 
 import android.content.Context;

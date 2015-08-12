@@ -3,6 +3,7 @@ package com.wepay.wecrowd.wecrowd;
 import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -38,7 +39,7 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         setUpInformationFields();
     }
