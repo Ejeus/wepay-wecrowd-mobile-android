@@ -65,15 +65,14 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
                 @Override
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
                     imageView.setImageBitmap(bitmap);
-                    imageView.invalidate();
 
                     ImageCache.addBitmapToCache(cacheKey, bitmap);
+
                     loadView.setVisibility(View.GONE);
                 }
             });
         } else {
             imageView.setImageBitmap(campaignImage);
-            imageView.invalidate();
             loadView.setVisibility(View.GONE);
         }
 

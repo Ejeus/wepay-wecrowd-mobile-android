@@ -127,7 +127,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
                     if (throwable == null) {
                         imageView.setImageBitmap(bitmap);
-                        imageView.invalidate();
                     } else {
                         AppNotifier.showSimpleError(CampaignDetailActivity.this,
                                 getString(R.string.error_fetch_title),
@@ -138,7 +137,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
             });
         } else {
             imageView.setImageBitmap(cachedImage);
-            imageView.invalidate();
         }
     }
 
