@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.wepay.wecrowd.wecrowd.R;
@@ -37,6 +38,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         View rowView;
         TextView titleTextView, goalTextView;
         final ImageView imageView;
+        final ProgressBar loadView;
         final Campaign campaign;
         final Bitmap campaignImage;
         final String cacheKey;
@@ -52,6 +54,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         goalTextView.setText(campaign.getEndDate());
 
         imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
+        loadView = (ProgressBar) rowView.findViewById(R.id.image_progress_bar);
 
         // Check if the image already exists in the cache
         cacheKey = ImageCache.getKeyForID(campaign.getCampaignID());
@@ -61,17 +64,17 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
             Campaign.fetchImage(campaign, new APIResponseHandler() {
                 @Override
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
-
-
                     imageView.setImageBitmap(bitmap);
                     imageView.invalidate();
 
                     ImageCache.addBitmapToCache(cacheKey, bitmap);
+                    loadView.setVisibility(View.GONE);
                 }
             });
         } else {
             imageView.setImageBitmap(campaignImage);
             imageView.invalidate();
+            loadView.setVisibility(View.GONE);
         }
 
         return rowView;
