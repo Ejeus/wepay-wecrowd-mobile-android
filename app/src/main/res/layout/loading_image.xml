@@ -7,7 +7,7 @@
     <ImageView
         style="@style/HeaderImageFull"
 
-        android:id="@+id/campaign_feed_image"
+        android:id="@+id/loadable_image"
         android:src="@drawable/wecrowdlogo"
         android:contentDescription="campaign_image"
         android:layout_marginBottom="@dimen/spacing_standard" />

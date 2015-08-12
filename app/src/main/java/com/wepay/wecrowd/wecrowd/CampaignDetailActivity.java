@@ -103,6 +103,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         TextView progressTextView;
         ProgressBar progressBar;
         final ImageView imageView;
+        final ProgressBar loadView;
         final Bitmap cachedImage;
         final String cacheKey;
 
@@ -110,7 +111,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         progressPercent = floatProgress(campaignDetail.getProgress(), campaignDetail.getGoal());
 
-        imageView = (ImageView) findViewById(R.id.campaign_detail_image);
+        imageView = (ImageView) findViewById(R.id.loadable_image);
+        loadView = (ProgressBar) findViewById(R.id.image_progress_bar);
         progressTextView = (TextView) findViewById(R.id.campaign_detail_progress_text);
         progressBar = (ProgressBar) findViewById(R.id.campaign_detail_progress_bar);
 
@@ -127,6 +129,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
                     if (throwable == null) {
                         imageView.setImageBitmap(bitmap);
+                        loadView.setVisibility(View.GONE);
                     } else {
                         AppNotifier.showSimpleError(CampaignDetailActivity.this,
                                 getString(R.string.error_fetch_title),
@@ -137,6 +140,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
             });
         } else {
             imageView.setImageBitmap(cachedImage);
+            loadView.setVisibility(View.GONE);
         }
     }
 

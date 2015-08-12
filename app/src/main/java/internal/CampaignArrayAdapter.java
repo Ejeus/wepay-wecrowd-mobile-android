@@ -2,7 +2,6 @@ package internal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         goalTextView = (TextView) rowView.findViewById(R.id.campaign_feed_cell_end_date);
         goalTextView.setText(campaign.getEndDate());
 
-        imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
+        imageView = (ImageView) rowView.findViewById(R.id.loadable_image);
         loadView = (ProgressBar) rowView.findViewById(R.id.image_progress_bar);
 
         // Check if the image already exists in the cache
