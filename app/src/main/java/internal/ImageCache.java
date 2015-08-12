@@ -3,8 +3,6 @@ package internal;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
-import models.Campaign;
-
 /**
  * Created by zachv on 8/11/15.
  */
