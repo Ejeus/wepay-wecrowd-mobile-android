@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ import internal.LoginManager;
 import internal.PaymentManager;
 
 public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
-    List<Map.Entry<String, String>> fields;
+    List<InfoField> fields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,11 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
             InputManager.setKeyboardDismissForEditText(this, entryEditText);
 
             // Set the text for the field child views
-            tagTextView.setText(fields.get(i).getKey());
-            entryEditText.setText(fields.get(i).getValue(), TextView.BufferType.EDITABLE);
+            if (i < fields.size()) {
+                entryEditText.setInputType(fields.get(i).inputType);
+                tagTextView.setText(fields.get(i).getTag());
+                entryEditText.setText(fields.get(i).getEntry(), TextView.BufferType.EDITABLE);
+            }
         }
 
         expirationMonthEditText = (EditText) findViewById(R.id.manual_payment_month_entry);
@@ -124,22 +128,25 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     // Couldn't figure out how to just add the strings directly to XML while reusing the ViewGroup
     // with the <include> tag, so using a programmatic structure.
-    private List<Map.Entry<String, String>> fieldConfigurationList() {
-        List<Map.Entry<String, String>> configList = new ArrayList<>();
+    private List<InfoField> fieldConfigurationList() {
+        List<InfoField> configList = new ArrayList<>();
 
-        configList.add(fieldConfiguration(getString(R.string.title_donation), getAmount()));
-        configList.add(fieldConfiguration(getString(R.string.title_first_name), getFirstName()));
-        configList.add(fieldConfiguration(getString(R.string.title_last_name), getLastName()));
-        configList.add(fieldConfiguration(getString(R.string.title_email), getEmail()));
-        configList.add(fieldConfiguration(getString(R.string.title_card_number), getCardNumber()));
-        configList.add(fieldConfiguration(getString(R.string.title_cvv), getCVV()));
-        configList.add(fieldConfiguration(getString(R.string.title_zip_code), getZipCode()));
+        configList.add(new InfoField(getString(R.string.title_donation), getPrefillAmount(),
+                InputType.TYPE_CLASS_NUMBER));
+        configList.add(new InfoField(getString(R.string.title_first_name), getPrefillFirstName(),
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
+        configList.add(new InfoField(getString(R.string.title_last_name), getPrefillLastName(),
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
+        configList.add(new InfoField(getString(R.string.title_email), getPrefillEmail(),
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS));
+        configList.add(new InfoField(getString(R.string.title_card_number), getPrefillCardNumber(),
+                InputType.TYPE_CLASS_NUMBER));
+        configList.add(new InfoField(getString(R.string.title_cvv), getPrefillCVV(),
+                InputType.TYPE_CLASS_NUMBER));
+        configList.add(new InfoField(getString(R.string.title_zip_code), getPrefillZipCode(),
+                InputType.TYPE_CLASS_NUMBER));
 
         return configList;
-    }
-
-    private Map.Entry<String, String> fieldConfiguration(final String tag, final String value) {
-        return new AbstractMap.SimpleImmutableEntry<>(tag, value);
     }
 
     private String getValueForId(final int ID) {
@@ -151,8 +158,6 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
     private ViewGroup getFieldForID(final int ID) {
         return (ViewGroup) findViewById(R.id.manual_payment_fields).findViewById(ID);
     }
-
-
 
     @Override
     public void onSuccess(PaymentInfo paymentInfo, PaymentToken paymentToken) {
@@ -191,12 +196,29 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
                 error.getLocalizedMessage());
     }
 
+    // Data for a field of information
+    class InfoField {
+        private String tag;
+        private String entry;
+        private int inputType;
+
+        public InfoField(String tag, String entry, int inputType) {
+            this.tag = tag;
+            this.entry = entry;
+            this.inputType = inputType;
+        }
+
+        public String getTag() { return tag; }
+        public String getEntry() { return entry; }
+        public int getInputType() { return inputType; }
+    }
+
     // Default field value getters
-    private String getAmount() { return getString(R.string.demo_payer_donation_amount); }
-    private String getFirstName() { return getString(R.string.demo_payer_first_name); }
-    private String getLastName() { return getString(R.string.demo_payer_last_name); }
-    private String getEmail() { return getString(R.string.demo_payer_email); }
-    private String getCardNumber() { return getString(R.string.demo_payer_card_number); }
-    private String getCVV() { return getString(R.string.demo_payer_cvv); }
-    private String getZipCode() { return getString(R.string.demo_payer_expiration_zip_code); }
+    private String getPrefillAmount() { return getString(R.string.demo_payer_donation_amount); }
+    private String getPrefillFirstName() { return getString(R.string.demo_payer_first_name); }
+    private String getPrefillLastName() { return getString(R.string.demo_payer_last_name); }
+    private String getPrefillEmail() { return getString(R.string.demo_payer_email); }
+    private String getPrefillCardNumber() { return getString(R.string.demo_payer_card_number); }
+    private String getPrefillCVV() { return getString(R.string.demo_payer_cvv); }
+    private String getPrefillZipCode() { return getString(R.string.demo_payer_expiration_zip_code); }
 }
