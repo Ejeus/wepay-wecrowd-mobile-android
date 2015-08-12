@@ -2,6 +2,7 @@ package internal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
     private final Context context;
     private final ArrayList<Campaign> values;
 
+
     public CampaignArrayAdapter(Context context, ArrayList<Campaign> values) {
         super(context, -1, values);
 
@@ -35,7 +37,9 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         View rowView;
         TextView titleTextView, goalTextView;
         final ImageView imageView;
-        Campaign campaign;
+        final Campaign campaign;
+        final Bitmap campaignImage;
+        final String cacheKey;
 
         inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rowView = inflater.inflate(R.layout.item_campaign_feed, parent, false);
@@ -49,14 +53,29 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
 
         imageView = (ImageView) rowView.findViewById(R.id.campaign_feed_image);
 
-        Campaign.fetchImage(campaign, new APIResponseHandler() {
-            @Override
-            public void onCompletion(Bitmap bitmap, Throwable throwable) {
-                imageView.setImageBitmap(bitmap);
-                imageView.invalidate();
-            }
-        });
+        // Check if the image already exists in the cache
+        cacheKey = ImageCache.getKeyForID(campaign.getCampaignID());
+        campaignImage = ImageCache.getBitmapFromCache(cacheKey);
+
+        if (campaignImage == null) {
+            Campaign.fetchImage(campaign, new APIResponseHandler() {
+                @Override
+                public void onCompletion(Bitmap bitmap, Throwable throwable) {
+
+
+                    imageView.setImageBitmap(bitmap);
+                    imageView.invalidate();
+
+                    ImageCache.addBitmapToCache(cacheKey, bitmap);
+                }
+            });
+        } else {
+            imageView.setImageBitmap(campaignImage);
+            imageView.invalidate();
+        }
 
         return rowView;
     }
+
+
 }

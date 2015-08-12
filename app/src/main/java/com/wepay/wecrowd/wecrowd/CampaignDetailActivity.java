@@ -16,6 +16,7 @@ import android.widget.TextView;
 import internal.APIResponseHandler;
 import internal.AppNotifier;
 import internal.DonationManager;
+import internal.ImageCache;
 import internal.LoginManager;
 import models.Campaign;
 import models.CampaignDetail;
@@ -102,6 +103,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
         TextView progressTextView;
         ProgressBar progressBar;
         final ImageView imageView;
+        final Bitmap cachedImage;
+        final String cacheKey;
 
         setTitle(campaignDetail.getTitle());
 
@@ -114,20 +117,29 @@ public class CampaignDetailActivity extends AppCompatActivity {
         progressTextView.setText(stringFromProgress(progressPercent));
         progressBar.setProgress(progressPercent);
 
-        campaignDetail.fetchImage(campaignDetail, new APIResponseHandler() {
-            @Override
-            public void onCompletion(Bitmap bitmap, Throwable throwable) {
-                if (throwable == null) {
-                    imageView.setImageBitmap(bitmap);
-                    imageView.invalidate();
-                } else {
-                    AppNotifier.showSimpleError(CampaignDetailActivity.this,
-                            getString(R.string.error_fetch_title),
-                            getString(R.string.error_campaign_image_fetch_preface),
-                            throwable.getLocalizedMessage());
+        // Check the cache for this image before fetching it remotely
+        cacheKey = ImageCache.getKeyForID(campaignDetail.getCampaignID());
+        cachedImage = ImageCache.getBitmapFromCache(cacheKey);
+
+        if (cachedImage == null) {
+            campaignDetail.fetchImage(campaignDetail, new APIResponseHandler() {
+                @Override
+                public void onCompletion(Bitmap bitmap, Throwable throwable) {
+                    if (throwable == null) {
+                        imageView.setImageBitmap(bitmap);
+                        imageView.invalidate();
+                    } else {
+                        AppNotifier.showSimpleError(CampaignDetailActivity.this,
+                                getString(R.string.error_fetch_title),
+                                getString(R.string.error_campaign_image_fetch_preface),
+                                throwable.getLocalizedMessage());
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            imageView.setImageBitmap(cachedImage);
+            imageView.invalidate();
+        }
     }
 
     private void configureViewForUserType(LoginManager.UserType userType) {
