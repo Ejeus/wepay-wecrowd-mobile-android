@@ -20,7 +20,7 @@ public class APIClient {
     private static final String URL_BASE = "http://wecrowd.wepay.com/api/";
     private static final String USER_AGENT = "WeCrowd-android";
 
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), null, responseHandler);

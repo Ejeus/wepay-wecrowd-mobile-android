@@ -14,8 +14,8 @@ import internal.JSONProcessor;
  * Created by zachv on 7/21/15.
  */
 public class CampaignDetail extends Campaign {
-    private String description;
-    private Integer progress;
+    private final String description;
+    private final Integer progress;
 
     public CampaignDetail(Integer ID,
                           String title,
@@ -29,12 +29,12 @@ public class CampaignDetail extends Campaign {
         this.progress = progress;
     }
 
-    public CampaignDetail(Integer ID,
-                          String title,
-                          Integer goal,
-                          String imageURL,
-                          String description,
-                          Integer progress)
+    private CampaignDetail(Integer ID,
+                           String title,
+                           Integer goal,
+                           String imageURL,
+                           String description,
+                           Integer progress)
     {
         super(ID, title, goal, imageURL);
 
@@ -42,7 +42,7 @@ public class CampaignDetail extends Campaign {
         this.progress = progress;
     }
 
-    public CampaignDetail(Campaign campaign, String description, Integer progress) {
+    private CampaignDetail(Campaign campaign, String description, Integer progress) {
         this(campaign.campaignID,
                 campaign.title,
                 campaign.goal,

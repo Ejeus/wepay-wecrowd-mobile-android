@@ -16,7 +16,7 @@ import models.User;
 public class LoginManager {
     public enum UserType { MERCHANT, PAYER }
     public static UserType userType = UserType.PAYER;
-    public static User user = null;
+    private static User user = null;
 
     public static void login(String email, String password, final APIResponseHandler handler) {
         RequestParams params;

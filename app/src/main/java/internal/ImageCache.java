@@ -11,7 +11,7 @@ public class ImageCache {
     private static final int cacheSize = maxMemory / 8;
     private static final String IMAGE_CACHE_PREFIX = "IMG_";
 
-    private static LruCache<String, Bitmap> memCache = new LruCache<String, Bitmap>(cacheSize) {
+    private static final LruCache<String, Bitmap> memCache = new LruCache<String, Bitmap>(cacheSize) {
         @Override
         protected int sizeOf(String key, Bitmap bitmap) {
             return bitmap.getByteCount() / 1024;

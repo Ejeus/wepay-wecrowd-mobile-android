@@ -41,6 +41,7 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
         final Bitmap campaignImage;
         final String cacheKey;
 
+        campaign = this.values.get(position);
         rowView = convertView;
 
         // Set up our view for recycling to reduce load
@@ -59,7 +60,6 @@ public class CampaignArrayAdapter extends ArrayAdapter<Campaign> {
 
         viewHolder = (ViewHolder) rowView.getTag();
 
-        campaign = this.values.get(position);
         viewHolder.titleText.setText(campaign.getTitle(), TextView.BufferType.NORMAL);
         viewHolder.goalText.setText(campaign.getEndDate());
 

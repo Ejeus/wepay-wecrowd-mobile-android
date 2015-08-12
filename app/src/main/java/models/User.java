@@ -4,8 +4,8 @@ package models;
  * Created by zachv on 7/21/15.
  */
 public class User {
-    Integer ID;
-    String token;
+    private final Integer ID;
+    private final String token;
 
     public User(Integer ID, String token) {
         this.ID = ID;

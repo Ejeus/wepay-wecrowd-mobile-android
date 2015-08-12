@@ -124,7 +124,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         cachedImage = ImageCache.getBitmapFromCache(cacheKey);
 
         if (cachedImage == null) {
-            campaignDetail.fetchImage(campaignDetail, new APIResponseHandler() {
+            Campaign.fetchImage(campaignDetail, new APIResponseHandler() {
                 @Override
                 public void onCompletion(Bitmap bitmap, Throwable throwable) {
                     if (throwable == null) {

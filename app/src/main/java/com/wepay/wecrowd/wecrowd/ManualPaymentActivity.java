@@ -29,7 +29,7 @@ import internal.LoginManager;
 import internal.PaymentManager;
 
 public class ManualPaymentActivity extends AppCompatActivity implements TokenizationHandler {
-    List<InfoField> fields;
+    private List<InfoField> fields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,9 +198,9 @@ public class ManualPaymentActivity extends AppCompatActivity implements Tokeniza
 
     // Data for a field of information
     class InfoField {
-        private String tag;
-        private String entry;
-        private int inputType;
+        private final String tag;
+        private final String entry;
+        private final int inputType;
 
         public InfoField(String tag, String entry, int inputType) {
             this.tag = tag;

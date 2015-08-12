@@ -25,7 +25,7 @@ public class InputManager {
         }
     }
 
-    public static void hideKeyboard(final Context context, View view) {
+    private static void hideKeyboard(final Context context, View view) {
         InputMethodManager inputMethodManager;
 
         inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);

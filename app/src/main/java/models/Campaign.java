@@ -25,29 +25,29 @@ import internal.JSONProcessor;
 
 public class Campaign {
     // Protected members
-    protected Integer campaignID;
-    protected String title;
-    protected String endDate;
-    protected Bitmap imageBMP;
-    protected Integer goal;
+    final Integer campaignID;
+    final String title;
+    private final String endDate;
+    private Bitmap imageBMP;
+    Integer goal;
 
     // Unexposed members
-    protected String imageURL;
+    String imageURL;
 
     // Constructors
-    public Campaign(Integer ID, String title) {
+    private Campaign(Integer ID, String title) {
         this.campaignID = ID;
         this.title = title;
 
         this.endDate = readableDateString();
     }
 
-    public Campaign(Integer ID, String title, Integer goal) {
+    Campaign(Integer ID, String title, Integer goal) {
         this(ID, title);
         this.goal = goal;
     }
 
-    public Campaign(Integer ID, String title, Integer goal, String imageURL) {
+    Campaign(Integer ID, String title, Integer goal, String imageURL) {
         this(ID, title, goal);
         this.imageURL = imageURL;
     }
@@ -81,12 +81,12 @@ public class Campaign {
             {
                 super.onFailure(statusCode, headers, responseString, throwable);
 
-                responseHandler.onCompletion((Campaign) null, throwable);
+                responseHandler.onCompletion((Campaign[]) null, throwable);
             }
         });
     }
 
-    protected static Campaign campaignFromJSONObject(JSONObject object) {
+    static Campaign campaignFromJSONObject(JSONObject object) {
         String title, imageURL;
         Integer ID, goal;
 
